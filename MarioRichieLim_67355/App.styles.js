@@ -15,6 +15,18 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     color: 'black',
   },
+  card: {
+
+  },
+  userList: {
+
+  },
+  avatar: {
+
+  },
+  boldText: {
+
+  },
 });
 
 export default styles;
