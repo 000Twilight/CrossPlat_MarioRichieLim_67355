@@ -4,18 +4,19 @@ import { Image } from 'react-native';
 import SideBar from './SideBar';
 import LibraryScreen from '../Library.Screen';
 import SearchScreen from '../Search.Screen';
+import HomeScreen from '../Home.Screen';
 
 const Tab = createBottomTabNavigator();
 
 function BottomTabs() {
     return (
         <Tab.Navigator
-            initialRouteName="Home"
+            initialRouteName="SideBar"
             screenOptions={({ route }) => ({
                 tabBarIcon: ({ focused }) => {
                     let iconName;
 
-                    if (route.name === 'Home') {
+                    if (route.name === 'SideBar') {
                         iconName = focused
                             ? require('../../Assets/home-full.png')
                             : require('../../Assets/home-not-full.png');
@@ -43,24 +44,22 @@ function BottomTabs() {
                     paddingBottom: 5,
                     paddingTop: 5,
                 },
-                // tabBarLabelStyle: {
-                //     fontFamily: 'Arial', 
-                //     fontSize: 10, 
-                //     fontWeight: 'bold',
-                // },
             })}
         >
             <Tab.Screen
-                name="Home"
+                name="SideBar"
                 component={SideBar}
+                options={{ headerShown: false, tabBarLabel: 'Home' }}
             />
             <Tab.Screen
                 name="Search"
                 component={SearchScreen}
+                options={{ headerShown: false }}
             />
             <Tab.Screen
                 name="Library"
                 component={LibraryScreen}
+                options={{ headerShown: false }}
             />
         </Tab.Navigator>
     );
