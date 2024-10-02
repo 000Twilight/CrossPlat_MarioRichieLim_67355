@@ -17,6 +17,9 @@
     },
     "web": {
       "favicon": "./Assets/spotify-logo.png"
-    }
+    },
+    "plugins": [
+      "expo-font"
+    ]
   }
 }

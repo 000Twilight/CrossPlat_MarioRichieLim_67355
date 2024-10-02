@@ -29,7 +29,7 @@ export default function App() {
           <Stack.Screen
             name="Main"
             component={BottomTabs}
-            options={{ headerShown: true }} 
+            options={{ headerShown: false }} 
           />
         </Stack.Navigator>
       </NavigationContainer>
