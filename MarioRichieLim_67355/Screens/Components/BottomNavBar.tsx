@@ -1,75 +1,68 @@
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import React from "react";
-import HomeScreen from "../Home.Screen";
-import ProfileScreen from "../Profile.Screen";
-import { NavigationContainer } from "@react-navigation/native";
+import * as React from 'react';
+import { View, Text, TouchableOpacity } from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import HomeScreen from '../Home.Screen'; 
+import ProfileScreen from '../Profile.Screen';
+
+// function MyTabBar({ state, descriptors, navigation }) {
+//   return (
+//     <View style={{ flexDirection: 'row' }}>
+//       {state.routes.map((route, index) => {
+//         const { options } = descriptors[route.key];
+//         const label =
+//           options.tabBarLabel !== undefined
+//             ? options.tabBarLabel
+//             : options.title !== undefined
+//               ? options.title
+//               : route.name;
+
+//         const isFocused = state.index === index;
+
+//         const onPress = () => {
+//           const event = navigation.emit({
+//             type: 'tabPress',
+//             target: route.key,
+//           });
+
+//           if (!isFocused && !event.defaultPrevented) {
+//             navigation.navigate(route.name);
+//           }
+//         };
+
+//         const onLongPress = () => {
+//           navigation.emit({
+//             type: 'tabLongPress',
+//             target: route.key,
+//           });
+//         };
+
+//         return (
+//           <TouchableOpacity
+//             accessibilityRole="button"
+//             accessibilityState={isFocused ? { selected: true } : {}}
+//             accessibilityLabel={options.tabBarAccessibilityLabel}
+//             testID={options.tabBarTestID}
+//             onPress={onPress}
+//             onLongPress={onLongPress}
+//             style={{ flex: 1 }}
+//           >
+//             <Text style={{ color: isFocused ? '#673ab7' : '#222' }}>
+//               {label}
+//             </Text>
+//           </TouchableOpacity>
+//         );
+//       })}
+//     </View>
+//   );
+// }
 
 const Tab = createBottomTabNavigator();
 
-function BottomTabs() {
+export default function BottomNavBar() {
   return (
-    <Tab.Navigator screenOptions={{
-        tabBarStyle:{
-            backgroundColor:"rgba(0,0,0,0.5)",
-            position: "absolute",
-            bottom:0,
-            left:0,
-            right:0,
-            shadowOpacity:4,
-            shadowRadius:4,
-            elevation:4,
-            shadowOffset:{
-                width:0,
-                height:-4
-            },
-            borderTopWidth:0 
-        }
-    }}>
-      <Tab.Screen
-        name="Home"
-        component={HomeScreen}
-        options={{
-          tabBarLabel: "Home",
-          headerShown: false,
-          tabBarLabelStyle: { color: "white" },
-        //   tabBarIcon: ({ focused }) =>
-        //     focused ? (
-        //       <Entypo name="home" size={24} color="white" />
-        //     ) : (
-        //       <AntDesign name="home" size={24} color="white" />
-        //     ),
-        }}
-      />
-      <Tab.Screen
-        name="Profile"
-        component={ProfileScreen}
-        options={{
-          tabBarLabel: "Profile",
-          headerShown: false,
-          tabBarLabelStyle: { color: "white" },
-        //   tabBarIcon: ({ focused }) =>
-        //     focused ? (
-        //         <Ionicons name="person" size={24} color="white" />
-        //     ) : (
-        //         <Ionicons name="person-outline" size={24} color="white" />
-        //     ),
-        }}
-      />
+    <Tab.Navigator>
+      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Settings" component={ProfileScreen} />
     </Tab.Navigator>
   );
 }
-
-
-const BottomNavBar = () => {
-    return (
-        <NavigationContainer>
-            <Tab.Navigator>
-                <Tab.Screen name="Main" component={BottomTabs} options={{headerShown:false}}/>
-                <Tab.Screen name="Profile" component={ProfileScreen} options={{headerShown:false}}/>
-            </Tab.Navigator>
-        </NavigationContainer>
-    );
-};
-
-export default BottomNavBar;
