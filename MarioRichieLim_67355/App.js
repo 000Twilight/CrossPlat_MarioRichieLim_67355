@@ -4,8 +4,8 @@ import { Provider as PaperProvider } from 'react-native-paper';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SplashScreen from './Screens/Splash.Screen';
-import HomeScreen from './Screens/Home.Screen';
-import BottomNavBar from './Screens/Components/BottomNavBar';
+// import HomeScreen from './Screens/Home.Screen';
+import BottomTabs from './Screens/Components/BottomTabs';
 // import { theme } from './Theme';
 
 const Stack = createNativeStackNavigator();
@@ -27,8 +27,8 @@ export default function App() {
             options={{ headerShown: false }}
           />
           <Stack.Screen
-            name="HomeScreen"
-            component={HomeScreen}
+            name="Main"
+            component={BottomTabs}
             options={{ headerShown: true }} 
           />
         </Stack.Navigator>

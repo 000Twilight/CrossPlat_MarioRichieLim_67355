@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { View, Image, Animated } from 'react-native';
-import splash_styles from '../Styles/Splash.style'; // Ensure the path is correct
+import splash_styles from '../Styles/Splash.style'; 
 
 const SplashScreen = ({ navigation }) => {
   const backgroundFade = useRef(new Animated.Value(0)).current;
@@ -10,34 +10,32 @@ const SplashScreen = ({ navigation }) => {
     // Step 1: Fade in the background
     Animated.timing(backgroundFade, {
       toValue: 1, // Fade in background to opacity 1
-      duration: 200, // 1 second fade in
+      duration: 100, 
       useNativeDriver: true,
     }).start(() => {
       // Step 2: After background fades in, fade in the logo
       Animated.timing(logoFade, {
         toValue: 1, // Fade in logo to opacity 1
-        duration: 400, // 1 second fade in
+        duration: 300, 
         useNativeDriver: true,
       }).start(() => {
-
         // Step 3: Fade out the logo after delay
         setTimeout(() => {
           Animated.timing(logoFade, {
             toValue: 0, // Fade out logo to opacity 0
-            duration: 500, // 1 second fade out
+            duration: 400, 
             useNativeDriver: true,
           }).start(() => {
             // Step 4: Fade out the background after logo fade out
             Animated.timing(backgroundFade, {
               toValue: 0, // Fade out background to opacity 0
-              duration: 600, // 1 second fade out
+              duration: 450, 
               useNativeDriver: true,
             }).start(() => {
-              // Step 5: Navigate to the HomeScreen
-              navigation.replace('HomeScreen');
+              navigation.replace('Main');
             });
           });
-        }, 1000);
+        }, 600);
       });
     });
   }, []);

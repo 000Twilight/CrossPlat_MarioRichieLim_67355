@@ -1,27 +1,22 @@
 {
   "expo": {
-    "name": "MarioRichieLim_67355",
-    "slug": "MarioRichieLim_67355",
+    "name": "MarioRichieLim_67355_Spotify",
+    "slug": "MarioRichieLim_67355_Spotify",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
+    "icon": "./Assets/spotify-logo.png",
+    "userInterfaceStyle": "dark",
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./Assets/spotify-logo.png",
+        "backgroundColor": "#000000"
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./Assets/spotify-logo.png"
     }
   }
 }

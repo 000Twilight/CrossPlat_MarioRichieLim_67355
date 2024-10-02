@@ -8,8 +8,8 @@ container: {
     backgroundColor: '#000000', // Customize splash screen background color
   },
   logo: {
-    width: 220,
-    height: 220, // Adjust the size of the image
+    width: 200,
+    height: 200, // Adjust the size of the image
   },
 });
 
