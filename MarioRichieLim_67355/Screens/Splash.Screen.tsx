@@ -43,9 +43,7 @@ const SplashScreen = ({ navigation }) => {
   }, []);
 
   return (
-    <Animated.View
-      style={[splash_styles.container, { opacity: backgroundFade }]}
-    >
+    <Animated.View style={[splash_styles.container, { opacity: backgroundFade }]}>
       <Animated.Image
         style={[splash_styles.logo, { opacity: logoFade }]}
         source={require('../Assets/spotify-logo.png')}

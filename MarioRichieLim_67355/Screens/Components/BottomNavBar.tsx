@@ -2,14 +2,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
 import HomeScreen from "../Home.Screen";
-// import { Entypo } from "@expo/vector-icons";
-// import { Ionicons } from '@expo/vector-icons';
-// import { AntDesign } from "@expo/vector-icons";
 import ProfileScreen from "../Profile.Screen";
 import { NavigationContainer } from "@react-navigation/native";
-// import LoginScreen from "./screens/LoginScreen";
-// import LikedSongsScreen from "./screens/LikedSongsScreen";
-// import SongInfoScreen from "./screens/SongInfoScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -39,27 +33,27 @@ function BottomTabs() {
           tabBarLabel: "Home",
           headerShown: false,
           tabBarLabelStyle: { color: "white" },
-          tabBarIcon: ({ focused }) =>
-            focused ? (
-              <Entypo name="home" size={24} color="white" />
-            ) : (
-              <AntDesign name="home" size={24} color="white" />
-            ),
+        //   tabBarIcon: ({ focused }) =>
+        //     focused ? (
+        //       <Entypo name="home" size={24} color="white" />
+        //     ) : (
+        //       <AntDesign name="home" size={24} color="white" />
+        //     ),
         }}
       />
       <Tab.Screen
         name="Profile"
         component={ProfileScreen}
         options={{
-          tabBarLabel: "Home",
+          tabBarLabel: "Profile",
           headerShown: false,
           tabBarLabelStyle: { color: "white" },
-          tabBarIcon: ({ focused }) =>
-            focused ? (
-                <Ionicons name="person" size={24} color="white" />
-            ) : (
-                <Ionicons name="person-outline" size={24} color="white" />
-            ),
+        //   tabBarIcon: ({ focused }) =>
+        //     focused ? (
+        //         <Ionicons name="person" size={24} color="white" />
+        //     ) : (
+        //         <Ionicons name="person-outline" size={24} color="white" />
+        //     ),
         }}
       />
     </Tab.Navigator>
@@ -67,18 +61,15 @@ function BottomTabs() {
 }
 
 
-const Stack = createNativeStackNavigator();
-function Navigation(){
+const BottomNavBar = () => {
     return (
         <NavigationContainer>
-            <Stack.Navigator>
-                <Stack.Screen name="Login" component={LoginScreen} options={{headerShown:false}}/>
-                <Stack.Screen name="Main" component={BottomTabs} options={{headerShown:false}}/>
-                <Stack.Screen name="Liked" component={LikedSongsScreen} options={{headerShown:false}}/> 
-                <Stack.Screen name="Info" component={SongInfoScreen} options={{headerShown:false}}/>
-            </Stack.Navigator>
+            <Tab.Navigator>
+                <Tab.Screen name="Main" component={BottomTabs} options={{headerShown:false}}/>
+                <Tab.Screen name="Profile" component={ProfileScreen} options={{headerShown:false}}/>
+            </Tab.Navigator>
         </NavigationContainer>
-    )
-}
+    );
+};
 
-export default Navigation
+export default BottomNavBar;
