@@ -3,8 +3,8 @@ import { Provider as PaperProvider } from 'react-native-paper';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SplashScreen from './Screens/Splash.Screen';
-import BottomTabs from './Screens/Components/BottomTabs';
-import { View, Text, TouchableOpacity, Image, StyleSheet, navigation } from 'react-native';
+import BottomTabs from './Components/BottomTabs';
+import { View, Text, TouchableOpacity, Image, StyleSheet, navigation, StatusBar } from 'react-native';
 
 const TabComponent = ({ activeTab, setActiveTab }) => {
   const tabs = ['All', 'Music', 'Podcast'];
@@ -18,8 +18,8 @@ const TabComponent = ({ activeTab, setActiveTab }) => {
           style={[
             styles.tabButton,
             {
-              backgroundColor: activeTab === tab ? '#28d35b' : '#8c8c8c'
-            }, // Darker gray for inactive tabs
+              backgroundColor: activeTab === tab ? '#28d35b' : '#2e2e2e'
+            },
           ]}
         >
           <Text style={[
@@ -56,7 +56,18 @@ export default function App() {
   return (
     <PaperProvider>
       <NavigationContainer>
-        <Stack.Navigator>
+        <StatusBar
+          backgroundColor="#16181d"
+          barStyle="light-content"
+        />
+        <Stack.Navigator
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: '#0d0d0d', // Set header background color to black
+            },
+            headerTintColor: '#fff',
+          }}
+        >
           <Stack.Screen
             name="Splash"
             component={SplashScreen}
@@ -73,10 +84,6 @@ export default function App() {
                   setActiveTab={setActiveTab}
                 />
               ),
-              headerTransparent: true,
-              headerStyle: {
-                backgroundColor: 'transparent',
-              },
             }}
           />
         </Stack.Navigator>
@@ -90,13 +97,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: 10,
-    marginTop: 40, // Lower the header
+    paddingLeft: 0,
+    marginTop: 40,
+    backgroundColor: 'black',
   },
   profileIcon: {
-    width: 50, // Increase logo size
-    height: 50,
-    marginRight: 10,
+    width: 40, 
+    height: 40,
+    marginRight: 5,
   },
   tabContainer: {
     flexDirection: 'row',
@@ -104,12 +112,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   tabButton: {
-    marginHorizontal: 5, // Reduce gap between tabs
-    paddingVertical: 8, // Increase vertical padding for a taller oval shape
-    paddingHorizontal: 15,
-    borderRadius: 25, // More height for oval effect
+    marginHorizontal: 3, 
+    paddingVertical: 10, 
+    paddingHorizontal: 16,
+    borderRadius: 20, 
   },
   tabText: {
-    fontSize: 16,
+    fontSize: 12,
   },
 });

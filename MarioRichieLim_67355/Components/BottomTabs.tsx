@@ -2,9 +2,9 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Image } from 'react-native';
 import SideBar from './SideBar';
-import LibraryScreen from '../Library.Screen';
-import SearchScreen from '../Search.Screen';
-import HomeScreen from '../Home.Screen';
+import LibraryScreen from '../Screens/Library.Screen';
+import SearchScreen from '../Screens/Search.Screen';
+import HomeScreen from '../Screens/Home.Screen';
 
 const Tab = createBottomTabNavigator();
 
@@ -18,16 +18,16 @@ function BottomTabs() {
 
                     if (route.name === 'SideBar') {
                         iconName = focused
-                            ? require('../../Assets/home-full.png')
-                            : require('../../Assets/home-not-full.png');
+                            ? require('../Assets/home-full.png')
+                            : require('../Assets/home-not-full.png');
                     } else if (route.name === 'Search') {
                         iconName = focused
-                            ? require('../../Assets/search-full.png')
-                            : require('../../Assets/search-not-full.png');
+                            ? require('../Assets/search-full.png')
+                            : require('../Assets/search-not-full.png');
                     } else if (route.name === 'Library') {
                         iconName = focused
-                            ? require('../../Assets/library-full.png')
-                            : require('../../Assets/library-not-full.png');
+                            ? require('../Assets/library-full.png')
+                            : require('../Assets/library-not-full.png');
                     }
 
                     return <Image source={iconName} style={{ width: 24, height: 24 }} />;
@@ -43,6 +43,7 @@ function BottomTabs() {
                     height: 60,
                     paddingBottom: 5,
                     paddingTop: 5,
+                    borderColor: 'black',
                 },
             })}
         >

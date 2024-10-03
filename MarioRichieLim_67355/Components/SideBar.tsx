@@ -1,9 +1,9 @@
 import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import TestScreen from '../Test.Screen';
+import TestScreen from '../Screens/Test.Screen';
 import { Text, TouchableOpacity, Image } from 'react-native';
 import { DrawerActions, useNavigation } from '@react-navigation/native';
-import HomeScreen from '../Home.Screen';
+import HomeScreen from '../Screens/Home.Screen';
 
 const Drawer = createDrawerNavigator();
 
@@ -26,7 +26,7 @@ const SideBar = () => {
                 drawerPosition: 'left',
                 headerLeft: () => (
                     <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
-                        <Image source={require('../../Assets/spotify-logo.png')} style={{ width: 30, height: 30 }} />
+                        <Image source={require('../Assets/spotify-logo.png')} style={{ width: 30, height: 30 }} />
                     </TouchableOpacity>
                 ),
             }}
