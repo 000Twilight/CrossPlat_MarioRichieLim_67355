@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import home_styles from '../Styles/HomeScreen.style';
+import search_styles from '../Styles/SearchScreen.style';
 
 const SearchScreen = () => {
   return (
-    <View style={home_styles.container}>
-      <Text style={home_styles.text}>This is the Search Screen</Text>
+    <View style={search_styles.container}>
+      <Text style={search_styles.text}>This is the Search Screen</Text>
     </View>
   );
 };

@@ -19,7 +19,7 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <LinearGradient colors={["#040306", "#131624"]} style={{ flex: 1 }}>
-      <ScrollView style={{ marginTop: 15 }}>
+      <ScrollView style={{ marginTop: 13 }}>
         <View style={home_styles.RecentContainer}>
           {RecentData.map((item) => (
             <View key={item.id} style={home_styles.RecentGrid}>
@@ -38,49 +38,105 @@ const HomeScreen = ({ navigation }) => {
           ))}
         </View>
 
-        {/* <FlatList
-          data={recentlyplayed}
-          renderItem={renderItem}
-          numColumns={2}
-          columnWrapperStyle={{ justifyContent: "space-between" }}
-        /> */}
-
         <Text
           style={{
             color: "white",
             fontSize: 24,
             fontWeight: "900",
-            marginHorizontal: 10,
-            marginTop: 10,
+            marginLeft: 17,
+            marginTop: 17,
           }}
         >
           Jump back in
         </Text>
 
-        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          style={{
+            marginTop: 19,
+            marginLeft: 17,
+          }}
+        >
           <JumpBackInList />
         </ScrollView>
 
-        {/*<View style={{ height: 10 }} />
+        {/* Made for you */}
         <Text
           style={{
             color: "white",
-            fontSize: 19,
-            fontWeight: "bold",
-            marginHorizontal: 10,
-            marginTop: 10,
+            fontSize: 24,
+            fontWeight: "900",
+            marginLeft: 17,
+            marginTop: 17,
           }}
         >
-          Recently Played
+          Made For You
         </Text>
-        <FlatList
-          data={recentlyplayed}
+
+        <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
-          renderItem={({ item, index }) => (
-            <RecentlyPlayedCard item={item} key={index} />
-          )}
-        /> */}
+          style={{
+            marginTop: 19,
+            marginLeft: 17,
+          }}
+        >
+          <JumpBackInList />
+        </ScrollView>
+
+        {/* Recent */}
+        <Text
+          style={{
+            color: "white",
+            fontSize: 24,
+            fontWeight: "900",
+            marginLeft: 17,
+            marginTop: 17,
+          }}
+        >
+          Recents
+        </Text>
+
+        <ScrollView>
+
+        </ScrollView>
+
+        {/* Your top mixes */}
+        <Text
+          style={{
+            color: "white",
+            fontSize: 24,
+            fontWeight: "900",
+            marginLeft: 17,
+            marginTop: 17,
+          }}
+        >
+          Your top mixes
+        </Text>
+
+        <ScrollView>
+
+        </ScrollView>
+
+        {/* Recommended Stations */}
+        <Text
+          style={{
+            color: "white",
+            fontSize: 24,
+            fontWeight: "900",
+            marginLeft: 17,
+            marginTop: 17,
+          }}
+        >
+          Your top mixes
+        </Text>
+
+        <ScrollView>
+
+        </ScrollView>
+
+        
       </ScrollView>
     </LinearGradient>
   );

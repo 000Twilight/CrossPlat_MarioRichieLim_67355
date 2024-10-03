@@ -3,7 +3,7 @@ import React from "react";
 
 const JumpBackInCard = ({ item }) => {
   return (
-    <View style={{ margin: 10, width: 160 }}> 
+    <View style={{ marginRight: 10, width: 160 }}> 
       <Image
         style={{ width: 160, height: 160 }}
         source={item.images[0].url}

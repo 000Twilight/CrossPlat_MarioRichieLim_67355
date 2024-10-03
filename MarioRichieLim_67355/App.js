@@ -3,6 +3,8 @@ import { Provider as PaperProvider } from 'react-native-paper';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SplashScreen from './Screens/Splash.Screen';
+import SearchScreen from './Screens/Search.Screen';
+import LibraryScreen from './Screens/Library.Screen';
 import BottomTabs from './Components/BottomTabs';
 import { View, Text, TouchableOpacity, Image, StyleSheet, navigation, StatusBar } from 'react-native';
 
@@ -86,6 +88,38 @@ export default function App() {
               ),
             }}
           />
+          <Stack.Screen
+            name="Search"
+            component={SearchScreen}
+            options={{
+              headerTitle: () => (
+                <View>
+                  <Text
+                    style={{
+                      fontSize: 20,
+                    }}
+                  >
+                    Search</Text>
+                </View>
+              ),
+            }}
+          />
+          <Stack.Screen
+            name="Library"
+            component={LibraryScreen}
+            options={{
+              headerTitle: () => (
+                <View>
+                  <Text
+                    style={{
+                      fontSize: 20,
+                    }}
+                  >
+                    Your Library</Text>
+                </View>
+              ),
+            }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>
@@ -102,7 +136,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
   },
   profileIcon: {
-    width: 40, 
+    width: 40,
     height: 40,
     marginRight: 5,
   },
@@ -112,10 +146,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   tabButton: {
-    marginHorizontal: 3, 
-    paddingVertical: 10, 
+    marginHorizontal: 3,
+    paddingVertical: 10,
     paddingHorizontal: 16,
-    borderRadius: 20, 
+    borderRadius: 20,
   },
   tabText: {
     fontSize: 12,
