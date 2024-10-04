@@ -1,7 +1,6 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Image } from 'react-native';
-import SideBar from './SideBar';
 import LibraryScreen from '../Screens/Library.Screen';
 import SearchScreen from '../Screens/Search.Screen';
 import HomeScreen from '../Screens/Home.Screen';
@@ -11,12 +10,12 @@ const Tab = createBottomTabNavigator();
 function BottomTabs() {
     return (
         <Tab.Navigator
-            initialRouteName="SideBar"
+            initialRouteName="BottomTabs"
             screenOptions={({ route }) => ({
                 tabBarIcon: ({ focused }) => {
                     let iconName;
 
-                    if (route.name === 'SideBar') {
+                    if (route.name === 'Home') {
                         iconName = focused
                             ? require('../Assets/home-full.png')
                             : require('../Assets/home-not-full.png');
@@ -35,9 +34,9 @@ function BottomTabs() {
                 tabBarActiveTintColor: '#ffffff',
                 tabBarInactiveTintColor: '#b3b3b3',
                 tabBarActiveBackgroundColor: 'transparent',
-                tabBarInactiveBackgroundColor: '#000000',
+                tabBarInactiveBackgroundColor: '#0d0d0d',
                 tabBarStyle: {
-                    backgroundColor: '#000000',
+                    backgroundColor: '#0d0d0d',
                     paddingRight: 30,
                     paddingLeft: 30,
                     height: 60,
@@ -48,19 +47,19 @@ function BottomTabs() {
             })}
         >
             <Tab.Screen
-                name="SideBar"
-                component={SideBar}
+                name="Home"
+                component={HomeScreen}
                 options={{ headerShown: false, tabBarLabel: 'Home' }}
             />
             <Tab.Screen
                 name="Search"
                 component={SearchScreen}
-                options={{ headerShown: false }}
+                options={{ headerShown: false, tabBarLabel: 'Search'  }}
             />
             <Tab.Screen
                 name="Library"
                 component={LibraryScreen}
-                options={{ headerShown: false }}
+                options={{ headerShown: false, tabBarLabel: 'Your Library'  }}
             />
         </Tab.Navigator>
     );

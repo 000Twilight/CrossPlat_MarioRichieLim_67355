@@ -5,7 +5,7 @@ container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#000000', // Customize splash screen background color
+    backgroundColor: '#0d0d0d', // Customize splash screen background color
   },
   logo: {
     width: 200,

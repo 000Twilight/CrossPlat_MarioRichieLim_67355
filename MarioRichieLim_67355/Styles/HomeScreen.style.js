@@ -11,7 +11,7 @@ const home_styles = StyleSheet.create({
     RecentGrid: {
         width: '50%',
         paddingHorizontal: 5,
-        paddingVertical: 4,
+        paddingBottom: 8,
     },
     RecentItem: {
         flexDirection: "row",

@@ -12,7 +12,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./Assets/spotify-logo.png",
-        "backgroundColor": "#000000"
+        "backgroundColor": "#0d0d0d0"
       }
     },
     "web": {

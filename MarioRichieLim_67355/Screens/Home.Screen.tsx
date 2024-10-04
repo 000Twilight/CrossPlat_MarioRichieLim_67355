@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, Image, Pressable } from 'react-native';
-import { MaterialCommunityIcons, AntDesign } from '@expo/vector-icons';
 import home_styles from '../Styles/HomeScreen.style';
 import { LinearGradient } from 'expo-linear-gradient';
 import JumpBackInList from '../Components/JumpBackList';
+import CustomHeader from '../Components/CustomHeader';
 
 const HomeScreen = ({ navigation }) => {
+  const [activeButton, setActiveButton] = useState('All'); 
+
   const RecentData = [
     { id: 1, text: "Hip-Hop Songs", image: require('../Assets/Songs/Recent-A.jpg') },
     { id: 2, text: "Slow Vibes", image: require('../Assets/Songs/Recent-B.jpg') },
@@ -17,9 +19,31 @@ const HomeScreen = ({ navigation }) => {
     { id: 8, text: "Eric Chou", image: require('../Assets/Songs/Recent-G.jpg') },
   ];
 
+  const middleButtons = [
+    {
+      name: 'All',
+      onPress: () => setActiveButton('All'),
+    },
+    {
+      name: 'Music',
+      onPress: () => setActiveButton('Music'),
+    },
+    {
+      name: 'Podcast',
+      onPress: () => setActiveButton('Podcasts'),
+    },
+  ];
+
   return (
-    <LinearGradient colors={["#040306", "#131624"]} style={{ flex: 1 }}>
-      <ScrollView style={{ marginTop: 13 }}>
+    <View style={{ flex: 1, backgroundColor: '#0d0d0d' }}>
+      <CustomHeader
+        title={''}
+        navigation={navigation}
+        middleButtons={middleButtons}
+        activeButton={activeButton} // Pass active button to CustomHeader
+        rightIcons={null} // No icons on the right
+      />
+      <ScrollView>
         <View style={home_styles.RecentContainer}>
           {RecentData.map((item) => (
             <View key={item.id} style={home_styles.RecentGrid}>
@@ -136,51 +160,10 @@ const HomeScreen = ({ navigation }) => {
 
         </ScrollView>
 
-        
+
       </ScrollView>
-    </LinearGradient>
+    </View>
   );
 };
 
 export default HomeScreen;
-
-{/* <ScrollView style={home_styles.container}>
-      <View style={home_styles.playlistSection}>
-        <View style={home_styles.playlistRow}>
-          <TouchableOpacity style={home_styles.playlistButton}>
-            <Text style={home_styles.playlistText}>Aura</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={home_styles.playlistButton}>
-            <Text style={home_styles.playlistText}>Hip-Hop Songs #1</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={home_styles.playlistRow}>
-          <TouchableOpacity style={home_styles.playlistButton}>
-            <Text style={home_styles.playlistText}>Liked Songs</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={home_styles.playlistButton}>
-            <Text style={home_styles.playlistText}>Damn</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={home_styles.playlistRow}>
-          <TouchableOpacity style={home_styles.playlistButton}>
-            <Text style={home_styles.playlistText}>Goods</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={home_styles.playlistButton}>
-            <Text style={home_styles.playlistText}>Slow C</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-
-      <Text style={home_styles.sectionHeader}>Jump back in</Text>
-      <View style={home_styles.jumpBackInSection}>
-        <Image
-          source={{  }}
-          style={home_styles.albumCover}
-        />
-        <Image
-          source={{  }}
-          style={home_styles.albumCover}
-        />
-      </View>
-    </ScrollView> */}
