@@ -1,12 +1,23 @@
-import React, { useState } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, Image, Pressable } from 'react-native';
+import React, { useState, useRef, useEffect } from 'react';
+import { View, Text, ScrollView, TouchableOpacity, Image, Pressable, Animated } from 'react-native';
 import home_styles from '../Styles/HomeScreen.style';
 import { LinearGradient } from 'expo-linear-gradient';
 import JumpBackInList from '../Components/JumpBackList';
 import CustomHeader from '../Components/CustomHeader';
+// import { useIsFocused } from '@react-navigation/native';
 
 const HomeScreen = ({ navigation }) => {
-  const [activeButton, setActiveButton] = useState('All'); 
+  const [activeButton, setActiveButton] = useState('All');
+  // const isFocused = useIsFocused(); 
+  // const fadeAnim = useRef(new Animated.Value(0)).current;  
+
+  // useEffect(() => {
+  //   Animated.timing(fadeAnim, {
+  //     toValue: isFocused ? 1 : 0,  
+  //     duration: 100, 
+  //     useNativeDriver: true,
+  //   }).start();
+  // }, [isFocused]);
 
   const RecentData = [
     { id: 1, text: "Hip-Hop Songs", image: require('../Assets/Songs/Recent-A.jpg') },
@@ -29,12 +40,13 @@ const HomeScreen = ({ navigation }) => {
       onPress: () => setActiveButton('Music'),
     },
     {
-      name: 'Podcast',
+      name: 'Podcasts',
       onPress: () => setActiveButton('Podcasts'),
     },
   ];
 
   return (
+    // <Animated.View style={{ flex: 1, backgroundColor: '#0d0d0d', opacity: fadeAnim }}>
     <View style={{ flex: 1, backgroundColor: '#0d0d0d' }}>
       <CustomHeader
         title={''}
@@ -51,11 +63,9 @@ const HomeScreen = ({ navigation }) => {
                 onPress={() => navigation.navigate("Liked")}
                 style={home_styles.RecentItem}
               >
-                <LinearGradient colors={["#33006F", "#FFFFFF"]}>
-                  <View style={home_styles.RecentImageContainer}>
-                    <Image source={item.image} style={home_styles.RecentImage} />
-                  </View>
-                </LinearGradient>
+                <View style={home_styles.RecentImageContainer}>
+                  <Image source={item.image} style={home_styles.RecentImage} />
+                </View>
                 <Text style={home_styles.RecentText}>{item.text}</Text>
               </Pressable>
             </View>
@@ -162,6 +172,7 @@ const HomeScreen = ({ navigation }) => {
 
 
       </ScrollView>
+      {/* </Animated.View > */}
     </View>
   );
 };

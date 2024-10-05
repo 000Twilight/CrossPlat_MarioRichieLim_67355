@@ -12,12 +12,9 @@ function SideBar() {
       screenOptions={() => ({
         drawerType: 'slide',
         headerShown: false,
-        headerStyle: { backgroundColor: '#0d0d0d' },
         headerTintColor: '#fff',
         drawerStyle: {
-          backgroundColor: '#b5b5b5',
-          width: 330,
-          border: 0,
+          width: 350,
         },
         drawerPosition: 'left',
       })}

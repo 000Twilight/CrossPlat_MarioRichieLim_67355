@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { View, Image, Animated } from 'react-native';
-import splash_styles from '../Styles/Splash.style'; 
+import splash_styles from '../Styles/SplashScreen.style'; 
 
 const SplashScreen = ({ navigation }) => {
   const backgroundFade = useRef(new Animated.Value(0)).current;

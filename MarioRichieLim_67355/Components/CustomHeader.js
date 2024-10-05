@@ -47,7 +47,7 @@ function CustomHeader({ title, middleButtons, activeButton, rightIcons, navigati
             <View style={styles.rightButtonsContainer}>
                 {rightIcons &&
                     rightIcons.map((icon, index) => (
-                        <TouchableOpacity key={index} onPress={icon.onPress} style={styles.rightButton}>
+                        <TouchableOpacity key={index} onPress={icon.onPress}>
                             {icon.icon}
                         </TouchableOpacity>
                     ))}
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     circleText: {
-        color: 'white',
+        color: 'black',
         fontSize: 16,
         fontWeight: 'bold',
     },
@@ -87,25 +87,28 @@ const styles = StyleSheet.create({
     middleButtonsContainer: {
         flexDirection: 'row',
     },
+
     ovalButton: {
         paddingHorizontal: 15,
         paddingVertical: 8,
         borderRadius: 20,
         marginLeft: 8,
     },
+
     activeButton: {
         backgroundColor: '#28d35b', 
     },
     inactiveButton: {
-        backgroundColor: '#535353', 
+        backgroundColor: '#292929', 
     },
+
     activeButtonText: {
         color: 'black', 
-        fontSize: 13,
+        fontSize: 12,
     },
     inactiveButtonText: {
         color: 'white', 
-        fontSize: 13,
+        fontSize: 12,
     },
     headerTitle: {
         color: 'white',
@@ -116,10 +119,6 @@ const styles = StyleSheet.create({
     rightButtonsContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-    },
-    rightButton: {
-        marginLeft: 10,
-        padding: 10,
     },
 });
 
