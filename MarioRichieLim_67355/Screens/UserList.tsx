@@ -1,26 +1,26 @@
 import { ScrollView, View, TouchableOpacity, Image, Text } from "react-native";
-import styles from "../App.styles";
-import userData from "../data.json";
+import styles from "../App.styles";  // Import your styles
+import userData from "../data.json";  // Assuming this file contains user data
 import React from "react";
 
 const UserList = ({ navigation }) => {
     return (
-        <ScrollView>
-            {userData.map((users) => {
+        <ScrollView contentContainerStyle={styles.scrollContainer}>
+            {userData.map((user) => {
                 return (
-                    <View style={styles.userList} key={users.name}>
-                        <TouchableOpacity 
-                        style={styles.card}
-                        onPress={() => 
-                            navigation.navigate("Profile", { userName: UserList.name })
-                        }>
-                            <Image
-                                style={styles.avatar}
-                                source={{ uri: users.photo_url }}
-                            />
-                            <View>
-                                <Text style={styles.boldText}>{users.name}</Text>
-                                <Text>{users.email}</Text>
+                    <View style={styles.userList} key={user.name}>
+                        <TouchableOpacity
+                            onPress={() => navigation.navigate("Profile", { user })}  // Pass the whole user object
+                        >
+                            <View style={styles.imageContainer}>
+                                <Image
+                                    style={styles.avatar}
+                                    source={{ uri: user.photo_url }}
+                                />
+                            </View>
+                            <View style={styles.textContainer}>
+                                <Text style={styles.boldText}>{user.name}'s Profile</Text>
+                                <Text>{user.email}</Text>
                             </View>
                         </TouchableOpacity>
                     </View>

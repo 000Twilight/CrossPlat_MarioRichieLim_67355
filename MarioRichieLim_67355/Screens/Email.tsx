@@ -1,16 +1,24 @@
 import React from "react";
-import { Button, Text, View } from "react-native";
+import { ScrollView, View, Text, TouchableOpacity } from "react-native";
+import styles from "../App.styles"; 
+import userData from "../data.json"; 
 
 const Email = ({ navigation }) => {
     return (
-        <View
-        style={{ flex:1, alignItems: "center", justifyContent: "center"}}>
-            <Text>Email List Page</Text>
-            <Button
-                title="Go Home"
-                onPress={() => navigation.navigate("HomeScreen")}
-            />
-        </View>
+        <ScrollView contentContainerStyle={styles.scrollContainer}>
+            <Text style={styles.boldText}>Email List</Text>
+            {userData.map((user) => {
+                return (
+                    <TouchableOpacity
+                        key={user.email}
+                        style={styles.emailListItem}
+                        onPress={() => navigation.navigate("Profile", { user })}  
+                    >
+                        <Text style={styles.profileEmail}>{user.email}</Text>
+                    </TouchableOpacity>
+                );
+            })}
+        </ScrollView>
     );
 }
 

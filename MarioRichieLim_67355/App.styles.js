@@ -3,73 +3,57 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 10,
+    backgroundColor: '#f8f8f8',
+    alignItems: 'center', 
   },
-  contentContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    textAlign: 'center',
-  },
-  title: {
-    textAlign: 'center',
-    marginVertical: 10,
-    color: 'black',
-  },
-  card: {
-
+  scrollContainer: {
+    flexGrow: 1,
+    justifyContent: 'center',  
+    alignItems: 'center',      
   },
   userList: {
-
+    marginBottom: 20,
+    alignItems: 'center',      
+  },
+  imageContainer: {
+    alignItems: 'center',      
   },
   avatar: {
-
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    marginBottom: 10,
+  },
+  textContainer: {
+    alignItems: 'center',       // Center the text within each user item
   },
   boldText: {
-
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#333',
+  },
+  profileImage: {
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+    marginBottom: 20,
+  },
+  profileName: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#333',
+  },
+  profileEmail: {
+    fontSize: 16,
+    color: '#666',
+  },
+  emailListItem: {
+    padding: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
+    width: '100%',
+    alignItems: 'center',
   },
 });
 
 export default styles;
-
-// import { StyleSheet } from 'react-native';
-// import { DefaultTheme, DarkTheme } from 'react-native-paper';
-
-// // Define the combined theme and styles
-// export const combinedThemeAndStyles = (isDarkTheme) => {
-//   const customTheme = isDarkTheme ? {
-//     ...DarkTheme,
-//     colors: {
-//       primary: '#191970',
-//       background: '#333333',
-//       text: 'white',
-//     },
-//   } : {
-//     ...DefaultTheme,
-//     colors: {
-//       primary: '#ffffff',
-//       background: '#f8f8f8',
-//       text: 'black',
-//     },
-//   };
-
-//   // Create styles based on the theme
-//   const styles = StyleSheet.create({
-//     container: {
-//       flex: 1,
-//       marginTop: 10,
-//       backgroundColor: customTheme.colors.background,
-//     },
-//     contentContainer: {
-//       alignItems: 'center',
-//       justifyContent: 'center',
-//     },
-//     card: {
-//       width: '80%',
-//       marginBottom: 10,
-//       borderRadius: 8,
-//       backgroundColor: customTheme.colors.primary,
-//     },
-//   });
-
-//   return { customTheme, styles };
-// };
