@@ -1,7 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, Text, TextInput, TextInputProps } from 'react-native';
 
-// Definisikan tipe props secara manual tanpa React.FC
 interface InputProps extends TextInputProps {
   label: string;
   value: string;
