@@ -5,7 +5,7 @@ const splash_styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#0d0d0d',
+    backgroundColor: '#FFFFFF',
   },
   logo: {
     width: 190,

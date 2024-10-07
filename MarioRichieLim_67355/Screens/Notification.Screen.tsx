@@ -3,12 +3,12 @@ import { View, Text, ScrollView, TouchableOpacity, Image, Pressable, Animated } 
 import home_styles from '../Styles/Home.style';
 
 
-const HomeScreen = ({ navigation }) => {
+const NotificationScreen = ({ navigation }) => {
   return (
     <View style={home_styles.container}>
-      <Text>This is Home Screen</Text>
+      <Text>This is Notification Screen</Text>
     </View>
   );
 };
 
-export default HomeScreen;
+export default NotificationScreen;
