@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
-import Input from './Input'; // Mengimpor komponen Input
+import Input from './Input'; 
 
 export default function App() {
   const [name, setName] = useState('');
@@ -20,7 +20,7 @@ export default function App() {
         value={nim}
         placeholder="Enter your NIM"
         onChangeText={setNim}
-        keyboardType="numeric" // Menambahkan keyboard khusus angka
+        keyboardType="numeric" 
       />
 
       <Text>Name: {name}</Text>
@@ -35,6 +35,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#fff',
-    // padding: 20,
+    padding: 20,
   },
 });

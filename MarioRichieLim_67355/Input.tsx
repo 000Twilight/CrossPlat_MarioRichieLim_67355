@@ -1,13 +1,8 @@
 import React from 'react';
-import { StyleSheet, View, Text, TextInput, TextInputProps } from 'react-native';
+import { StyleSheet, View, Text, TextInput } from 'react-native';
+import { KeyboardTypeOptions } from 'react-native';
 
-interface InputProps extends TextInputProps {
-  label: string;
-  value: string;
-  onChangeText: (text: string) => void;
-}
-
-const Input = ({ label, value, onChangeText, placeholder, keyboardType = 'default', ...props }: InputProps) => {
+const Input = ({ label, value, onChangeText, placeholder, keyboardType = 'default' as KeyboardTypeOptions }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.label}>{label}</Text>
@@ -17,7 +12,6 @@ const Input = ({ label, value, onChangeText, placeholder, keyboardType = 'defaul
         onChangeText={onChangeText}
         placeholder={placeholder}
         keyboardType={keyboardType}
-        {...props}
       />
     </View>
   );
@@ -26,7 +20,7 @@ const Input = ({ label, value, onChangeText, placeholder, keyboardType = 'defaul
 const styles = StyleSheet.create({
   container: {
     marginBottom: 20,
-    width: '100%',
+    width: '50%',
   },
   label: {
     marginBottom: 8,
