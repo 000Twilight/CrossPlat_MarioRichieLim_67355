@@ -1,13 +1,13 @@
 {
   "expo": {
-    "name": "MarioRichieLim_67355",
-    "slug": "MarioRichieLim_67355",
+    "name": "MarioRichieLim_67355_UTS",
+    "slug": "MarioRichieLim_67355_UTS",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./Assets/UMN-Logo.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./Assets/UMN-Logo.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -16,12 +16,12 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./Assets/UMN-Logo.png",
         "backgroundColor": "#ffffff"
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./Assets/UMN-Logo.png"
     }
   }
 }
