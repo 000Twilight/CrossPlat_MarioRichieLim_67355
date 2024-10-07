@@ -1,0 +1,141 @@
+To create a persistent music player bar above the bottom navigation tab, you'll need to modify your `BottomTabs` component and add a new component for the song bar.
+
+Here's a general approach to achieve this:
+
+1. **Create the Music Player Bar Component**: This component will display the current song playing and have controls (e.g., play/pause button).
+
+2. **Adjust the Bottom Navigation Tabs to Include the Music Bar**: You can wrap the `BottomTabs` component and the `MusicPlayerBar` component inside a `View` to stack them properly.
+
+### Step 1: Create the MusicPlayerBar Component
+
+Create a new file called `MusicPlayerBar.js`:
+
+```jsx
+// MusicPlayerBar.js
+import React from 'react';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
+
+const MusicPlayerBar = () => {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.songTitle}>The Lost Soul Down X Lost Soul</Text>
+      <TouchableOpacity>
+        <Icon name="play-circle-outline" size={28} color="#fff" />
+      </TouchableOpacity>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+    backgroundColor: '#1d1d1d',
+  },
+  songTitle: {
+    color: '#fff',
+    fontSize: 16,
+  },
+});
+
+export default MusicPlayerBar;
+```
+
+### Step 2: Modify the BottomTabs Component to Include MusicPlayerBar
+
+Now, modify your `BottomTabs` component to include this music bar above the navigation.
+
+```jsx
+import React from 'react';
+import { View, StyleSheet } from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Image } from 'react-native';
+import LibraryScreen from '../Screens/Library.Screen';
+import HomeScreen from '../Screens/Home.Screen';
+import SearchStackNavigator from '../Navigation/SearchStackNavigation';
+import MusicPlayerBar from '../Components/MusicPlayerBar'; // Import the music player bar
+
+const Tab = createBottomTabNavigator();
+
+function BottomTabs() {
+    return (
+        <View style={styles.container}>
+            {/* Music Player Bar */}
+            <MusicPlayerBar />
+
+            {/* Bottom Tab Navigation */}
+            <Tab.Navigator
+                initialRouteName="BottomTabs"
+                screenOptions={({ route }) => ({
+                    tabBarIcon: ({ focused }) => {
+                        let iconName;
+
+                        if (route.name === 'Home') {
+                            iconName = focused
+                                ? require('../Assets/home-full.png')
+                                : require('../Assets/home-not-full.png');
+                        } else if (route.name === 'Search') {
+                            iconName = focused
+                                ? require('../Assets/search-full.png')
+                                : require('../Assets/search-not-full.png');
+                        } else if (route.name === 'Library') {
+                            iconName = focused
+                                ? require('../Assets/library-full.png')
+                                : require('../Assets/library-not-full.png');
+                        }
+
+                        return <Image source={iconName} style={{ width: 24, height: 24 }} />;
+                    },
+                    tabBarActiveTintColor: '#ffffff',
+                    tabBarInactiveTintColor: '#b3b3b3',
+                    tabBarActiveBackgroundColor: '#0d0d0d',
+                    tabBarInactiveBackgroundColor: '#0d0d0d',
+                    tabBarStyle: {
+                        backgroundColor: '#0d0d0d',
+                        paddingRight: 30,
+                        paddingLeft: 30,
+                        height: 60,
+                        paddingBottom: 5,
+                        paddingTop: 5,
+                        borderColor: 'black',
+                    },
+                })}
+            >
+                <Tab.Screen
+                    name="Home"
+                    component={HomeScreen}
+                    options={{ headerShown: false, tabBarLabel: 'Home' }}
+                />
+                <Tab.Screen
+                    name="Search"
+                    component={SearchStackNavigator}
+                    options={{ headerShown: false, tabBarLabel: 'Search'  }}
+                />
+                <Tab.Screen
+                    name="Library"
+                    component={LibraryScreen}
+                    options={{ headerShown: false, tabBarLabel: 'Your Library'  }}
+                />
+            </Tab.Navigator>
+        </View>
+    );
+}
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
+});
+
+export default BottomTabs;
+```
+
+### Step 3: Adjust Layout to Ensure the Music Player Bar is Always Visible
+
+By placing the `MusicPlayerBar` above the `Tab.Navigator`, you ensure that it is always visible at the bottom of the screen, right above the navigation bar.
+
+Now when you render your app, the music player bar will stay above the bottom tabs, similar to the example in your screenshot. Feel free to expand the `MusicPlayerBar` component to include features like song progress, album artwork, etc.

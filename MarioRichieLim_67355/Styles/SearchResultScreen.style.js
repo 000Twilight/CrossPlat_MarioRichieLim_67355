@@ -15,6 +15,7 @@ const searchResult_styles = StyleSheet.create({
   },
   searchBarInput: {
     fontSize: 17,
+    color: 'white',
   },
 
   contentContainer: {
