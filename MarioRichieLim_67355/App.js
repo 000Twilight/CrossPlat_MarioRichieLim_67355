@@ -23,10 +23,16 @@ export default function App() {
           name="Splash"
           component={SplashScreen}
           options={{ headerShown: false }}
+          style={{ backgroundColor: '#0d0d0d' }}
         />
-        
+
         {/* Main app with Sidebar and Bottom Tabs */}
-        <Stack.Screen name="Main" component={SideBar} options={{ headerShown: false }} />
+        <Stack.Screen
+          name="Main"
+          component={SideBar}
+          options={{ headerShown: false }}
+          style={{ backgroundColor: '#0d0d0d' }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

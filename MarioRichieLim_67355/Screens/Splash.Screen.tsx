@@ -23,25 +23,25 @@ const SplashScreen = ({ navigation }) => {
         setTimeout(() => {
           Animated.timing(logoFade, {
             toValue: 0, // Fade out logo to opacity 0
-            duration: 400, 
+            duration: 300, 
             useNativeDriver: true,
           }).start(() => {
             // Step 4: Fade out the background after logo fade out
             Animated.timing(backgroundFade, {
               toValue: 0, // Fade out background to opacity 0
-              duration: 450, 
+              duration: 350, 
               useNativeDriver: true,
             }).start(() => {
-              navigation.replace('Main');
+              navigation.navigate('Main');
             });
           });
-        }, 600);
+        }, 0);
       });
     });
   }, []);
 
   return (
-    <Animated.View style={[splash_styles.container, { opacity: backgroundFade }]}>
+    <Animated.View style={[splash_styles.container, { opacity: backgroundFade, backgroundColor: '#0d0d0d' }]}>
       <Animated.Image
         style={[splash_styles.logo, { opacity: logoFade }]}
         source={require('../Assets/spotify-logo.png')}

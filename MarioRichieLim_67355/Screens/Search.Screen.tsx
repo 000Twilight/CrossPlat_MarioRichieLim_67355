@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import CustomHeader from '../Components/CustomHeader';
 import search_styles from '../Styles/SearchScreen.style';
 import BrowseButton from '../Components/BrowseButton';
+import SearchResultScreen from './SearchResult.Screen';
 
 const browseButtonsData = [
   { backgroundColor: "#FF6F91", text: "Made For You" },
@@ -47,16 +48,18 @@ const SearchScreen = ({ navigation }) => {
       />
 
       <ScrollView style={search_styles.container}>
-
         {/* Search Bar */}
-        <View style={search_styles.searchBarContainer}>
+        <TouchableOpacity
+          style={search_styles.searchBarContainer}
+          onPress={() => navigation.navigate('SearchResultScreen')}
+        >
           <Icon name="search-outline" size={26} style={search_styles.searchIcon} />
-          <TextInput
+          <Text
             style={search_styles.searchBar}
-            placeholder="What do you want to listen to?"
-            placeholderTextColor="#292929"
-          />
-        </View>
+          >
+            What do you want to listen to?
+          </Text>
+        </TouchableOpacity>
 
         {/* Start Browsing Section */}
         <View style={search_styles.section}>

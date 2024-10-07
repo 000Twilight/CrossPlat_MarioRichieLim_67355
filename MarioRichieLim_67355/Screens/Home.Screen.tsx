@@ -4,20 +4,9 @@ import home_styles from '../Styles/HomeScreen.style';
 import { LinearGradient } from 'expo-linear-gradient';
 import JumpBackInList from '../Components/JumpBackList';
 import CustomHeader from '../Components/CustomHeader';
-// import { useIsFocused } from '@react-navigation/native';
 
 const HomeScreen = ({ navigation }) => {
   const [activeButton, setActiveButton] = useState('All');
-  // const isFocused = useIsFocused(); 
-  // const fadeAnim = useRef(new Animated.Value(0)).current;  
-
-  // useEffect(() => {
-  //   Animated.timing(fadeAnim, {
-  //     toValue: isFocused ? 1 : 0,  
-  //     duration: 100, 
-  //     useNativeDriver: true,
-  //   }).start();
-  // }, [isFocused]);
 
   const RecentData = [
     { id: 1, text: "Hip-Hop Songs", image: require('../Assets/Songs/Recent-A.jpg') },
@@ -47,7 +36,7 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     // <Animated.View style={{ flex: 1, backgroundColor: '#0d0d0d', opacity: fadeAnim }}>
-    <View style={{ flex: 1, backgroundColor: '#0d0d0d' }}>
+    <View style={home_styles.container}>
       <CustomHeader
         title={''}
         navigation={navigation}

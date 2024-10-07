@@ -5,6 +5,7 @@ const search_styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#0d0d0d',
     },
+
     searchBarContainer: {
         padding: 11,
         flexDirection: 'row',
@@ -22,6 +23,7 @@ const search_styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
         color: '#292929',
+        marginTop: 3,
     },
 
     section: {

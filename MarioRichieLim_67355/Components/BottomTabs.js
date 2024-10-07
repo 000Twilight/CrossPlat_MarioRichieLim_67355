@@ -2,8 +2,8 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Image } from 'react-native';
 import LibraryScreen from '../Screens/Library.Screen';
-import SearchScreen from '../Screens/Search.Screen';
 import HomeScreen from '../Screens/Home.Screen';
+import SearchStackNavigator from '../Navigation/SearchStackNavigation';
 
 const Tab = createBottomTabNavigator();
 
@@ -33,7 +33,7 @@ function BottomTabs() {
                 },
                 tabBarActiveTintColor: '#ffffff',
                 tabBarInactiveTintColor: '#b3b3b3',
-                tabBarActiveBackgroundColor: 'transparent',
+                tabBarActiveBackgroundColor: '#0d0d0d',
                 tabBarInactiveBackgroundColor: '#0d0d0d',
                 tabBarStyle: {
                     backgroundColor: '#0d0d0d',
@@ -53,7 +53,7 @@ function BottomTabs() {
             />
             <Tab.Screen
                 name="Search"
-                component={SearchScreen}
+                component={SearchStackNavigator}
                 options={{ headerShown: false, tabBarLabel: 'Search'  }}
             />
             <Tab.Screen

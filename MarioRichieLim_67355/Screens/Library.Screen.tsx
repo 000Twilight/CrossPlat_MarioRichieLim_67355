@@ -66,6 +66,21 @@ const PlaylistItem = ({ title, detail, isDownloaded, image, detailText }) => {
   );
 };
 
+const renderHeader = () => (
+  <View>
+    <View style={library_styles.section}>
+      <View style={[library_styles.flexRow, library_styles.headerRow]}>
+        <View style={library_styles.flexRow}>
+          <FontAwesome6 name="arrow-down-long" size={10} color="white" />
+          <FontAwesome6 name="arrow-up-long" size={10} style={{ marginLeft: -2, marginRight: 5 }} color="white" />
+          <Text style={library_styles.recentsTitle}>Recents</Text>
+        </View>
+        <MaterialIcons name="grid-view" size={16} color="white" />
+      </View>
+    </View>
+  </View>
+);
+
 const LibraryScreen = ({ navigation }) => {
   const rightIcons = [
     {
@@ -88,7 +103,6 @@ const LibraryScreen = ({ navigation }) => {
         rightIcons={rightIcons}
       />
 
-      {/* Top Menu (Playlists, Podcasts, Downloaded) */}
       <View style={library_styles.section}>
         <View style={library_styles.flexRow}>
           <TouchableOpacity style={library_styles.menuButton}>
@@ -103,36 +117,21 @@ const LibraryScreen = ({ navigation }) => {
         </View>
       </View>
 
-      <ScrollView>
-        {/* Recents Section */}
-        <View style={library_styles.section}>
-          <View style={[library_styles.flexRow, library_styles.headerRow]}>
-            <View style={library_styles.flexRow}>
-              <FontAwesome6 name="arrow-down-long" size={10} color="white" />
-              <FontAwesome6 name="arrow-up-long" size={10} style={{ marginLeft: -2, marginRight: 5 }} color="white" />
-              <Text style={library_styles.recentsTitle}>Recents</Text>
-            </View>
-            <MaterialIcons name="grid-view" size={16} color="white" />
-          </View>
-        </View>
-
-        {/* Playlist Section */}
-        <View style={{ paddingHorizontal: 15 }}>
-          <FlatList
-            data={playlists}
-            keyExtractor={(item) => item.id}
-            renderItem={({ item }) => (
-              <PlaylistItem
-                title={item.title}
-                detail={item.detail}
-                isDownloaded={item.isDownloaded}
-                image={item.image}
-                detailText={item.detailText}
-              />
-            )}
+      <FlatList
+        ListHeaderComponent={renderHeader}
+        data={playlists}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <PlaylistItem
+            title={item.title}
+            detail={item.detail}
+            isDownloaded={item.isDownloaded}
+            image={item.image}
+            detailText={item.detailText}
           />
-        </View>
-      </ScrollView>
+        )}
+        contentContainerStyle={{ paddingHorizontal: 15 }}
+      />
     </View>
   );
 };

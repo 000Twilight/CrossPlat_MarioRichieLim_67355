@@ -1,6 +1,10 @@
 import { StyleSheet } from 'react-native';
 
 const home_styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: "#0d0d0d",
+    },
     RecentContainer: {
         flex: 1,
         flexDirection: 'row',
