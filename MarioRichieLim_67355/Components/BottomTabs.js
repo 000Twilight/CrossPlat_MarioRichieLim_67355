@@ -1,9 +1,9 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Image } from 'react-native';
-import LibraryScreen from '../Screens/Library.Screen';
 import HomeScreen from '../Screens/Home.Screen';
 import SearchStackNavigator from '../Navigation/SearchStackNavigation';
+import LibraryStackNavigation from '../Navigation/LibraryStackNavigation';
 
 const Tab = createBottomTabNavigator();
 
@@ -58,7 +58,7 @@ function BottomTabs() {
             />
             <Tab.Screen
                 name="Library"
-                component={LibraryScreen}
+                component={LibraryStackNavigation}
                 options={{ headerShown: false, tabBarLabel: 'Your Library'  }}
             />
         </Tab.Navigator>

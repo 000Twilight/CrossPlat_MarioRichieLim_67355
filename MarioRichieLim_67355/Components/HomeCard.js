@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, Image } from "react-native";
 import React from "react";
 
-const JumpBackInCard = ({ item }) => {
+const HomeCard = ({ item }) => {
   return (
     <View style={{ marginRight: 10, width: 160 }}> 
       <Image
@@ -33,4 +33,4 @@ const JumpBackInCard = ({ item }) => {
   );
 };
 
-export default JumpBackInCard;
+export default HomeCard;

@@ -2,8 +2,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, Image, Pressable, Animated } from 'react-native';
 import home_styles from '../Styles/HomeScreen.style';
 import { LinearGradient } from 'expo-linear-gradient';
-import JumpBackInList from '../Components/JumpBackList';
 import CustomHeader from '../Components/CustomHeader';
+import HomeList from '../Components/HomeList';
 
 const HomeScreen = ({ navigation }) => {
   const [activeButton, setActiveButton] = useState('All');
@@ -81,7 +81,7 @@ const HomeScreen = ({ navigation }) => {
             marginLeft: 17,
           }}
         >
-          <JumpBackInList />
+          <HomeList dataType={'A'} />
         </ScrollView>
 
         {/* Made for you */}
@@ -105,7 +105,7 @@ const HomeScreen = ({ navigation }) => {
             marginLeft: 17,
           }}
         >
-          <JumpBackInList />
+          <HomeList dataType={'B'} />
         </ScrollView>
 
         {/* Recent */}
@@ -121,8 +121,15 @@ const HomeScreen = ({ navigation }) => {
           Recents
         </Text>
 
-        <ScrollView>
-
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          style={{
+            marginTop: 19,
+            marginLeft: 17,
+          }}
+        >
+          <HomeList dataType={'C'} />
         </ScrollView>
 
         {/* Your top mixes */}
@@ -138,30 +145,18 @@ const HomeScreen = ({ navigation }) => {
           Your top mixes
         </Text>
 
-        <ScrollView>
-
-        </ScrollView>
-
-        {/* Recommended Stations */}
-        <Text
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
           style={{
-            color: "white",
-            fontSize: 24,
-            fontWeight: "900",
+            marginTop: 19,
             marginLeft: 17,
-            marginTop: 17,
           }}
         >
-          Your top mixes
-        </Text>
-
-        <ScrollView>
-
+          <HomeList dataType={'D'} />
         </ScrollView>
 
-
       </ScrollView>
-      {/* </Animated.View > */}
     </View>
   );
 };

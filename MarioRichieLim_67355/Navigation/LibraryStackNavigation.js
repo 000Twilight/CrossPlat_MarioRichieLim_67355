@@ -1,15 +1,15 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import SearchScreen from '../Screens/Search.Screen';
 import SearchResultScreen from '../Screens/SearchResult.Screen';
+import LibraryScreen from '../Screens/Library.Screen';
 
 const SearchStack = createNativeStackNavigator();
 
-const SearchStackNavigator = ( Screen ) => {
+const LibraryStackNavigation = ( Screen ) => {
   return (
     <SearchStack.Navigator>
       <SearchStack.Screen
-        name="SearchScreen"
-        component={SearchScreen}
+        name="LibraryScreen"
+        component={LibraryScreen}
         options={{ headerShown: false }}
       />
       <SearchStack.Screen
@@ -21,4 +21,4 @@ const SearchStackNavigator = ( Screen ) => {
   );
 }
 
-export default SearchStackNavigator;
+export default LibraryStackNavigation;

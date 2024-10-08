@@ -6,6 +6,7 @@ import CustomHeader from '../Components/CustomHeader';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import Octicons from '@expo/vector-icons/Octicons';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import SearchResultScreen from './SearchResult.Screen';
 
 const playlists = [
   {
@@ -84,7 +85,7 @@ const renderHeader = () => (
 const LibraryScreen = ({ navigation }) => {
   const rightIcons = [
     {
-      onPress: () => console.log('Search icon pressed'),
+      onPress: () => navigation.navigate('SearchResultScreen'),
       icon: <Icon name="search-outline" size={26} marginTop={3} color={'white'} />,
     },
     {
