@@ -7,40 +7,23 @@ import QrisScreen from '../Screens/Qris.Screen';
 import NotificationScreen from '../Screens/Notification.Screen';
 import ProfileScreen from '../Screens/Profile.Screen';
 
+import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
+import HistoryIconActive from '../Assets/BottomNavBar/History-active.png';
+import HistoryIconInactive from '../Assets/BottomNavBar/History-inactive.png';
+import QRISIconActive from '../Assets/BottomNavBar/QRIS-active.png';
+import QRISIconInactive from '../Assets/BottomNavBar/QRIS-inactive.png';
+import NotificationIconActive from '../Assets/BottomNavBar/Mail-active.png';
+import NotificationIconInactive from '../Assets/BottomNavBar/Mail-inactive.png';
+import ProfileIconActive from '../Assets/BottomNavBar/Profile-active.png';
+import ProfileIconInactive from '../Assets/BottomNavBar/Profile-inactive.png';
+
 const Tab = createBottomTabNavigator();
 
 function BottomTabs() {
     return (
         <Tab.Navigator
             initialRouteName="BottomTabs"
-            screenOptions={({ route }) => ({
-                tabBarIcon: ({ focused }) => {
-                    let iconName;
-
-                    if (route.name === 'Home') {
-                        iconName = focused
-                            ? require('../Assets/home-full.png')
-                            : require('../Assets/home-not-full.png');
-                    } else if (route.name === 'History') {
-                        iconName = focused
-                            ? require('../Assets/search-full.png')
-                            : require('../Assets/search-not-full.png');
-                    } else if (route.name === 'QRIS') {
-                        iconName = focused
-                            ? require('../Assets/library-full.png')
-                            : require('../Assets/library-not-full.png');
-                    } else if (route.name === 'Profile') {
-                        iconName = focused
-                            ? require('../Assets/profile-full.png')
-                            : require('../Assets/profile-not-full.png');
-                    } else if (route.name === 'Notification') {
-                        iconName = focused
-                            ? require('../Assets/notification-full.png')
-                            : require('../Assets/notification-not-full.png');
-                    }
-
-                    return <Image source={iconName} style={{ width: 24, height: 24 }} />;
-                },
+            screenOptions={() => ({
                 tabBarActiveTintColor: '#ffffff',
                 tabBarInactiveTintColor: '#b3b3b3',
                 tabBarActiveBackgroundColor: '#0d0d0d',
@@ -52,9 +35,45 @@ function BottomTabs() {
                     height: 60,
                     paddingBottom: 5,
                     paddingTop: 5,
-                    borderColor: 'grey',
                 },
-            })}
+                tabBarIcon: ({ focused, route }) => {
+                    let icon;
+
+                    if (route.name === 'Home') {
+                        icon = focused ? (
+                            <FontAwesome6 name="house" size={24} color="#9B9B9B" />
+                        ) : (
+                            <FontAwesome6 name="house" size={24} color="#808080" />
+                        );
+                    } else if (route.name === 'History') {
+                        icon = focused ? (
+                            <Image source={HistoryIconActive} style={{ width: 24, height: 24 }} />
+                        ) : (
+                            <Image source={HistoryIconInactive} style={{ width: 24, height: 24 }} />
+                        );
+                    } else if (route.name === 'QRIS') {
+                        icon = focused ? (
+                            <Image source={QRISIconActive} style={{ width: 24, height: 24 }} />
+                        ) : (
+                            <Image source={QRISIconInactive} style={{ width: 24, height: 24 }} />
+                        );
+                    } else if (route.name === 'Notification') {
+                        icon = focused ? (
+                            <Image source={NotificationIconActive} style={{ width: 24, height: 24 }} />
+                        ) : (
+                            <Image source={NotificationIconInactive} style={{ width: 24, height: 24 }} />
+                        );
+                    } else if (route.name === 'Profile') {
+                        icon = focused ? (
+                            <Image source={ProfileIconActive} style={{ width: 24, height: 24 }} />
+                        ) : (
+                            <Image source={ProfileIconInactive} style={{ width: 24, height: 24 }} />
+                        );
+                    }
+                    return icon;
+                },
+            })
+            }
         >
             <Tab.Screen
                 name="Home"
@@ -64,24 +83,24 @@ function BottomTabs() {
             <Tab.Screen
                 name="History"
                 component={History}
-                options={{ headerShown: false, tabBarLabel: 'Riwayat'  }}
+                options={{ headerShown: false, tabBarLabel: 'Riwayat' }}
             />
             <Tab.Screen
                 name="QRIS"
                 component={QrisScreen}
-                options={{ headerShown: false, tabBarLabel: 'Bayar'  }}
+                options={{ headerShown: false, tabBarLabel: 'Bayar' }}
             />
             <Tab.Screen
                 name="Notification"
                 component={NotificationScreen}
-                options={{ headerShown: false, tabBarLabel: 'Notifikasi'  }}
+                options={{ headerShown: false, tabBarLabel: 'Notifikasi' }}
             />
             <Tab.Screen
                 name="Profile"
-                component={{ProfileScreen}}
-                options={{ headerShown: false, tabBarLabel: 'Profil'  }}
+                component={{ ProfileScreen }}
+                options={{ headerShown: false, tabBarLabel: 'Profil' }}
             />
-        </Tab.Navigator>
+        </ Tab.Navigator >
     );
 }
 

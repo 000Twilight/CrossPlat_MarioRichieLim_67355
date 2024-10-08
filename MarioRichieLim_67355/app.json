@@ -6,11 +6,6 @@
     "orientation": "portrait",
     "icon": "./Assets/UMN-Logo.png",
     "userInterfaceStyle": "light",
-    "splash": {
-      "image": "./Assets/UMN-Logo.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
     "ios": {
       "supportsTablet": true
     },

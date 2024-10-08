@@ -8,8 +8,8 @@ const splash_styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
   },
   logo: {
-    width: 190,
-    height: 190,
+    width: 150,
+    height: 300,
   },
 });
 
