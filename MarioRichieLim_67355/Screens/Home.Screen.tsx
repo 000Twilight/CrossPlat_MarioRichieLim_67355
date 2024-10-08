@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollView } from 'react-native';
 import home_styles from '../Styles/Home.style';
 import CustomText from '../Components/CustomText';
 import { ImageBackground } from 'react-native';
@@ -80,7 +80,16 @@ const HomeScreen = () => {
           <CustomText style={{ fontSize: 24, fontFamily: 'Lato-Black ' }}>Recent Transactions</CustomText>
           <CustomText style={{ fontSize: 16, color: '#2566a5' }}>View All</CustomText>
         </View>
-        
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          style={{
+            marginTop: 19,
+            marginLeft: 17,
+          }}
+        >
+          <View></View>
+        </ScrollView>
       </View>
     </View >
   );
