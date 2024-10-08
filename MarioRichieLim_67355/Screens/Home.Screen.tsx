@@ -12,7 +12,7 @@ const HomeScreen = () => {
           source={require('../Assets/Union-Logo.png')}
         />
         <Text style={home_styles.topText}>
-          All-U-Need
+          UnionX
         </Text>
       </View>
 

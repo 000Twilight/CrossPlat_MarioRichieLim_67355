@@ -6,12 +6,10 @@ const home_styles = StyleSheet.create({
         backgroundColor: '#F8F9F9',
         paddingHorizontal: 20,
         paddingTop: 32,
-
     },
     logo: {
         width: 64,
         height: 64,
-        marginRight: 8,
     },
     flexRow: {
         flexDirection: 'row',

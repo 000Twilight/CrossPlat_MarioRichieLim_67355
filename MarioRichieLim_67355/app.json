@@ -17,6 +17,9 @@
     },
     "web": {
       "favicon": "./Assets/UMN-Logo.png"
-    }
+    },
+    "plugins": [
+      "expo-font"
+    ]
   }
 }
