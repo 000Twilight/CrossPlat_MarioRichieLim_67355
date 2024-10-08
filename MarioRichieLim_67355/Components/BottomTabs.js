@@ -37,9 +37,6 @@ function BottomTabs() {
                     paddingBottom: 5,
                     paddingTop: 5,
                 },
-                tabBarLabelStyle: ({ focused }) => ({
-                    fontWeight: focused ? 'bold' : 'normal',
-                }),
                 tabBarIcon: ({ focused }) => {
                     let icon;
 

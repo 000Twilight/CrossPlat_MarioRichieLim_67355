@@ -3,9 +3,9 @@ import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollView } from 'rea
 import home_styles from '../Styles/Home.style';
 import CustomText from '../Components/CustomText';
 import { ImageBackground } from 'react-native';
-import { Ionicons, FontAwesome } from '@expo/vector-icons';
+import { Ionicons, FontAwesome, FontAwesome5 } from '@expo/vector-icons';
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }) => {
   return (
     <View style={home_styles.container}>
       <View style={home_styles.flexTop}>
@@ -28,19 +28,12 @@ const HomeScreen = () => {
           style={home_styles.cardBackground}
           imageStyle={{ borderRadius: 15 }}
         >
-          <View style={home_styles.cardContent}>
-            <Image
-              source={require('../Assets/Chip.png')}
-              style={home_styles.cardChip}
-            />
-            <CustomText style={home_styles.cardCurrency}>Rp 1.000.000</CustomText>
-            <CustomText style={home_styles.cardLabel}>Total Balance</CustomText>
-          </View>
+          <CustomText style={home_styles.cardCurrency}>Rp 1.000.000</CustomText>
+          <CustomText style={home_styles.cardLabel}>Total Balance</CustomText>
         </ImageBackground>
       </View>
 
       <View>
-        {/* <CustomText style={{ fontSize: 24, fontFamily: 'Lato-Black ' }}>Quick Action</CustomText> */}
         <View style={home_styles.quickActionContainer}>
           <TouchableOpacity style={home_styles.quickActionButton}>
             <Ionicons name="arrow-up-outline" size={24} color="#2566a5" />
@@ -58,19 +51,28 @@ const HomeScreen = () => {
       </View>
 
       <View>
-        <CustomText style={{ fontSize: 24, fontFamily: 'Lato-Black ' }}>Categories</CustomText>
+        <CustomText style={{ fontSize: 24, fontFamily: 'Lato-Black' }}>Categories</CustomText>
         <View style={home_styles.quickActionContainer}>
-          <TouchableOpacity style={home_styles.quickActionButton}>
-            <Ionicons name="arrow-up-outline" size={24} color="#2566a5" />
-            <CustomText style={home_styles.quickActionText}>Transfer</CustomText>
+          <TouchableOpacity
+            style={home_styles.quickActionButton}
+            onPress={() => navigation.navigate('Pulsa')}
+          >
+            <Ionicons name="phone-portrait-outline" size={24} color="#2566a5" />
+            <CustomText style={home_styles.quickActionText}>Pulsa/Data</CustomText>
           </TouchableOpacity>
-          <TouchableOpacity style={home_styles.quickActionButton}>
-            <Ionicons name="arrow-down-outline" size={24} color="#2566a5" />
-            <CustomText style={home_styles.quickActionText}>Tarik Tunai</CustomText>
+          <TouchableOpacity
+            style={home_styles.quickActionButton}
+            onPress={() => navigation.navigate('PLN')}
+          >
+            <Ionicons name="flash-outline" size={24} color="#2566a5" />
+            <CustomText style={home_styles.quickActionText}>Listrik</CustomText>
           </TouchableOpacity>
-          <TouchableOpacity style={home_styles.quickActionButton}>
-            <FontAwesome name="ellipsis-h" size={24} color="#2566a5" />
-            <CustomText style={home_styles.quickActionText}>More</CustomText>
+          <TouchableOpacity
+            style={home_styles.quickActionButton}
+            onPress={() => navigation.navigate('BPJS')}
+          >
+            <FontAwesome5 name="shield-alt" size={24} color="#2566a5" />
+            <CustomText style={home_styles.quickActionText}>BPJS</CustomText>
           </TouchableOpacity>
         </View>
       </View>

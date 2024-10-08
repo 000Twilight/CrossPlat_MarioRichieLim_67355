@@ -1,12 +1,16 @@
+import 'react-native-gesture-handler';
 import * as React from 'react';
-import * as Font from 'expo-font';
+import { useState, useEffect } from 'react';
 import { StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import * as Font from 'expo-font';
+
 import SplashScreen from './Screens/Splash.Screen';
 import BottomTabs from './Components/BottomTabs';
-import 'react-native-gesture-handler';
-import { useState, useEffect } from 'react';
+import BPJSScreen from './Screens/Transaction/BPJS.Screen';
+import PLNScreen from './Screens/Transaction/PLN.Screen';
+import PulsaScreen from './Screens/Transaction/Pulsa.Screen';
 
 const Stack = createNativeStackNavigator();
 
@@ -51,6 +55,21 @@ export default function App() {
           component={BottomTabs}
           options={{ headerShown: false }}
           style={{ backgroundColor: '#FFFFFF' }}
+        />
+        <Stack.Screen
+          name="Pulsa"
+          component={PulsaScreen}
+          options={{ title: 'Pulsa/Data' }}
+        />
+        <Stack.Screen
+          name="PLN"
+          component={PLNScreen}
+          options={{ title: 'Listrik' }}
+        />
+        <Stack.Screen
+          name="BPJS"
+          component={BPJSScreen}
+          options={{ title: 'BPJS' }}
         />
       </Stack.Navigator>
     </NavigationContainer>

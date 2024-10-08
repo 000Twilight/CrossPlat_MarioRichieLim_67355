@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, TextInput, TouchableOpacity, Image, FlatList } from 'react-native';
 import pulsa_styles from '../../Styles/Transaction/Pulsa.style';
 import CustomText from '../../Components/CustomText';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const PulsaScreen = ({ navigation }) => {
     const [phoneNumber, setPhoneNumber] = useState('');
@@ -83,7 +84,8 @@ const PulsaScreen = ({ navigation }) => {
                     />
                     {phoneNumber.length > 0 && (
                         <TouchableOpacity onPress={() => setPhoneNumber('')}>
-                            <Image source={require('../../Assets/ClearIcon.png')} style={pulsa_styles.inputIcon} />
+                            {/* <Image source={require('../../Assets/ClearIcon.png')} style={pulsa_styles.inputIcon} /> */}
+                            <Icon name="close" size={24} style={pulsa_styles.inputIcon} />
                         </TouchableOpacity>
                     )}
                 </View>
@@ -125,7 +127,8 @@ const PulsaScreen = ({ navigation }) => {
                 />
             ) : (
                 <View style={pulsa_styles.messageContainer}>
-                    <Image source={require('../../Assets/InfoIcon.png')} style={pulsa_styles.messageIcon} />
+                    {/* <Image source={require('../../Assets/InfoIcon.png')} style={pulsa_styles.messageIcon} /> */}
+                    <Icon name="info" size={24} style={pulsa_styles.messageIcon} />
                     <CustomText style={pulsa_styles.messageText}>
                         Isi nomor ponsel yang valid untuk menampilkan menu pembelian.
                     </CustomText>

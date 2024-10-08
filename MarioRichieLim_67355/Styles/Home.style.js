@@ -1,3 +1,5 @@
+import { StyleSheet } from 'react-native';
+
 const home_styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -38,40 +40,26 @@ const home_styles = StyleSheet.create({
 
     // Visa Card Styles
     cardContainer: {
-        marginTop: 20,
+        marginTop: 10,
         borderRadius: 15,
-        overflow: 'hidden',
     },
     cardBackground: {
-        width: '100%',
+        width: 365,
         height: 200,
-        justifyContent: 'space-between',
-        padding: 16,
-    },
-    cardContent: {
-        flex: 1,
-        justifyContent: 'space-between',
-    },
-    cardChip: {
-        width: 40,
-        height: 40,
-        position: 'absolute',
-        top: 16,
-        right: 16,
     },
     cardCurrency: {
         fontSize: 24,
         fontFamily: 'Lato-Black',
         color: '#FFFFFF',
         position: 'absolute',
-        bottom: 30,
+        bottom: 40,
         left: 16,
     },
     cardLabel: {
         fontSize: 14,
         color: '#FFFFFF',
         position: 'absolute',
-        bottom: 10,
+        bottom: 20,
         left: 16,
     },
 
@@ -80,18 +68,15 @@ const home_styles = StyleSheet.create({
     quickActionContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        backgroundColor: '#F1F3F4',
-        padding: 16,
         borderRadius: 15,
-        marginTop: 20,
+        marginVertical: 20,
     },
     quickActionButton: {
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#FFFFFF',
         borderRadius: 12,
-        paddingVertical: 10,
-        paddingHorizontal: 20,
+        padding: 16,
         width: '30%', 
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
