@@ -1,69 +1,86 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import home_styles from '../Styles/Home.style';
+import CustomText from '../Components/CustomText';
+import { ImageBackground } from 'react-native';
 import { Ionicons, FontAwesome } from '@expo/vector-icons';
 
 const HomeScreen = () => {
   return (
     <View style={home_styles.container}>
-      <View style={home_styles.flexRow}>
+      <View style={home_styles.flexTop}>
+        <View style={home_styles.logoAndText}>
+          <Image
+            style={home_styles.logo}
+            source={require('../Assets/Union-Logo.png')}
+          />
+          <CustomText style={home_styles.topText}>nionX</CustomText>
+        </View>
         <Image
-          style={home_styles.logo}
-          source={require('../Assets/Union-Logo.png')}
+          style={home_styles.topProfile}
+          source={require('../Assets/Profile.jpeg')}
         />
-        <Text style={home_styles.topText}>
-          UnionX
-        </Text>
       </View>
 
+      <View style={home_styles.cardContainer}>
+        <ImageBackground
+          source={require('../Assets/VisaCard.png')}
+          style={home_styles.cardBackground}
+          imageStyle={{ borderRadius: 15 }}
+        >
+          <View style={home_styles.cardContent}>
+            <Image
+              source={require('../Assets/Chip.png')}
+              style={home_styles.cardChip}
+            />
+            <CustomText style={home_styles.cardCurrency}>Rp 1.000.000</CustomText>
+            <CustomText style={home_styles.cardLabel}>Total Balance</CustomText>
+          </View>
+        </ImageBackground>
+      </View>
 
-      <View style={home_styles.userInfoCard}>
-        <Text style={home_styles.userName}>Mario Richie Lim</Text>
-        <Text style={home_styles.userNumber}>67355</Text>
-
-        <View style={home_styles.horizontalDivider} />
-
-        <View style={home_styles.transactionRow}>
-          <TouchableOpacity style={home_styles.transactionButton}>
-            <Ionicons name="arrow-up-outline" size={24} color="#333" />
-            <Text style={home_styles.buttonText}>Transfer</Text>
+      <View>
+        {/* <CustomText style={{ fontSize: 24, fontFamily: 'Lato-Black ' }}>Quick Action</CustomText> */}
+        <View style={home_styles.quickActionContainer}>
+          <TouchableOpacity style={home_styles.quickActionButton}>
+            <Ionicons name="arrow-up-outline" size={24} color="#2566a5" />
+            <CustomText style={home_styles.quickActionText}>Transfer</CustomText>
           </TouchableOpacity>
-
-          <View style={home_styles.verticalDivider} />
-
-          <TouchableOpacity style={home_styles.transactionButton}>
-            <Ionicons name="arrow-down-outline" size={24} color="#333" />
-            <Text style={home_styles.buttonText}>Tarik Tunai</Text>
+          <TouchableOpacity style={home_styles.quickActionButton}>
+            <Ionicons name="arrow-down-outline" size={24} color="#2566a5" />
+            <CustomText style={home_styles.quickActionText}>Tarik Tunai</CustomText>
           </TouchableOpacity>
-
-          <View style={home_styles.verticalDivider} />
-
-          <TouchableOpacity style={home_styles.transactionButton}>
-            <FontAwesome name="ellipsis-h" size={24} color="#333" />
-            <Text style={home_styles.buttonText}>More</Text>
+          <TouchableOpacity style={home_styles.quickActionButton}>
+            <FontAwesome name="ellipsis-h" size={24} color="#2566a5" />
+            <CustomText style={home_styles.quickActionText}>More</CustomText>
           </TouchableOpacity>
         </View>
       </View>
 
-      <View style={home_styles.quickAccessRow}>
-        <TouchableOpacity style={home_styles.quickAccessButton}>
-          <Ionicons name="phone-portrait-outline" size={40} color="#6A0DAD" />
-          <Text>Pulsa/Data</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={home_styles.quickAccessButton}>
-          <Ionicons name="flash-outline" size={40} color="#6A0DAD" />
-          <Text>Listrik</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={home_styles.quickAccessButton}>
-          <Ionicons name="medkit-outline" size={40} color="#6A0DAD" />
-          <Text>BJS</Text>
-        </TouchableOpacity>
+      <View>
+        <CustomText style={{ fontSize: 24, fontFamily: 'Lato-Black ' }}>Categories</CustomText>
+        <View style={home_styles.quickActionContainer}>
+          <TouchableOpacity style={home_styles.quickActionButton}>
+            <Ionicons name="arrow-up-outline" size={24} color="#2566a5" />
+            <CustomText style={home_styles.quickActionText}>Transfer</CustomText>
+          </TouchableOpacity>
+          <TouchableOpacity style={home_styles.quickActionButton}>
+            <Ionicons name="arrow-down-outline" size={24} color="#2566a5" />
+            <CustomText style={home_styles.quickActionText}>Tarik Tunai</CustomText>
+          </TouchableOpacity>
+          <TouchableOpacity style={home_styles.quickActionButton}>
+            <FontAwesome name="ellipsis-h" size={24} color="#2566a5" />
+            <CustomText style={home_styles.quickActionText}>More</CustomText>
+          </TouchableOpacity>
+        </View>
       </View>
 
-      {/* Offer Banner */}
-      <View style={home_styles.offerBanner}>
-        <Text style={home_styles.offerText}>Super Deal!</Text>
-        <Text style={home_styles.offerDetails}>SPECIAL OFFER SALE UPTO 80% OFF</Text>
+      <View>
+        <View style={home_styles.flexTop}>
+          <CustomText style={{ fontSize: 24, fontFamily: 'Lato-Black ' }}>Recent Transactions</CustomText>
+          <CustomText style={{ fontSize: 16, color: '#2566a5' }}>View All</CustomText>
+        </View>
+        
       </View>
     </View >
   );
