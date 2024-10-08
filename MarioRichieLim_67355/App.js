@@ -11,7 +11,7 @@ const Stack = createNativeStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <StatusBar backgroundColor="#1e1e1e" barStyle="light-content" />
+      <StatusBar backgroundColor="#1e1e1e" barStyle="dark-content" />
       <Stack.Navigator
         screenOptions={{
           headerStyle: { backgroundColor: '#FFFFFF' },
@@ -24,7 +24,6 @@ export default function App() {
           options={{ headerShown: false }}
           style={{ backgroundColor: '#FFFFFF' }}
         />
-
         <Stack.Screen
           name="Main"
           component={BottomTabs}

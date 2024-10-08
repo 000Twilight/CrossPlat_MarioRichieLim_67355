@@ -3,7 +3,7 @@ import { View, Text, ScrollView, TouchableOpacity, Image, Pressable, Animated } 
 import home_styles from '../Styles/Home.style';
 
 
-const ProfileScreen = ({ navigation }) => {
+const ProfileScreen = ({  }) => {
   return (
     <View style={home_styles.container}>
       <Text>This is Profile Screen</Text>
