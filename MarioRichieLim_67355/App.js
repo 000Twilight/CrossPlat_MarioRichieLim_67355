@@ -1,43 +1,31 @@
 import 'react-native-gesture-handler';
-import * as React from 'react';
-import { useState, useEffect } from 'react';
-import { StatusBar } from 'react-native';
+import React, { useContext } from 'react';
+import { ActivityIndicator, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import * as Font from 'expo-font';
-
-import SplashScreen from './Screens/Splash.Screen';
 import BottomTabs from './Components/BottomTabs';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import SplashScreen from './Screens/Splash.Screen';
 import BPJSScreen from './Screens/Transaction/BPJS.Screen';
 import PLNScreen from './Screens/Transaction/PLN.Screen';
 import PulsaScreen from './Screens/Transaction/Pulsa.Screen';
+import PaymentScreen from './Screens/Transaction/Payment.Screen';
+import { AppContext, AppProvider } from './Contexts/App.Context';
 
 const Stack = createNativeStackNavigator();
 
-export default function App() {
-  const [fontsLoaded, setFontsLoaded] = useState(false);
+function AppContent() {
+  const { fontsLoaded } = useContext(AppContext);
 
-  const loadFonts = async () => {
-    await Font.loadAsync({
-      'Lato-Regular': require('./Assets/Lato/Lato-Regular.ttf'),
-      'Lato-Italic': require('./Assets/Lato/Lato-Italic.ttf'),
-      'Lato-Bold': require('./Assets/Lato/Lato-Bold.ttf'),
-      'Lato-BoldItalic': require('./Assets/Lato/Lato-BoldItalic.ttf'),
-      'Lato-Black': require('./Assets/Lato/Lato-Black.ttf'),
-      'Lato-BlackItalic': require('./Assets/Lato/Lato-BlackItalic.ttf'),
-      'Lato-Light': require('./Assets/Lato/Lato-Light.ttf'),
-      'Lato-LightItalic': require('./Assets/Lato/Lato-LightItalic.ttf'),
-    });
-    setFontsLoaded(true);
-  };
-
-  useEffect(() => {
-    loadFonts();
-  }, []);
+  if (!fontsLoaded) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <ActivityIndicator size="large" color="#000000" />
+      </View>
+    );
+  }
 
   return (
     <NavigationContainer>
-      <StatusBar backgroundColor="#000000" barStyle="light-content" />
       <Stack.Navigator
         screenOptions={{
           headerStyle: { backgroundColor: '#FFFFFF' },
@@ -48,13 +36,11 @@ export default function App() {
           name="Splash"
           component={SplashScreen}
           options={{ headerShown: false }}
-          style={{ backgroundColor: '#FFFFFF' }}
         />
         <Stack.Screen
           name="Main"
           component={BottomTabs}
           options={{ headerShown: false }}
-          style={{ backgroundColor: '#FFFFFF' }}
         />
         <Stack.Screen
           name="Pulsa"
@@ -71,7 +57,20 @@ export default function App() {
           component={BPJSScreen}
           options={{ headerShown: false }}
         />
+        <Stack.Screen
+          name="Payment"
+          component={PaymentScreen}
+          options={{ headerShown: false }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
+  );
+}
+
+export default function App() {
+  return (
+    <AppProvider>
+      <AppContent />
+    </AppProvider>
   );
 }

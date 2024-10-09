@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import Octicons from '@expo/vector-icons/Octicons';
+import { AppContext } from '../contexts/AppContext';
 import { useNavigation } from '@react-navigation/native';
 
 const CategoryHeader = ({ title }) => {
     const navigation = useNavigation();
+    const { someValue } = useContext(AppContext);
 
     return (
         <View style={styles.headerContainer}>
@@ -13,6 +15,7 @@ const CategoryHeader = ({ title }) => {
             </TouchableOpacity>
             <View style={styles.titleContainer}>
                 <Text style={styles.headerTitle}>{title}</Text>
+                <Text>{someValue}</Text>
             </View>
         </View>
     );

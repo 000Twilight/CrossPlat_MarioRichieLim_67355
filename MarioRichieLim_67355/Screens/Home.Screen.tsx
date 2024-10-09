@@ -45,13 +45,13 @@ const HomeScreen = ({ navigation }) => {
           </TouchableOpacity>
           <TouchableOpacity style={home_styles.quickActionButton}>
             <FontAwesome name="ellipsis-h" size={24} color="#2566a5" />
-            <CustomText style={home_styles.quickActionText}>More</CustomText>
+            <CustomText style={home_styles.quickActionText}>Lebih</CustomText>
           </TouchableOpacity>
         </View>
       </View>
 
       <View style={home_styles.space}>
-        <CustomText style={{ fontSize: 24, fontFamily: 'Lato-Black', paddingBottom: 16 }}>Categories</CustomText>
+        <CustomText style={{ fontSize: 24, fontFamily: 'Lato-Black', paddingBottom: 16 }}>Kategori</CustomText>
         <View style={home_styles.quickActionContainer}>
           <TouchableOpacity
             style={home_styles.quickActionButton}
@@ -79,7 +79,7 @@ const HomeScreen = ({ navigation }) => {
 
       <View style={home_styles.space}>
         <View style={[home_styles.flexRow, { paddingBottom: 16 }]}>
-          <CustomText style={{ fontSize: 24, fontFamily: 'Lato-Black' }}>Recent Transactions</CustomText>
+          <CustomText style={{ fontSize: 24, fontFamily: 'Lato-Black' }}>Transaksi Terakhir</CustomText>
           <CustomText style={{ fontSize: 14, color: '#2566a5' }}>View All</CustomText>
         </View>
         <ScrollView
