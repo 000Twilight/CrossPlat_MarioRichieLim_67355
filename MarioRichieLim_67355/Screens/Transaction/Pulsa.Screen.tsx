@@ -1,34 +1,53 @@
 import React, { useState } from 'react';
 import { View, TextInput, TouchableOpacity, Image, FlatList } from 'react-native';
+import Animated, { useSharedValue, useAnimatedStyle, withTiming } from 'react-native-reanimated';
+
 import pulsa_styles from '../../Styles/Transaction/Pulsa.style';
 import CustomText from '../../Components/CustomText';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import CategoryHeader from '../../Components/CategoryHeader';
 
 const PulsaScreen = ({ navigation }) => {
+    const translateX = useSharedValue(0);
     const [phoneNumber, setPhoneNumber] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [selectedTab, setSelectedTab] = useState('Isi Pulsa');
     const [isPhoneNumberValid, setIsPhoneNumberValid] = useState(false);
 
-    const priceOptions = [
-        { price: 6500 }, { price: 11500 },
-        { price: 16500 }, { price: 21500 },
-        { price: 26500 }, { price: 31500 },
-        { price: 41500 }, { price: 51500 },
-        { price: 76500 }, { price: 101500 },
+    const topUpOptions = [
+        { amount: '5.000', price: 'Rp 6.500' },
+        { amount: '10.000', price: 'Rp 11.500' },
+        { amount: '15.000', price: 'Rp 16.500' },
+        { amount: '20.000', price: 'Rp 21.500' },
+        { amount: '25.000', price: 'Rp 26.500' },
+        { amount: '30.000', price: 'Rp 31.500' },
+        { amount: '40.000', price: 'Rp 41.500' },
+        { amount: '50.000', price: 'Rp 51.500' },
+        { amount: '75.000', price: 'Rp 76.500' },
+        { amount: '100.000', price: 'Rp 101.500' },
     ];
 
-    const validatePhoneNumber = (phoneNumber) => {
+    const handleTabChange = (tab) => {
+        setSelectedTab(tab);
+        translateX.value = tab === 'Isi Pulsa' ? 0 : -pulsa_styles.container.width;
+    };
+
+    const animatedStyles = useAnimatedStyle(() => {
+        return {
+            transform: [{ translateX: withTiming(translateX.value, { duration: 300 }) }],
+        };
+    });
+
+    const validatePhoneNumber = (number) => {
         setErrorMessage('');
 
-        if (!phoneNumber.startsWith('08')) {
+        if (!number.startsWith('08')) {
             setErrorMessage('Nomor harus dimulai dengan 08');
             setIsPhoneNumberValid(false);
             return false;
         }
 
-        if (phoneNumber.length > 13) {
+        if (number.length > 13) {
             setErrorMessage('Nomor telepon tidak boleh lebih dari 13 digit');
             setIsPhoneNumberValid(false);
             return false;
@@ -42,7 +61,7 @@ const PulsaScreen = ({ navigation }) => {
             '0838', '0831', '0832', '0833' // Axis
         ];
 
-        if (!validPrefixes.some(prefix => phoneNumber.startsWith(prefix))) {
+        if (!validPrefixes.some(prefix => number.startsWith(prefix))) {
             setErrorMessage('Nomor tidak sesuai dengan operator resmi di Indonesia');
             setIsPhoneNumberValid(false);
             return false;
@@ -52,24 +71,16 @@ const PulsaScreen = ({ navigation }) => {
         return true;
     };
 
-    const handlePhoneNumberChange = (phoneNumber) => {
-        setPhoneNumber(phoneNumber);
-        validatePhoneNumber(phoneNumber);
+    const handlePhoneNumberChange = (number) => {
+        setPhoneNumber(number);
+        validatePhoneNumber(number);
     };
 
-    const renderTopUpOption = ({ index, item }) => (
-        <TouchableOpacity
-            key={index}
-            style={pulsa_styles.topUpBox}
-            onPress={() => navigation.navigate('Payment', { selectedTopUp: item, phoneNumber })}
-        >
-            <CustomText style={pulsa_styles.topUpPriceFirst}>
-                {((item.price - 1500)).toLocaleString('id-ID')}
-            </CustomText>
-            <CustomText style={pulsa_styles.topUpPrice}>
-                Harga Rp {item.price.toLocaleString('id-ID')}
-            </CustomText>
-        </TouchableOpacity>
+    const renderTopUpOption = ({ item }) => (
+        <View style={pulsa_styles.topUpBox}>
+            <CustomText style={pulsa_styles.topUpAmount}>{item.amount}</CustomText>
+            <CustomText style={pulsa_styles.topUpPrice}>Harga {item.price}</CustomText>
+        </View>
     );
 
     return (
@@ -91,7 +102,8 @@ const PulsaScreen = ({ navigation }) => {
                         />
                         {phoneNumber.length > 0 && (
                             <TouchableOpacity onPress={() => setPhoneNumber('')}>
-                                <Icon name="close" size={24} />
+                                {/* <Image source={require('../../Assets/ClearIcon.png')} style={pulsa_styles.inputIcon} /> */}
+                                <Icon name="close" size={24} style={pulsa_styles.inputIcon} />
                             </TouchableOpacity>
                         )}
                     </View>
@@ -104,7 +116,7 @@ const PulsaScreen = ({ navigation }) => {
                             pulsa_styles.tabButton,
                             selectedTab === 'Isi Pulsa' && pulsa_styles.activeTab,
                         ]}
-                        onPress={() => setSelectedTab('Isi Pulsa')}
+                        onPress={() => handleTabChange('Isi Pulsa')}
                     >
                         <CustomText style={selectedTab === 'Isi Pulsa' ? pulsa_styles.activeTabText : pulsa_styles.inactiveTabText}>
                             Isi Pulsa
@@ -115,7 +127,7 @@ const PulsaScreen = ({ navigation }) => {
                             pulsa_styles.tabButton,
                             selectedTab === 'Paket Data' && pulsa_styles.activeTab,
                         ]}
-                        onPress={() => setSelectedTab('Paket Data')}
+                        onPress={() => handleTabChange('Paket Data')}
                     >
                         <CustomText style={selectedTab === 'Paket Data' ? pulsa_styles.activeTabText : pulsa_styles.inactiveTabText}>
                             Paket Data
@@ -124,28 +136,16 @@ const PulsaScreen = ({ navigation }) => {
                 </View>
 
                 {isPhoneNumberValid ? (
-                    selectedTab === 'Isi Pulsa' ? (
-                        <FlatList
-                            data={priceOptions}
-                            renderItem={renderTopUpOption}
-                            keyExtractor={(item) => item.price.toString()}
-                            numColumns={2}
-                            columnWrapperStyle={pulsa_styles.topUpRow}
-                        />
-                    ) : (
-                        // <FlatList
-                        //     data={priceOptions}
-                        //     renderItem={renderTopUpOption}
-                        //     keyExtractor={(item) => item.amount}
-                        //     numColumns={2}
-                        //     columnWrapperStyle={pulsa_styles.topUpRow}
-                        // />
-                        <View>
-                            <CustomText>Paket Data</CustomText>
-                        </View>
-                    )
+                    <FlatList
+                        data={topUpOptions}
+                        renderItem={renderTopUpOption}
+                        keyExtractor={(item) => item.amount}
+                        numColumns={2}
+                        columnWrapperStyle={pulsa_styles.topUpRow}
+                    />
                 ) : (
                     <View style={pulsa_styles.messageContainer}>
+                        {/* <Image source={require('../../Assets/InfoIcon.png')} style={pulsa_styles.messageIcon} /> */}
                         <Icon name="info" size={24} style={pulsa_styles.messageIcon} />
                         <CustomText>
                             Isi nomor ponsel yang valid untuk menampilkan menu pembelian.

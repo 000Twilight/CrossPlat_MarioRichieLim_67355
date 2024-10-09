@@ -1,50 +1,48 @@
-import React, { useEffect } from 'react';
-import { View, Image } from 'react-native';
-import Animated, { Easing, useSharedValue, useAnimatedStyle, withTiming, withDelay } from 'react-native-reanimated';
+import React, { useEffect, useRef } from 'react';
+import { View, Image, Animated } from 'react-native';
 import splash_styles from '../Styles/Splash.style';
 
 const SplashScreen = ({ navigation }) => {
-  const scale = useSharedValue(0);
-  const opacity = useSharedValue(1);
+  const backgroundFade = useRef(new Animated.Value(0)).current;
+  const logoFade = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
-    // Start the scale animation
-    scale.value = withTiming(1, {
-      duration: 1000,
-      easing: Easing.out(Easing.exp),
+    Animated.timing(backgroundFade, {
+      toValue: 1,
+      duration: 200,
+      useNativeDriver: true,
+    }).start(() => {
+      Animated.timing(logoFade, {
+        toValue: 1,
+        duration: 400,
+        useNativeDriver: true,
+      }).start(() => {
+        setTimeout(() => {
+          Animated.timing(logoFade, {
+            toValue: 0,
+            duration: 600,
+            useNativeDriver: true,
+          }).start(() => {
+            Animated.timing(backgroundFade, {
+              toValue: 0,
+              duration: 700,
+              useNativeDriver: true,
+            }).start(() => {
+              navigation.navigate('Main');
+            });
+          });
+        }, 100);
+      });
     });
-
-    // Start the fade-out effect after the scaling animation
-    opacity.value = withDelay(
-      1000,
-      withTiming(0, {
-        duration: 500,
-        easing: Easing.inOut(Easing.ease),
-      })
-    );
-
-    // Navigate to the main screen after the fade-out is complete
-    const timeout = setTimeout(() => {
-      navigation.replace('Main');
-    }, 1500);
-
-    return () => clearTimeout(timeout);
-  }, [scale, opacity, navigation]);
-
-  const animatedStyle = useAnimatedStyle(() => {
-    return {
-      transform: [{ scale: scale.value }],
-      opacity: opacity.value,
-    };
-  });
+  }, []);
 
   return (
-    <View style={splash_styles.container}>
+    <Animated.View style={[splash_styles.container, { opacity: backgroundFade }]}>
       <Animated.Image
+        style={[splash_styles.logo, { opacity: logoFade }]}
         source={require('../Assets/UMN-Logo.png')}
-        style={[splash_styles.logo, animatedStyle]}
       />
-    </View>
+    </Animated.View>
   );
 };
 
