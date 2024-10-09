@@ -9,29 +9,29 @@ const SplashScreen = ({ navigation }) => {
   useEffect(() => {
     Animated.timing(backgroundFade, {
       toValue: 1,
-      duration: 100,
+      duration: 200,
       useNativeDriver: true,
     }).start(() => {
       Animated.timing(logoFade, {
         toValue: 1,
-        duration: 300,
+        duration: 400,
         useNativeDriver: true,
       }).start(() => {
         setTimeout(() => {
           Animated.timing(logoFade, {
             toValue: 0,
-            duration: 300,
+            duration: 600,
             useNativeDriver: true,
           }).start(() => {
             Animated.timing(backgroundFade, {
               toValue: 0,
-              duration: 350,
+              duration: 700,
               useNativeDriver: true,
             }).start(() => {
               navigation.navigate('Main');
             });
           });
-        }, 0);
+        }, 100);
       });
     });
   }, []);

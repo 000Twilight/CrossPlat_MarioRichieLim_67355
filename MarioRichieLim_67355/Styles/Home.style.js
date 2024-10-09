@@ -7,14 +7,16 @@ const home_styles = StyleSheet.create({
         paddingHorizontal: 24,
         paddingTop: 24,
     },
-
-    // Top Styles
-    flexTop: {
+    space: {
+        paddingTop: 24,
+    },
+    flexRow: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        marginBottom: 20,
     },
+
+    // Top Styles
     logoAndText: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -41,7 +43,6 @@ const home_styles = StyleSheet.create({
     // Visa Card Styles
     cardContainer: {
         marginTop: 10,
-        borderRadius: 15,
     },
     cardBackground: {
         width: 365,
@@ -69,7 +70,6 @@ const home_styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         borderRadius: 15,
-        marginVertical: 20,
     },
     quickActionButton: {
         alignItems: 'center',
@@ -77,7 +77,7 @@ const home_styles = StyleSheet.create({
         backgroundColor: '#FFFFFF',
         borderRadius: 12,
         padding: 16,
-        width: '30%', 
+        width: '30%',
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.1,

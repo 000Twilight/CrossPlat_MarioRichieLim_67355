@@ -8,7 +8,7 @@ import { Ionicons, FontAwesome, FontAwesome5 } from '@expo/vector-icons';
 const HomeScreen = ({ navigation }) => {
   return (
     <View style={home_styles.container}>
-      <View style={home_styles.flexTop}>
+      <View style={home_styles.flexRow}>
         <View style={home_styles.logoAndText}>
           <Image
             style={home_styles.logo}
@@ -33,7 +33,7 @@ const HomeScreen = ({ navigation }) => {
         </ImageBackground>
       </View>
 
-      <View>
+      <View style={home_styles.space}>
         <View style={home_styles.quickActionContainer}>
           <TouchableOpacity style={home_styles.quickActionButton}>
             <Ionicons name="arrow-up-outline" size={24} color="#2566a5" />
@@ -50,8 +50,8 @@ const HomeScreen = ({ navigation }) => {
         </View>
       </View>
 
-      <View>
-        <CustomText style={{ fontSize: 24, fontFamily: 'Lato-Black' }}>Categories</CustomText>
+      <View style={home_styles.space}>
+        <CustomText style={{ fontSize: 24, fontFamily: 'Lato-Black', paddingBottom: 16 }}>Categories</CustomText>
         <View style={home_styles.quickActionContainer}>
           <TouchableOpacity
             style={home_styles.quickActionButton}
@@ -77,10 +77,10 @@ const HomeScreen = ({ navigation }) => {
         </View>
       </View>
 
-      <View>
-        <View style={home_styles.flexTop}>
-          <CustomText style={{ fontSize: 24, fontFamily: 'Lato-Black ' }}>Recent Transactions</CustomText>
-          <CustomText style={{ fontSize: 16, color: '#2566a5' }}>View All</CustomText>
+      <View style={home_styles.space}>
+        <View style={[home_styles.flexRow, { paddingBottom: 16 }]}>
+          <CustomText style={{ fontSize: 24, fontFamily: 'Lato-Black' }}>Recent Transactions</CustomText>
+          <CustomText style={{ fontSize: 14, color: '#2566a5' }}>View All</CustomText>
         </View>
         <ScrollView
           horizontal
@@ -90,7 +90,9 @@ const HomeScreen = ({ navigation }) => {
             marginLeft: 17,
           }}
         >
-          <View></View>
+          <View>
+            
+          </View>
         </ScrollView>
       </View>
     </View >

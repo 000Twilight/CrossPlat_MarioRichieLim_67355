@@ -4,8 +4,12 @@ const pulsa_styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#F8F9F9',
+    },
+    contentContainer: {
         padding: 20,
     },
+
+    // Top Styles
     title: {
         fontSize: 18,
         fontFamily: 'Lato-Black',
@@ -58,7 +62,7 @@ const pulsa_styles = StyleSheet.create({
     },
     activeTabText: {
         color: '#FFF',
-        fontFamily: 'Lato-Black',
+        fontFamily: 'Lato-Bold',
     },
     inactiveTabText: {
         color: '#333',
@@ -67,7 +71,9 @@ const pulsa_styles = StyleSheet.create({
     messageContainer: {
         flexDirection: 'row',
         backgroundColor: '#F1F3F4',
-        padding: 15,
+        paddingLeft: 15,
+        paddingVertical: 15,
+        paddingRight: 50,
         borderRadius: 10,
         alignItems: 'center',
     },
@@ -76,11 +82,6 @@ const pulsa_styles = StyleSheet.create({
         height: 30,
         marginRight: 10,
     },
-    messageText: {
-        fontSize: 14,
-        color: '#333',
-    },
-
     errorText: {
         color: 'red',
         fontSize: 12,

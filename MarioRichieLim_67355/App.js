@@ -59,17 +59,17 @@ export default function App() {
         <Stack.Screen
           name="Pulsa"
           component={PulsaScreen}
-          options={{ title: 'Pulsa/Data' }}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="PLN"
           component={PLNScreen}
-          options={{ title: 'Listrik' }}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="BPJS"
           component={BPJSScreen}
-          options={{ title: 'BPJS' }}
+          options={{ headerShown: false }}
         />
       </Stack.Navigator>
     </NavigationContainer>

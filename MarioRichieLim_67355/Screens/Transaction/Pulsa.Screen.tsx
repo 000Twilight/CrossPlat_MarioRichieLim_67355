@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import { View, TextInput, TouchableOpacity, Image, FlatList } from 'react-native';
+import Animated, { useSharedValue, useAnimatedStyle, withTiming } from 'react-native-reanimated';
+
 import pulsa_styles from '../../Styles/Transaction/Pulsa.style';
 import CustomText from '../../Components/CustomText';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import CategoryHeader from '../../Components/CategoryHeader';
 
 const PulsaScreen = ({ navigation }) => {
+    const translateX = useSharedValue(0);
     const [phoneNumber, setPhoneNumber] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [selectedTab, setSelectedTab] = useState('Isi Pulsa');
@@ -22,6 +26,17 @@ const PulsaScreen = ({ navigation }) => {
         { amount: '75.000', price: 'Rp 76.500' },
         { amount: '100.000', price: 'Rp 101.500' },
     ];
+
+    const handleTabChange = (tab) => {
+        setSelectedTab(tab);
+        translateX.value = tab === 'Isi Pulsa' ? 0 : -pulsa_styles.container.width;
+    };
+
+    const animatedStyles = useAnimatedStyle(() => {
+        return {
+            transform: [{ translateX: withTiming(translateX.value, { duration: 300 }) }],
+        };
+    });
 
     const validatePhoneNumber = (number) => {
         setErrorMessage('');
@@ -70,70 +85,74 @@ const PulsaScreen = ({ navigation }) => {
 
     return (
         <View style={pulsa_styles.container}>
-            <CustomText style={pulsa_styles.title}>Pulsa & Paket Data</CustomText>
+            <CategoryHeader title='Pulsa & Paket Data' />
+            <View style={pulsa_styles.contentContainer}>
 
-            <View style={pulsa_styles.inputContainer}>
-                <CustomText style={pulsa_styles.label}>Nomor Ponsel</CustomText>
-                <View style={pulsa_styles.inputWrapper}>
-                    <TextInput
-                        style={pulsa_styles.textInput}
-                        placeholder="Contoh : 082370323318"
-                        keyboardType="phone-pad"
-                        value={phoneNumber}
-                        onChangeText={handlePhoneNumberChange}
+                <CustomText style={pulsa_styles.title}>Pulsa & Paket Data</CustomText>
+
+                <View style={pulsa_styles.inputContainer}>
+                    <CustomText style={pulsa_styles.label}>Nomor Ponsel</CustomText>
+                    <View style={pulsa_styles.inputWrapper}>
+                        <TextInput
+                            style={pulsa_styles.textInput}
+                            placeholder="Contoh : 082370323318"
+                            keyboardType="phone-pad"
+                            value={phoneNumber}
+                            onChangeText={handlePhoneNumberChange}
+                        />
+                        {phoneNumber.length > 0 && (
+                            <TouchableOpacity onPress={() => setPhoneNumber('')}>
+                                {/* <Image source={require('../../Assets/ClearIcon.png')} style={pulsa_styles.inputIcon} /> */}
+                                <Icon name="close" size={24} style={pulsa_styles.inputIcon} />
+                            </TouchableOpacity>
+                        )}
+                    </View>
+                    {errorMessage !== '' && <CustomText style={pulsa_styles.errorText}>{errorMessage}</CustomText>}
+                </View>
+
+                <View style={pulsa_styles.tabContainer}>
+                    <TouchableOpacity
+                        style={[
+                            pulsa_styles.tabButton,
+                            selectedTab === 'Isi Pulsa' && pulsa_styles.activeTab,
+                        ]}
+                        onPress={() => handleTabChange('Isi Pulsa')}
+                    >
+                        <CustomText style={selectedTab === 'Isi Pulsa' ? pulsa_styles.activeTabText : pulsa_styles.inactiveTabText}>
+                            Isi Pulsa
+                        </CustomText>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={[
+                            pulsa_styles.tabButton,
+                            selectedTab === 'Paket Data' && pulsa_styles.activeTab,
+                        ]}
+                        onPress={() => handleTabChange('Paket Data')}
+                    >
+                        <CustomText style={selectedTab === 'Paket Data' ? pulsa_styles.activeTabText : pulsa_styles.inactiveTabText}>
+                            Paket Data
+                        </CustomText>
+                    </TouchableOpacity>
+                </View>
+
+                {isPhoneNumberValid ? (
+                    <FlatList
+                        data={topUpOptions}
+                        renderItem={renderTopUpOption}
+                        keyExtractor={(item) => item.amount}
+                        numColumns={2}
+                        columnWrapperStyle={pulsa_styles.topUpRow}
                     />
-                    {phoneNumber.length > 0 && (
-                        <TouchableOpacity onPress={() => setPhoneNumber('')}>
-                            {/* <Image source={require('../../Assets/ClearIcon.png')} style={pulsa_styles.inputIcon} /> */}
-                            <Icon name="close" size={24} style={pulsa_styles.inputIcon} />
-                        </TouchableOpacity>
-                    )}
-                </View>
-                {errorMessage !== '' && <CustomText style={pulsa_styles.errorText}>{errorMessage}</CustomText>}
+                ) : (
+                    <View style={pulsa_styles.messageContainer}>
+                        {/* <Image source={require('../../Assets/InfoIcon.png')} style={pulsa_styles.messageIcon} /> */}
+                        <Icon name="info" size={24} style={pulsa_styles.messageIcon} />
+                        <CustomText>
+                            Isi nomor ponsel yang valid untuk menampilkan menu pembelian.
+                        </CustomText>
+                    </View>
+                )}
             </View>
-
-            <View style={pulsa_styles.tabContainer}>
-                <TouchableOpacity
-                    style={[
-                        pulsa_styles.tabButton,
-                        selectedTab === 'Isi Pulsa' && pulsa_styles.activeTab,
-                    ]}
-                    onPress={() => setSelectedTab('Isi Pulsa')}
-                >
-                    <CustomText style={selectedTab === 'Isi Pulsa' ? pulsa_styles.activeTabText : pulsa_styles.inactiveTabText}>
-                        Isi Pulsa
-                    </CustomText>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={[
-                        pulsa_styles.tabButton,
-                        selectedTab === 'Paket Data' && pulsa_styles.activeTab,
-                    ]}
-                    onPress={() => setSelectedTab('Paket Data')}
-                >
-                    <CustomText style={selectedTab === 'Paket Data' ? pulsa_styles.activeTabText : pulsa_styles.inactiveTabText}>
-                        Paket Data
-                    </CustomText>
-                </TouchableOpacity>
-            </View>
-
-            {isPhoneNumberValid ? (
-                <FlatList
-                    data={topUpOptions}
-                    renderItem={renderTopUpOption}
-                    keyExtractor={(item) => item.amount}
-                    numColumns={2}
-                    columnWrapperStyle={pulsa_styles.topUpRow}
-                />
-            ) : (
-                <View style={pulsa_styles.messageContainer}>
-                    {/* <Image source={require('../../Assets/InfoIcon.png')} style={pulsa_styles.messageIcon} /> */}
-                    <Icon name="info" size={24} style={pulsa_styles.messageIcon} />
-                    <CustomText style={pulsa_styles.messageText}>
-                        Isi nomor ponsel yang valid untuk menampilkan menu pembelian.
-                    </CustomText>
-                </View>
-            )}
         </View>
     );
 };
