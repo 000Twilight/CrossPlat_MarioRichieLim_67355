@@ -8,6 +8,7 @@ const CustomText = (props) => {
 const styles = StyleSheet.create({
   text: {
     fontFamily: 'Lato-Regular', 
+    lineHeight: 18,
   },
 });
 

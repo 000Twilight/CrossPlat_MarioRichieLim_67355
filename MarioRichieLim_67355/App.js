@@ -11,6 +11,7 @@ import BottomTabs from './Components/BottomTabs';
 import BPJSScreen from './Screens/Transaction/BPJS.Screen';
 import PLNScreen from './Screens/Transaction/PLN.Screen';
 import PulsaScreen from './Screens/Transaction/Pulsa.Screen';
+import PaymentScreen from './Screens/Transaction/Payment.Screen';
 
 const Stack = createNativeStackNavigator();
 
@@ -69,6 +70,11 @@ export default function App() {
         <Stack.Screen
           name="BPJS"
           component={BPJSScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Payment"
+          component={PaymentScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import Octicons from '@expo/vector-icons/Octicons';
 import { useNavigation } from '@react-navigation/native';
-import { AppContext } from '../Contexts/App.Context';
+// import { AppContext } from '../Contexts/App.Context';
 
 const CategoryHeader = ({ title }) => {
     const navigation = useNavigation();
