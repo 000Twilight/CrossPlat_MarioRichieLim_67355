@@ -1,16 +1,32 @@
-import { ScrollView, View, TouchableOpacity, Image, Text } from "react-native";
-import styles from "../App.styles";  // Import your styles
-import userData from "../data.json";  // Assuming this file contains user data
 import React from "react";
+import { ScrollView, View, TouchableOpacity, Image, Text } from "react-native";
+import styles from "../App.styles"; // Import your styles
+import userData from "../data.json"; // Assuming this file contains user data
+import Animated, {
+    SlideInLeft,
+    SlideInRight,
+    SlideInDown,
+} from "react-native-reanimated";
 
 const UserList = ({ navigation }) => {
     return (
         <ScrollView contentContainerStyle={styles.scrollContainer}>
-            {userData.map((user) => {
+            {userData.map((user, index) => {
+                // Alternate between animations for a dynamic effect
+                const animation = index % 3 === 0
+                    ? SlideInLeft
+                    : index % 3 === 1
+                        ? SlideInRight
+                        : SlideInDown;
+
                 return (
-                    <View style={styles.userList} key={user.name}>
+                    <Animated.View
+                        key={user.name}
+                        style={styles.userList}
+                        entering={animation.delay(index * 100).duration(500)}
+                    >
                         <TouchableOpacity
-                            onPress={() => navigation.navigate("Profile", { user })}  // Pass the whole user object
+                            onPress={() => navigation.navigate("Profile", { user })} // Pass the whole user object
                         >
                             <View style={styles.imageContainer}>
                                 <Image
@@ -23,11 +39,11 @@ const UserList = ({ navigation }) => {
                                 <Text>{user.email}</Text>
                             </View>
                         </TouchableOpacity>
-                    </View>
+                    </Animated.View>
                 );
             })}
         </ScrollView>
     );
-}
+};
 
 export default UserList;
