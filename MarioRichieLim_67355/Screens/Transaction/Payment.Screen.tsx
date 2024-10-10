@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import CustomText from '../../Components/CustomText';
 import CategoryHeader from '../../Components/CategoryHeader';
 import payment_styles from '../../Styles/Transaction/Payment.style';
-
+import { TransactionContext } from '../../Contexts/Transaction.Context';
 import AntDesign from '@expo/vector-icons/AntDesign';
 
-const PaymentScreen = ({ route, navigation }) => {
-    const { selectedTopUp, phoneNumber } = route.params;
+const PaymentScreen = ({ navigation }) => {
+    const { state } = useContext(TransactionContext);
+    const { phoneNumber, selectedPrice, selectedPackage, operator, saldo } = state;
 
     return (
         <View style={payment_styles.container}>
@@ -17,37 +18,29 @@ const PaymentScreen = ({ route, navigation }) => {
                 <View style={payment_styles.messageContainer}>
                     <AntDesign name="star" size={24} color="black" />
                     <View>
-                        <CustomText>Telkomsel</CustomText>
-                        <CustomText>{phoneNumber}</CustomText>
+                        <CustomText>operator : {operator}</CustomText>
+                        <CustomText>phone number : {phoneNumber}</CustomText>
+                        <CustomText>Package : {selectedPackage}</CustomText>
                     </View>
-                    <CustomText>{selectedTopUp.price}</CustomText>
+                    <CustomText>Rp {selectedPrice.toLocaleString('id-ID')}</CustomText>
                 </View>
 
-                {/* <CustomText>Metode Pembayaran</CustomText>
+                <CustomText>Metode Pembayaran</CustomText>
                 <View style={payment_styles.messageContainer}>
                     <CustomText>Saldo saya</CustomText>
-                    <CustomText>Rp 900.000</CustomText>
+                    <CustomText>Rp {saldo.toLocaleString('id-ID')}</CustomText>
                 </View>
 
-                <CustomText>Detail Pembayaran</CustomText>
-                <View style={payment_styles.messageContainer}>
-                    <CustomText>Harga Voucher</CustomText>
-                    <CustomText>{selectedTopUp.price}</CustomText>
-                </View>
+                <CustomText>Total Pembayaran Rp {selectedPrice.toLocaleString('id-ID')}</CustomText>
 
-                <View style={payment_styles.messageContainer}>
-                    <CustomText>Biaya Transaksi</CustomText>
-                    <CustomText>Rp 0</CustomText>
-                </View>
-
-                <View style={payment_styles.messageContainer}>
-                    <CustomText>Total Pembayaran</CustomText>
-                    <CustomText>{selectedTopUp.price}</CustomText>
-                </View>
-
-                <TouchableOpacity style={payment_styles.topUpBox} onPress={() => alert('Pembayaran Berhasil')}>
-                    <CustomText style={payment_styles.activeTabText}>Konfirmasi</CustomText>
-                </TouchableOpacity> */}
+                <TouchableOpacity
+                    style={{ padding: 10, backgroundColor: 'red' }}
+                    onPress={() => {
+                        navigation.navigate('PIN');
+                    }}
+                >
+                    <CustomText>Konfirmasi</CustomText>
+                </TouchableOpacity>
             </View>
         </View>
     );

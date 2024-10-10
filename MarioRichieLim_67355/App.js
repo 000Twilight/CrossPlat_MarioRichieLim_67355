@@ -1,10 +1,10 @@
 import 'react-native-gesture-handler';
-import * as React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import * as Font from 'expo-font';
 import { StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import * as Font from 'expo-font';
+import { TransactionProvider } from './Contexts/Transaction.Context';
 
 import SplashScreen from './Screens/Splash.Screen';
 import BottomTabs from './Components/BottomTabs';
@@ -12,8 +12,12 @@ import BPJSScreen from './Screens/Transaction/BPJS.Screen';
 import PLNScreen from './Screens/Transaction/PLN.Screen';
 import PulsaScreen from './Screens/Transaction/Pulsa.Screen';
 import PaymentScreen from './Screens/Transaction/Payment.Screen';
+import PinScreen from './Screens/Transaction/PIN.Screen';
+import SuccessScreen from './Screens/Transaction/Success.Screen';
+import HistoryDetailScreen from './Screens/HistoryDetail.Screen';
 
 const Stack = createNativeStackNavigator();
+// const AppStore = createStore(transactionReducer);
 
 export default function App() {
   const [fontsLoaded, setFontsLoaded] = useState(false);
@@ -37,47 +41,64 @@ export default function App() {
   }, []);
 
   return (
-    <NavigationContainer>
-      <StatusBar backgroundColor="#000000" barStyle="light-content" />
-      <Stack.Navigator
-        screenOptions={{
-          headerStyle: { backgroundColor: '#FFFFFF' },
-          headerTintColor: '#000000',
-        }}
-      >
-        <Stack.Screen
-          name="Splash"
-          component={SplashScreen}
-          options={{ headerShown: false }}
-          style={{ backgroundColor: '#FFFFFF' }}
-        />
-        <Stack.Screen
-          name="Main"
-          component={BottomTabs}
-          options={{ headerShown: false }}
-          style={{ backgroundColor: '#FFFFFF' }}
-        />
-        <Stack.Screen
-          name="Pulsa"
-          component={PulsaScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="PLN"
-          component={PLNScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="BPJS"
-          component={BPJSScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Payment"
-          component={PaymentScreen}
-          options={{ headerShown: false }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <TransactionProvider>
+      <NavigationContainer>
+        <StatusBar backgroundColor="#000000" barStyle="light-content" />
+        <Stack.Navigator
+          screenOptions={{
+            headerStyle: { backgroundColor: '#FFFFFF' },
+            headerTintColor: '#000000',
+          }}
+        >
+          <Stack.Screen
+            name="Splash"
+            component={SplashScreen}
+            options={{ headerShown: false }}
+            style={{ backgroundColor: '#FFFFFF' }}
+          />
+          <Stack.Screen
+            name="Main"
+            component={BottomTabs}
+            options={{ headerShown: false }}
+            style={{ backgroundColor: '#FFFFFF' }}
+          />
+          <Stack.Screen
+            name="Pulsa"
+            component={PulsaScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="PLN"
+            component={PLNScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="BPJS"
+            component={BPJSScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Payment"
+            component={PaymentScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="PIN"
+            component={PinScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Success"
+            component={SuccessScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="HistoryDetail"
+            component={HistoryDetailScreen}
+            options={{ headerShown: false }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </TransactionProvider>
   );
 }

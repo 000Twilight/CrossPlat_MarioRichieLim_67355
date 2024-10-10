@@ -4,8 +4,11 @@ import home_styles from '../Styles/Home.style';
 import CustomText from '../Components/CustomText';
 import { ImageBackground } from 'react-native';
 import { Ionicons, FontAwesome, FontAwesome5 } from '@expo/vector-icons';
+import { TransactionContext } from '../Contexts/Transaction.Context';
 
 const HomeScreen = ({ navigation }) => {
+  const { state } = React.useContext(TransactionContext);
+  
   return (
     <View style={home_styles.container}>
       <View style={home_styles.flexRow}>
@@ -28,7 +31,7 @@ const HomeScreen = ({ navigation }) => {
           style={home_styles.cardBackground}
           imageStyle={{ borderRadius: 15 }}
         >
-          <CustomText style={home_styles.cardCurrency}>Rp 1.000.000</CustomText>
+          <CustomText style={home_styles.cardCurrency}>Rp {state.saldo.toLocaleString('id-ID')}</CustomText>
           <CustomText style={home_styles.cardLabel}>Total Balance</CustomText>
         </ImageBackground>
       </View>
