@@ -1,22 +1,17 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Image, View } from 'react-native';
+import { Image, View, StyleSheet } from 'react-native';
 import HomeScreen from '../Screens/Home.Screen';
 import History from '../Screens/History.Screen';
 import QrisScreen from '../Screens/Qris.Screen';
 import NotificationScreen from '../Screens/Notification.Screen';
 import ProfileScreen from '../Screens/Profile.Screen';
 
+import Ionicons from '@expo/vector-icons/Ionicons';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
-import HistoryIconActive from '../Assets/BottomNavBar/History-active.png';
-import HistoryIconInactive from '../Assets/BottomNavBar/History-inactive.png';
-import QRISIconActive from '../Assets/BottomNavBar/QRIS-active.png';
-import QRISIconInactive from '../Assets/BottomNavBar/QRIS-inactive.png';
-import NotificationIconActive from '../Assets/BottomNavBar/Mail-active.png';
-import NotificationIconInactive from '../Assets/BottomNavBar/Mail-inactive.png';
-import ProfileIconActive from '../Assets/BottomNavBar/Profile-active.png';
-import ProfileIconInactive from '../Assets/BottomNavBar/Profile-inactive.png';
-import bottomTabs_styles from '../Styles/BottomTabs.style';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import Qris from '../Assets/Qris.png';
+import QrisBlue from '../Assets/Qris-blue.png';
 
 const Tab = createBottomTabNavigator();
 
@@ -39,40 +34,38 @@ function BottomTabs() {
                 },
                 tabBarIcon: ({ focused }) => {
                     let icon;
+                    const colorActive = '#2566a5';
+                    const colorInActive = '#e0e0e0';
 
                     if (route.name === 'Home') {
                         icon = focused ? (
-                            <FontAwesome6 name="house" size={24} color="#808080" />
+                            <FontAwesome6 name='house' size={24} color={colorActive} />
                         ) : (
-                            <FontAwesome6 name="house" size={24} color="#9B9B9B" />
+                            <FontAwesome6 name='house' size={24} color={colorInActive} />
                         );
                     } else if (route.name === 'History') {
                         icon = focused ? (
-                            <Image source={HistoryIconActive} style={bottomTabs_styles.normal} />
+                            <MaterialCommunityIcons name='file-clock' size={28} color={colorActive} />
                         ) : (
-                            <Image source={HistoryIconInactive} style={bottomTabs_styles.normal} />
+                            <MaterialCommunityIcons name='file-clock-outline' size={28} color={colorInActive} />
                         );
                     } else if (route.name === 'QRIS') {
-                        icon = focused ? (
-                            <View style={bottomTabs_styles.qrisContainer}>
-                                <Image source={QRISIconActive} style={bottomTabs_styles.qris} />
-                            </View>
-                        ) : (
-                            <View style={bottomTabs_styles.qrisContainer}>
-                                <Image source={QRISIconInactive} style={bottomTabs_styles.qris} />
+                        icon = (
+                            <View style={[styles.qrisContainer, focused ? {backgroundColor: {colorActive}} : {backgroundColor: {colorActive}}]}>
+                                <Image source={Qris} style={styles.qrisImage} />
                             </View>
                         );
                     } else if (route.name === 'Notification') {
                         icon = focused ? (
-                            <Image source={NotificationIconActive} style={bottomTabs_styles.normal} />
+                            <Ionicons name='notifications' size={28} color={colorActive} />
                         ) : (
-                            <Image source={NotificationIconInactive} style={bottomTabs_styles.normal} />
+                            <Ionicons name='notifications-outline' size={28} color={colorInActive} />
                         );
                     } else if (route.name === 'Profile') {
                         icon = focused ? (
-                            <Image source={ProfileIconActive} style={bottomTabs_styles.normal} />
+                            <MaterialCommunityIcons name='account-circle' size={32} marginBottom={4} color={colorActive} />
                         ) : (
-                            <Image source={ProfileIconInactive} style={bottomTabs_styles.normal} />
+                            <MaterialCommunityIcons name='account-circle-outline' size={32} marginBottom={4} color={colorInActive} />
                         );
                     }
                     return icon;
@@ -108,5 +101,22 @@ function BottomTabs() {
         </ Tab.Navigator >
     );
 }
+
+const styles = StyleSheet.create({
+    qrisContainer: {
+        width: 68,
+        height: 65,
+        borderRadius: 15,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderColor: '#fff',
+        borderWidth: 4,
+        top: -15,
+    },
+    qrisImage: {
+        width: 48,
+        height: 48,
+    },
+});
 
 export default BottomTabs;

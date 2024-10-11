@@ -7,8 +7,6 @@ const initialState = {
 
     saldo: 1000000,
 
-    transactionHistory: [],
-
     selectedPrice: 0,
     selectedPackage: '',
 
@@ -22,6 +20,36 @@ const initialState = {
     transactionStatus: null,
 
     operator: '',
+
+    transactionHistory: [
+        {
+            traceNo: '00111111',
+            price: 50000,
+            date: new Date().toLocaleString(),
+            status: 'Berhasil',
+            cardType: 'Debit',
+            transactionType: 'Pulsa',
+            phoneNumber: '081234567890',
+        },
+        {
+            traceNo: '00222222', 
+            price: 100000,
+            date: new Date().toLocaleString(),
+            status: 'Gagal',
+            cardType: 'Credit',
+            transactionType: 'Paket Data',
+            phoneNumber: '089876543210',
+        },
+        {
+            traceNo: '00333333', 
+            price: 75000,
+            date: new Date().toLocaleString(),
+            status: 'Berhasil',
+            cardType: 'Debit',
+            transactionType: 'Listrik',
+            phoneNumber: '081245678901',
+        },
+    ],
 };
 
 const transactionReducer = (state, action) => {
@@ -67,9 +95,9 @@ const transactionReducer = (state, action) => {
                 price: action.payload.price,
                 date: new Date().toLocaleString(),
                 status: action.payload.status,
-                cardType: action.payload.cardType, // Include card type
-                transactionType: action.payload.transactionType, // Include transaction type
-                phoneNumber: action.payload.phoneNumber, // Include phone number
+                cardType: action.payload.cardType,
+                transactionType: action.payload.transactionType,
+                phoneNumber: action.payload.phoneNumber,
             };
             return {
                 ...state,
@@ -99,4 +127,8 @@ const getOperator = (phoneNumber) => {
     if (['0895', '0896', '0897', '0898', '0899'].includes(prefix)) return 'Three';
     if (['0838', '0831', '0832', '0833'].includes(prefix)) return 'Axis';
     return 'Unknown Operator';
+};
+
+const generateTraceNo = () => {
+    return Math.floor(Math.random() * 1000000000000).toString().padStart(8, '0');
 };

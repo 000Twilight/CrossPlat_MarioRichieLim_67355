@@ -109,7 +109,7 @@ const PulsaScreen = ({ navigation }) => {
             onPress={() => handleTopUpSelection(item)}
         >
             <CustomText style={pulsa_styles.topUpPriceFirst}>
-                {item.dataAmount} Data
+                {item.info} Data
             </CustomText>
             <CustomText style={pulsa_styles.topUpPrice}>
                 Harga Rp {item.price.toLocaleString('id-ID')}
