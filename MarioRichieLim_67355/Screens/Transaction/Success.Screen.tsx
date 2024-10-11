@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { TransactionContext } from '../../Contexts/Transaction.Context';
 import CustomText from '../../Components/CustomText';
+import HistoryScreen from '../History.Screen';
 
 const SuccessScreen = ({ navigation, route }) => {
     const { state, dispatch } = useContext(TransactionContext);
@@ -22,6 +23,7 @@ const SuccessScreen = ({ navigation, route }) => {
                 price: state.selectedPrice,
             },
         });
+        
     }, [isSuccess, dispatch, state.selectedPrice]);
 
     return (

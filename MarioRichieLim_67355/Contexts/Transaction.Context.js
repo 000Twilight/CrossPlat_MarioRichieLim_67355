@@ -15,7 +15,7 @@ const initialState = {
     isCustomerIdValid: false,
     isPhoneNumberValid: false,
     isBPJSNumberValid: false,
-    
+
     pinNumber: '040504',
     pinAttempts: 0,
 
@@ -59,18 +59,23 @@ const transactionReducer = (state, action) => {
             return { ...state, pinAttempts: 0 };
         case 'SET_TRANSACTION_STATUS':
             return { ...state, transactionStatus: action.payload };
+        default:
+            return state;
         case 'ADD_TRANSACTION':
             const newTransaction = {
+                traceNo: generateTraceNo(),
                 price: action.payload.price,
                 date: new Date().toLocaleString(),
-                remainingSaldo: state.saldo
+                status: action.payload.status,
+                cardType: action.payload.cardType, // Include card type
+                transactionType: action.payload.transactionType, // Include transaction type
+                phoneNumber: action.payload.phoneNumber, // Include phone number
             };
             return {
                 ...state,
                 transactionHistory: [...state.transactionHistory, newTransaction],
             };
-        default:
-            return state;
+
     }
 };
 

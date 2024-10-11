@@ -1,6 +1,7 @@
 import React, { useContext, useRef, useEffect, useState } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
 import { TransactionContext } from '../../Contexts/Transaction.Context';
+import CategoryHeader from '../../Components/CategoryHeader';
 
 const PINScreen = ({ navigation }) => {
     const { state, dispatch } = useContext(TransactionContext);
@@ -37,6 +38,8 @@ const PINScreen = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
+            <CategoryHeader title='' />
+
             <Text style={styles.title}>Masukkan PIN Anda</Text>
 
             <TextInput

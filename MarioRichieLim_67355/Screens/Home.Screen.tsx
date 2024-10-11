@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useContext } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollView } from 'react-native';
 import home_styles from '../Styles/Home.style';
 import CustomText from '../Components/CustomText';
@@ -7,7 +7,7 @@ import { Ionicons, FontAwesome, FontAwesome5 } from '@expo/vector-icons';
 import { TransactionContext } from '../Contexts/Transaction.Context';
 
 const HomeScreen = ({ navigation }) => {
-  const { state } = React.useContext(TransactionContext);
+  const { state } = useContext(TransactionContext);
   
   return (
     <View style={home_styles.container}>

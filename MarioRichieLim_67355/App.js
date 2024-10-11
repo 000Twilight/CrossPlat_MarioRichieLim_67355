@@ -15,9 +15,9 @@ import PaymentScreen from './Screens/Transaction/Payment.Screen';
 import PinScreen from './Screens/Transaction/PIN.Screen';
 import SuccessScreen from './Screens/Transaction/Success.Screen';
 import HistoryDetailScreen from './Screens/HistoryDetail.Screen';
+import HistoryScreen from './Screens/History.Screen';
 
 const Stack = createNativeStackNavigator();
-// const AppStore = createStore(transactionReducer);
 
 export default function App() {
   const [fontsLoaded, setFontsLoaded] = useState(false);
@@ -93,9 +93,14 @@ export default function App() {
             options={{ headerShown: false }}
           />
           <Stack.Screen
+            name="HistoryScreen"
+            component={HistoryScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
             name="HistoryDetail"
             component={HistoryDetailScreen}
-            options={{ headerShown: false }}
+            options={{ headerShown: false, title: 'Transaction Details' }}
           />
         </Stack.Navigator>
       </NavigationContainer>
