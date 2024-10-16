@@ -22,10 +22,10 @@ function BottomTabs() {
             screenOptions={({ route }) => ({
                 tabBarActiveTintColor: '#808080',
                 tabBarInactiveTintColor: '#b3b3b3',
-                tabBarActiveBackgroundColor: '#fff',
-                tabBarInactiveBackgroundColor: '#fff',
+                tabBarActiveBackgroundColor: '#F8F9F9',
+                tabBarInactiveBackgroundColor: '#F8F9F9',
                 tabBarStyle: {
-                    backgroundColor: '#fff',
+                    backgroundColor: '#F8F9F9',
                     paddingRight: 10,
                     paddingLeft: 10,
                     height: 60,
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         justifyContent: 'center',
         alignItems: 'center',
-        borderColor: '#fff',
+        borderColor: '#F8F9F9',
         borderWidth: 4,
         top: -15,
     },

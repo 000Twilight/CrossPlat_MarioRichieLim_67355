@@ -5,7 +5,7 @@ const profile_styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#FFFFFF',
+        backgroundColor: '#F8F9F9',
     },
 });
 

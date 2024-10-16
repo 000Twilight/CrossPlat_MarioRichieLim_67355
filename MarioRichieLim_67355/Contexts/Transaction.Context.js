@@ -3,9 +3,9 @@ import React, { createContext, useReducer } from 'react';
 const initialState = {
     phoneNumber: '',
     bpjsNumber: '',
-    customerId: '',
+    tokenId: '',
 
-    saldo: 1000000,
+    saldo: 100000000,
 
     selectedPrice: 0,
     selectedPackage: '',
@@ -63,11 +63,11 @@ const transactionReducer = (state, action) => {
                 isPhoneNumberValid: isPhoneValid,
                 operator: isPhoneValid ? operator : 'Unknown Operator',
             };
-        case 'SET_CUSTOMER_ID':
+        case 'SET_TOKEN_ID':
             return {
                 ...state,
-                customerId: action.payload,
-                isCustomerIdValid: /^[1-9]\d{11}$/.test(action.payload),
+                tokenId: action.payload,
+                isTokenIdValid: /^[1-9]\d{19}$/.test(action.payload),  
             };
         case 'SET_BPJS_NUMBER':
             return {

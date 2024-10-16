@@ -46,7 +46,7 @@ export default function App() {
         <StatusBar backgroundColor="#000000" barStyle="light-content" />
         <Stack.Navigator
           screenOptions={{
-            headerStyle: { backgroundColor: '#FFFFFF' },
+            headerStyle: { backgroundColor: '#F8F9F9' },
             headerTintColor: '#000000',
           }}
         >
@@ -54,13 +54,13 @@ export default function App() {
             name="Splash"
             component={SplashScreen}
             options={{ headerShown: false }}
-            style={{ backgroundColor: '#FFFFFF' }}
+            style={{ backgroundColor: '#F8F9F9' }}
           />
           <Stack.Screen
             name="Main"
             component={BottomTabs}
             options={{ headerShown: false }}
-            style={{ backgroundColor: '#FFFFFF' }}
+            style={{ backgroundColor: '#F8F9F9' }}
           />
           <Stack.Screen
             name="Pulsa"

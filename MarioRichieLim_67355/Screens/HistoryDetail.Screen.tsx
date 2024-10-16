@@ -1,38 +1,51 @@
-import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import React, { useContext } from 'react';
+import { View, Text, Button, StyleSheet } from 'react-native';
+import { useRoute, useNavigation } from '@react-navigation/native';
 import CustomText from '../Components/CustomText';
-import historyDetail_styles from '../Styles/HistoryDetail.style';
+import { TransactionContext } from '../Contexts/Transaction.Context';
+import CategoryHeader from '../Components/CategoryHeader';
 
-const HistoryDetailScreen = ({ route, navigation }) => {
-  // Get the transaction details from route params
-  const { transaction } = route.params;
+const HistoryDetailScreen = ({ navigation }) => {
+  const { state } = useContext(TransactionContext);
 
   return (
-    <View style={historyDetail_styles.container}>
-      <CustomText style={styles.label}>Trace No:</CustomText>
-      <CustomText style={styles.value}>{transaction.traceNo}</CustomText>
+    <View style={styles.container}>
+      <CategoryHeader title="Transaction Detail" />
+      <CustomText style={styles.label}>Phone Number: {state.phoneNumber}</CustomText>
+      <CustomText style={styles.label}>Package: {state.selectedPackage}</CustomText>
+      <CustomText style={styles.label}>Price: {state.selectedPrice}</CustomText>
+      <CustomText style={styles.label}>Trace No: {state.traceNo}</CustomText>
+      <CustomText style={styles.label}>Status: {state.status}</CustomText>
+      <CustomText style={styles.label}>Date: {state.date}</CustomText>
 
-      <CustomText style={styles.label}>Jenis Kartu:</CustomText>
-      <CustomText style={styles.value}>{transaction.cardType || 'N/A'}</CustomText>
-
-      <CustomText style={styles.label}>Jenis Transaksi:</CustomText>
-      <CustomText style={styles.value}>{transaction.transactionType || 'N/A'}</CustomText>
-
-      <CustomText style={styles.label}>No. Telp:</CustomText>
-      <CustomText style={styles.value}>{transaction.phoneNumber}</CustomText>
+      <View style={styles.buttonContainer}>
+        <Button title="Cetak" onPress={() => console.log('Print functionality not yet implemented')} disabled />
+        <Button title="Email" onPress={() => console.log('Email functionality not yet implemented')} disabled />
+        <Button title="Selesai" onPress={() => navigation.goBack()} />
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  label: {
-    fontFamily: 'Lato-Bold',
-    fontSize: 16,
-    marginBottom: 5,
+  container: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: '#fff',
   },
-  value: {
-    fontSize: 18,
-    marginBottom: 15,
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20,
+  },
+  label: {
+    fontSize: 16,
+    marginVertical: 8,
+  },
+  buttonContainer: {
+    marginTop: 30,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
 });
 

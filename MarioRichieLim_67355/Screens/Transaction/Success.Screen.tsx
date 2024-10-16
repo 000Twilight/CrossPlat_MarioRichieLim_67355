@@ -21,9 +21,13 @@ const SuccessScreen = ({ navigation, route }) => {
             type: 'ADD_TRANSACTION',
             payload: {
                 price: state.selectedPrice,
+                status: isSuccess ? 'Berhasil' : 'Gagal', 
+                cardType: 'Debit', 
+                transactionType: state.selectedPackage ? 'Paket Data' : 'Pulsa', 
+                phoneNumber: state.phoneNumber,
             },
         });
-        
+
     }, [isSuccess, dispatch, state.selectedPrice]);
 
     return (
@@ -104,17 +108,17 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 24,
         fontFamily: 'Lato-Bold',
-        color: '#fff',
+        color: '#F8F9F9',
         marginBottom: 10,
     },
     infoText: {
-        color: '#fff',
+        color: '#F8F9F9',
         fontSize: 16,
         fontFamily: 'Lato-Bold',
         textAlign: 'center',
     },
     priceText: {
-        color: '#fff',
+        color: '#F8F9F9',
         textAlign: 'center',
         fontFamily: 'Lato-Black',
     },
@@ -126,7 +130,7 @@ const styles = StyleSheet.create({
         width: '100%',
     },
     button: {
-        backgroundColor: '#ffffff',
+        backgroundColor: '#F8F9F9',
         borderRadius: 30,
         paddingVertical: 12,
         marginBottom: 10,

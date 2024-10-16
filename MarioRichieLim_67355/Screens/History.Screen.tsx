@@ -1,41 +1,60 @@
 import React, { useContext } from 'react';
-import { View, FlatList, TouchableOpacity } from 'react-native';
-import CustomText from '../Components/CustomText';
+import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
 import { TransactionContext } from '../Contexts/Transaction.Context';
-import history_styles from '../Styles/History.style';
+import CustomText from '../Components/CustomText';
+import CategoryHeader from '../Components/CategoryHeader';
 
 const HistoryScreen = ({ navigation }) => {
-  const { state } = useContext(TransactionContext);
+    const { state } = useContext(TransactionContext);
 
-  const renderItem = ({ item }) => (
-    <TouchableOpacity
-      style={history_styles.transactionItem}
-      onPress={() => navigation.navigate('HistoryDetail', { transaction: item })}
-    >
-      <CustomText style={history_styles.traceNumber}>Trace No. {item.traceNo}</CustomText>
-      <CustomText style={history_styles.date}>{item.date}</CustomText>
-      <CustomText style={history_styles.amount}>Rp {item.price.toLocaleString('id-ID')}</CustomText>
-      <CustomText style={item.status === 'Berhasil' ? history_styles.successStatus : history_styles.failedStatus}>
-        {item.status}
-      </CustomText>
-    </TouchableOpacity>
-  );
+    // Sort history by the newest transaction first
+    const sortedHistory = state.transactionHistory.slice().sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
-  return (
-    <View style={history_styles.container}>
-      {state.transactionHistory.length > 0 ? (
-        <FlatList
-          data={state.transactionHistory}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.traceNo.toString()} 
-        />
-      ) : (
-        <View style={history_styles.noTransactionsContainer}>
-          <CustomText>Belum ada transaksi</CustomText>
+    // Navigate to History Detail screen with selected transaction data
+    const navigateToDetail = (transaction) => {
+        navigation.navigate('HistoryDetail', { transaction });
+    };
+
+    return (
+        <View style={styles.container}>
+          <CategoryHeader title="Transaction History" />
+            <FlatList
+                data={sortedHistory}
+                keyExtractor={(item) => item.traceNo}
+                renderItem={({ item }) => (
+                    <TouchableOpacity onPress={() => navigateToDetail(item)} style={styles.transactionItem}>
+                        <CustomText style={styles.transactionText}>Transaction Type: {item.transactionType}</CustomText>
+                        <CustomText style={styles.transactionText}>Price: {item.price}</CustomText>
+                        <CustomText style={styles.transactionText}>Status: {item.status}</CustomText>
+                        <CustomText style={styles.transactionText}>Date: {item.date}</CustomText>
+                    </TouchableOpacity>
+                )}
+            />
         </View>
-      )}
-    </View>
-  );
+    );
 };
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        padding: 20,
+        backgroundColor: '#fff',
+    },
+    title: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        marginBottom: 20,
+    },
+    transactionItem: {
+        padding: 15,
+        marginVertical: 8,
+        backgroundColor: '#f9f9f9',
+        borderRadius: 8,
+        elevation: 2,
+    },
+    transactionText: {
+        fontSize: 16,
+    },
+});
 
 export default HistoryScreen;

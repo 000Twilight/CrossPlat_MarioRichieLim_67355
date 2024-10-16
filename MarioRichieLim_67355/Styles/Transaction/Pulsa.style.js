@@ -25,7 +25,7 @@ const pulsa_styles = StyleSheet.create({
     inputWrapper: {
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: '#FFFFFF',
+        backgroundColor: '#F8F9F9',
         borderRadius: 10,
         paddingHorizontal: 10,
         borderWidth: 1,
@@ -62,7 +62,7 @@ const pulsa_styles = StyleSheet.create({
         borderColor: '#2566a5',
     },
     activeTabText: {
-        color: '#FFF',
+        color: '#F8F9F9',
         fontFamily: 'Lato-Bold',
     },
     inactiveTabText: {
@@ -93,7 +93,7 @@ const pulsa_styles = StyleSheet.create({
     },
     topUpBox: {
         flex: 1,
-        backgroundColor: '#FFFFFF',
+        backgroundColor: '#F8F9F9',
         borderRadius: 10,
         padding: 15,
         alignItems: 'center',

@@ -51,14 +51,14 @@ const home_styles = StyleSheet.create({
     cardCurrency: {
         fontSize: 24,
         fontFamily: 'Lato-Black',
-        color: '#FFFFFF',
+        color: '#F8F9F9',
         position: 'absolute',
         bottom: 40,
         left: 16,
     },
     cardLabel: {
         fontSize: 14,
-        color: '#FFFFFF',
+        color: '#F8F9F9',
         position: 'absolute',
         bottom: 20,
         left: 16,
@@ -74,7 +74,7 @@ const home_styles = StyleSheet.create({
     quickActionButton: {
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#FFFFFF',
+        backgroundColor: '#F8F9F9',
         borderRadius: 12,
         padding: 16,
         width: '30%',

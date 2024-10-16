@@ -12,7 +12,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./Assets/UMN-Logo.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#F8F9F9"
       }
     },
     "web": {
