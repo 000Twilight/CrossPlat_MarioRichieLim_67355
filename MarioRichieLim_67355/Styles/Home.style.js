@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 const home_styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#F8F9F9',
+        backgroundColor: '#F0F0F0',
         paddingHorizontal: 24,
         paddingTop: 24,
     },
@@ -31,7 +31,7 @@ const home_styles = StyleSheet.create({
         fontFamily: 'Lato-Black',
         marginLeft: -9,
         marginBottom: -18,
-        color: '#2566a5',
+        color: '#2566A5',
     },
     topProfile: {
         width: 48,
@@ -51,14 +51,14 @@ const home_styles = StyleSheet.create({
     cardCurrency: {
         fontSize: 24,
         fontFamily: 'Lato-Black',
-        color: '#F8F9F9',
+        color: '#F0F0F0',
         position: 'absolute',
         bottom: 40,
         left: 16,
     },
     cardLabel: {
         fontSize: 14,
-        color: '#F8F9F9',
+        color: '#F0F0F0',
         position: 'absolute',
         bottom: 20,
         left: 16,
@@ -74,7 +74,7 @@ const home_styles = StyleSheet.create({
     quickActionButton: {
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#F8F9F9',
+        backgroundColor: '#F0F0F0',
         borderRadius: 12,
         padding: 16,
         width: '30%',
@@ -87,6 +87,33 @@ const home_styles = StyleSheet.create({
     quickActionText: {
         fontSize: 14,
         marginTop: 8,
+    },
+
+    // Card
+    transactionCard: {
+        backgroundColor: '#F0F0F0', 
+        borderRadius: 10,
+        paddingVertical: 14,
+        paddingLeft: 16,
+        paddingRight: 24,
+        marginRight: 14,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+        elevation: 3,
+    },
+    transactionType: {
+        fontSize: 16,
+        fontFamily: 'Lato-Bold',
+    },
+    transactionPrice: {
+        fontSize: 15,
+        color: '#2566A5',
+        marginVertical: 4,
+    },
+    transactionDate: {
+        fontSize: 13,
     },
 });
 

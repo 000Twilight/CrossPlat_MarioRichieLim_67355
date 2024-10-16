@@ -4,7 +4,6 @@ import CustomText from '../../Components/CustomText';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import CategoryHeader from '../../Components/CategoryHeader';
 import { TransactionContext } from '../../Contexts/Transaction.Context';
-import PLN_styles from '../../Styles/Transaction/PLN.style';
 import pulsa_styles from '../../Styles/Transaction/Pulsa.style';
 
 const PLNScreen = ({ navigation }) => {
@@ -41,6 +40,7 @@ const PLNScreen = ({ navigation }) => {
   const handleTopUpSelection = (item) => {
     dispatch({ type: 'SET_SELECTED_PRICE', payload: item.price });
     dispatch({ type: 'SET_SELECTED_PACKAGE', payload: item.info });
+    dispatch({ type: 'SET_TRANSACTION_TYPE', payload: 'Listrik' });
     navigation.navigate('Payment');
   };
 

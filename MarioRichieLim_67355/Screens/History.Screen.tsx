@@ -1,60 +1,70 @@
 import React, { useContext } from 'react';
-import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, FlatList, TouchableOpacity } from 'react-native';
 import { TransactionContext } from '../Contexts/Transaction.Context';
 import CustomText from '../Components/CustomText';
 import CategoryHeader from '../Components/CategoryHeader';
 
+import history_styles from '../Styles/History.style';
+
 const HistoryScreen = ({ navigation }) => {
-    const { state } = useContext(TransactionContext);
+    const { state, dispatch } = useContext(TransactionContext);
 
-    // Sort history by the newest transaction first
-    const sortedHistory = state.transactionHistory.slice().sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    const sortedHistory = state.transactionHistory.slice().sort((a, b) =>
+        new Date(b.date).getTime() - new Date(a.date).getTime()
+    );
 
-    // Navigate to History Detail screen with selected transaction data
-    const navigateToDetail = (transaction) => {
-        navigation.navigate('HistoryDetail', { transaction });
+    const isValidDate = (dateString) => {
+        const date = new Date(dateString);
+        return !isNaN(date.getTime());
+    };
+
+    const validHistory = sortedHistory.filter(transaction => isValidDate(transaction.date));
+
+    const handleHistoryPress = (traceNo) => {
+        dispatch({ type: 'SET_SELECTED_TRACE_NO', payload: traceNo });
+        navigation.navigate('HistoryDetail');
     };
 
     return (
-        <View style={styles.container}>
-          <CategoryHeader title="Transaction History" />
-            <FlatList
-                data={sortedHistory}
-                keyExtractor={(item) => item.traceNo}
-                renderItem={({ item }) => (
-                    <TouchableOpacity onPress={() => navigateToDetail(item)} style={styles.transactionItem}>
-                        <CustomText style={styles.transactionText}>Transaction Type: {item.transactionType}</CustomText>
-                        <CustomText style={styles.transactionText}>Price: {item.price}</CustomText>
-                        <CustomText style={styles.transactionText}>Status: {item.status}</CustomText>
-                        <CustomText style={styles.transactionText}>Date: {item.date}</CustomText>
-                    </TouchableOpacity>
-                )}
-            />
+        <View style={history_styles.container}>
+            <CategoryHeader title="Riwayat Transaksi" />
+            <View style={{ paddingHorizontal: 20, flex: 1 }}>
+                <FlatList
+                    data={validHistory}
+                    showsVerticalScrollIndicator={false}
+                    keyExtractor={(item) => item.traceNo}
+                    contentContainerStyle={{ paddingBottom: 50 }} 
+                    renderItem={({ item }) => (
+                        <TouchableOpacity onPress={() => handleHistoryPress(item.traceNo)} style={history_styles.transactionItem}>
+                            <CustomText style={history_styles.transactionText}>Tipe Transaksi: {item.transactionType}</CustomText>
+                            <CustomText style={history_styles.transactionText}>Harga: {item.price}</CustomText>
+                            <CustomText style={history_styles.transactionText}>
+                                Status:{' '}
+                                <CustomText
+                                    style={{
+                                        color: item.status === 'Berhasil' ? 'green' : 'red',
+                                        fontFamily: 'Lato-Bold',
+                                    }}
+                                >
+                                    {item.status}
+                                </CustomText>
+                            </CustomText>
+                            <CustomText style={history_styles.transactionText}>
+                                Tanggal: {new Date(item.date).toLocaleString('en-US', {
+                                    weekday: 'long',
+                                    year: 'numeric',
+                                    month: 'numeric',
+                                    day: 'numeric',
+                                    hour: '2-digit',
+                                    minute: '2-digit',
+                                })}
+                            </CustomText>
+                        </TouchableOpacity>
+                    )}
+                />
+            </View>
         </View>
     );
 };
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 20,
-        backgroundColor: '#fff',
-    },
-    title: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        marginBottom: 20,
-    },
-    transactionItem: {
-        padding: 15,
-        marginVertical: 8,
-        backgroundColor: '#f9f9f9',
-        borderRadius: 8,
-        elevation: 2,
-    },
-    transactionText: {
-        fontSize: 16,
-    },
-});
 
 export default HistoryScreen;

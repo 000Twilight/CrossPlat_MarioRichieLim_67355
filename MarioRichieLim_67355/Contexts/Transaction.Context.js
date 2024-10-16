@@ -10,10 +10,6 @@ const initialState = {
     selectedPrice: 0,
     selectedPackage: '',
 
-    isCustomerIdValid: false,
-    isPhoneNumberValid: false,
-    isBPJSNumberValid: false,
-
     pinNumber: '040504',
     pinAttempts: 0,
 
@@ -21,33 +17,34 @@ const initialState = {
 
     operator: '',
 
+    transactionType: '',
     transactionHistory: [
         {
             traceNo: '00111111',
             price: 50000,
-            date: new Date().toLocaleString(),
+            date: new Date().toISOString(),
             status: 'Berhasil',
             cardType: 'Debit',
             transactionType: 'Pulsa',
-            phoneNumber: '081234567890',
+            customerId: '081234567890',
         },
         {
-            traceNo: '00222222', 
+            traceNo: '00222222',
             price: 100000,
-            date: new Date().toLocaleString(),
+            date: new Date().toISOString(),
             status: 'Gagal',
             cardType: 'Credit',
             transactionType: 'Paket Data',
-            phoneNumber: '089876543210',
+            customerId: '089876543210',
         },
         {
-            traceNo: '00333333', 
+            traceNo: '00333333',
             price: 75000,
-            date: new Date().toLocaleString(),
+            date: new Date().toISOString(),
             status: 'Berhasil',
             cardType: 'Debit',
             transactionType: 'Listrik',
-            phoneNumber: '081245678901',
+            customerId: '081245678901',
         },
     ],
 };
@@ -67,7 +64,7 @@ const transactionReducer = (state, action) => {
             return {
                 ...state,
                 tokenId: action.payload,
-                isTokenIdValid: /^[1-9]\d{19}$/.test(action.payload),  
+                isTokenIdValid: /^[1-9]\d{19}$/.test(action.payload),
             };
         case 'SET_BPJS_NUMBER':
             return {
@@ -87,23 +84,26 @@ const transactionReducer = (state, action) => {
             return { ...state, pinAttempts: 0 };
         case 'SET_TRANSACTION_STATUS':
             return { ...state, transactionStatus: action.payload };
-        default:
-            return state;
+        case 'SET_SELECTED_TRACE_NO':
+            return { ...state, selectedTraceNo: action.payload };
+        case 'SET_TRANSACTION_TYPE':
+            return { ...state, transactionType: action.payload };
         case 'ADD_TRANSACTION':
             const newTransaction = {
-                traceNo: generateTraceNo(),
+                traceNo: generateUniqueTraceNo(state.transactionHistory),
                 price: action.payload.price,
-                date: new Date().toLocaleString(),
+                date: new Date().toISOString(),
                 status: action.payload.status,
                 cardType: action.payload.cardType,
-                transactionType: action.payload.transactionType,
-                phoneNumber: action.payload.phoneNumber,
+                transactionType: state.transactionType,
+                customerId: state.phoneNumber || state.bpjsNumber || state.tokenId || 'Unknown Customer',
             };
             return {
                 ...state,
                 transactionHistory: [...state.transactionHistory, newTransaction],
             };
-
+        default:
+            return state;
     }
 };
 
@@ -129,6 +129,10 @@ const getOperator = (phoneNumber) => {
     return 'Unknown Operator';
 };
 
-const generateTraceNo = () => {
-    return Math.floor(Math.random() * 1000000000000).toString().padStart(8, '0');
+const generateUniqueTraceNo = (history) => {
+    let newTraceNo;
+    do {
+        newTraceNo = Math.floor(Math.random() * 1000000000000).toString().padStart(8, '0');
+    } while (history.some(transaction => transaction.traceNo === newTraceNo));
+    return newTraceNo;
 };

@@ -3,6 +3,7 @@ import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-nativ
 import { TransactionContext } from '../../Contexts/Transaction.Context';
 import CategoryHeader from '../../Components/CategoryHeader';
 import CustomText from '../../Components/CustomText';
+import PIN_styles from '../../Styles/Transaction/PIN.style';
 
 const PINScreen = ({ navigation }) => {
     const { state, dispatch } = useContext(TransactionContext);
@@ -28,7 +29,7 @@ const PINScreen = ({ navigation }) => {
                 } else {
                     setEnteredPin('');
 
-                    if (state.pinAttempts === 3) {
+                    if (state.pinAttempts === 2) {
                         navigation.navigate('Success', {
                             isSuccess: false,
                         });
@@ -49,12 +50,12 @@ const PINScreen = ({ navigation }) => {
         <View style={{ flex: 1 }}>
             <CategoryHeader title='' />
 
-            <View style={styles.centeredContent}>
-                <CustomText style={[styles.title, { lineHeight: 50 }]}>Masukkan PIN Anda</CustomText>
+            <View style={PIN_styles.centeredContent}>
+                <CustomText style={[PIN_styles.title, { lineHeight: 50 }]}>Masukkan PIN Anda</CustomText>
                 {state.pinAttempts > 0 && state.pinAttempts < 3 && enteredPin !== state.pinNumber ? (
-                    <CustomText style={[styles.subtitle, { color: 'red' }]}>PIN salah. Silahkan coba lagi.</CustomText>
+                    <CustomText style={[PIN_styles.subtitle, { color: 'red' }]}>PIN salah. Silahkan coba lagi.</CustomText>
                 ) : (
-                    <CustomText style={styles.subtitle}>Masukkan PIN Aplikasi Anda</CustomText>
+                    <CustomText style={PIN_styles.subtitle}>Masukkan PIN Aplikasi Anda</CustomText>
                 )}
 
                 <TextInput
@@ -64,18 +65,18 @@ const PINScreen = ({ navigation }) => {
                     value={enteredPin}
                     onChangeText={handlePinChange}
                     maxLength={6}
-                    style={styles.hiddenInput}
+                    style={PIN_styles.hiddenInput}
                     autoFocus={true}
                 />
 
                 <TouchableOpacity onPress={keyboardPop}>
-                    <View style={styles.pinContainer}>
+                    <View style={PIN_styles.pinContainer}>
                         {Array(6).fill('').map((_, index) => (
                             <View
                                 key={index}
                                 style={[
-                                    styles.pinDot,
-                                    enteredPin.length > index && styles.pinDotFilled,
+                                    PIN_styles.pinDot,
+                                    enteredPin.length > index && PIN_styles.pinDotFilled,
                                 ]}
                             />
                         ))}
@@ -86,41 +87,5 @@ const PINScreen = ({ navigation }) => {
         </View>
     );
 };
-
-const styles = StyleSheet.create({
-    centeredContent: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    title: {
-        fontSize: 30,
-        fontFamily: 'Lato-Black',
-    },
-    subtitle: {
-        fontSize: 18,
-        marginTop: 10,
-        marginBottom: 25,
-    },
-    pinContainer: {
-        flexDirection: 'row',
-    },
-    pinDot: {
-        width: 30,
-        height: 30,
-        borderRadius: 15,
-        margin: 5,
-        backgroundColor: '#E0E0E0',
-    },
-    pinDotFilled: {
-        backgroundColor: 'blue',
-    },
-    hiddenInput: {
-        height: 0,
-        width: 0,
-        opacity: 0,
-        position: 'absolute',
-    },
-});
 
 export default PINScreen;

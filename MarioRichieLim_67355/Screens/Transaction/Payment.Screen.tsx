@@ -16,6 +16,7 @@ const PaymentScreen = ({ navigation }) => {
         selectedPackage,
         operator,
         saldo,
+        transactionType,
     } = state;
 
     return (
@@ -84,7 +85,7 @@ const PaymentScreen = ({ navigation }) => {
                     navigation.navigate('PIN');
                 }}
             >
-                <CustomText style={{ fontSize: 18, fontFamily: 'Lato-Bold', color: 'white' }}>
+                <CustomText style={{ fontSize: 18, fontFamily: 'Lato-Bold', color: '#F0F0F0' }}>
                     Konfirmasi
                 </CustomText>
             </TouchableOpacity>

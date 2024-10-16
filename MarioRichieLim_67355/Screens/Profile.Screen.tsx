@@ -1,12 +1,19 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, Image, Pressable, Animated } from 'react-native';
-import home_styles from '../Styles/Home.style';
+import React from 'react';
+import { View, ScrollView, Image, StyleSheet } from 'react-native';
 import CustomText from '../Components/CustomText';
+import profile_styles from '../Styles/Profile.style';
+import CategoryHeader from '../Components/CategoryHeader';
 
-const ProfileScreen = ({  }) => {
+const ProfileScreen = () => {
   return (
-    <View style={home_styles.container}>
-      <CustomText>This is Profile Screen</CustomText>
+    <View style={profile_styles.container}>
+      <CategoryHeader title="Profile" />
+      <View style={profile_styles.profileContainer}>
+        <Image source={require('../Assets/Profile.jpeg')} style={profile_styles.profileImage} />
+        <CustomText style={profile_styles.profileText}>Mario Richie Lim</CustomText>
+        <CustomText style={profile_styles.profileText}>00000067355</CustomText>
+      </View>
+      <CustomText style={profile_styles.versionText}>App Version 16.10.2024</CustomText>
     </View>
   );
 };

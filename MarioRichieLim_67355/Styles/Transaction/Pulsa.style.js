@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 const pulsa_styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#F8F9F9',
+        backgroundColor: '#F0F0F0',
     },
     contentContainer: {
         padding: 20,
@@ -25,7 +25,7 @@ const pulsa_styles = StyleSheet.create({
     inputWrapper: {
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: '#F8F9F9',
+        backgroundColor: '#F0F0F0',
         borderRadius: 10,
         paddingHorizontal: 10,
         borderWidth: 1,
@@ -57,22 +57,22 @@ const pulsa_styles = StyleSheet.create({
         borderRadius: 10,
     },
     activeTab: {
-        backgroundColor: '#2566a5',
+        backgroundColor: '#2566A5',
         borderWidth: 1,
-        borderColor: '#2566a5',
+        borderColor: '#2566A5',
     },
     activeTabText: {
-        color: '#F8F9F9',
+        color: '#F0F0F0',
         fontFamily: 'Lato-Bold',
     },
     inactiveTabText: {
-        color: '#2566a5',
+        color: '#2566A5',
     },
 
 
     messageContainer: {
         flexDirection: 'row',
-        backgroundColor: '#F1F3F4',
+        backgroundColor: '#E0E0E0',
         paddingLeft: 15,
         paddingVertical: 15,
         paddingRight: 50,
@@ -93,13 +93,12 @@ const pulsa_styles = StyleSheet.create({
     },
     topUpBox: {
         flex: 1,
-        backgroundColor: '#F8F9F9',
         borderRadius: 10,
         padding: 15,
         alignItems: 'center',
         justifyContent: 'center',
         borderWidth: 1,
-        borderColor: '#e9eeff',
+        borderColor: '#2566A5',
     },
     topUpPriceFirst: {
         fontSize: 16,

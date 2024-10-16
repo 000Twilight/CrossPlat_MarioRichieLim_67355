@@ -15,11 +15,11 @@ const payment_styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
 
-        shadowColor: '#000', 
-        shadowOffset: { width: 0, height: 1 },
-        shadowOpacity: 0.3,
-        shadowRadius: 3,
-        elevation: 3, 
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+        elevation: 3,
     },
     flexRow: {
         flexDirection: 'row',
@@ -49,7 +49,6 @@ const payment_styles = StyleSheet.create({
         fontFamily: 'Lato-Black',
     },
     detailContainer: {
-        backgroundColor: '#F0F0F0', 
         borderRadius: 15,
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -66,7 +65,7 @@ const payment_styles = StyleSheet.create({
     },
 
     buttonConfirm: {
-        backgroundColor: '#2566a5',
+        backgroundColor: '#2566A5',
         borderRadius: 15,
         padding: 15,
         alignItems: 'center',

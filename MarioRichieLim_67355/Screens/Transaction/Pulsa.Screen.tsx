@@ -84,8 +84,10 @@ const PulsaScreen = ({ navigation }) => {
     const handleTopUpSelection = (item) => {
         dispatch({ type: 'SET_SELECTED_PRICE', payload: item.price });
         dispatch({ type: 'SET_SELECTED_PACKAGE', payload: item.info });
+        dispatch({ type: 'SET_TRANSACTION_TYPE', payload: 'Pulsa' }); 
         navigation.navigate('Payment');
     };
+
 
     const renderTopUpOption = ({ index, item }) => (
         <TouchableOpacity

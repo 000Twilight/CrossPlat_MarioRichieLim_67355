@@ -8,7 +8,9 @@ import { TransactionContext } from '../Contexts/Transaction.Context';
 
 const HomeScreen = ({ navigation }) => {
   const { state } = useContext(TransactionContext);
-  
+
+  const latestTransactions = state.transactionHistory.slice(0, 4);
+
   return (
     <View style={home_styles.container}>
       <View style={home_styles.flexRow}>
@@ -19,10 +21,12 @@ const HomeScreen = ({ navigation }) => {
           />
           <CustomText style={home_styles.topText}>nionX</CustomText>
         </View>
-        <Image
-          style={home_styles.topProfile}
-          source={require('../Assets/Profile.jpeg')}
-        />
+        <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
+          <Image
+            style={home_styles.topProfile}
+            source={require('../Assets/Profile.jpeg')}
+          />
+        </TouchableOpacity>
       </View>
 
       <View style={home_styles.cardContainer}>
@@ -39,15 +43,15 @@ const HomeScreen = ({ navigation }) => {
       <View style={home_styles.space}>
         <View style={home_styles.quickActionContainer}>
           <TouchableOpacity style={home_styles.quickActionButton}>
-            <Ionicons name="arrow-up-outline" size={24} color="#2566a5" />
+            <Ionicons name="arrow-up-outline" size={24} color="#2566A5" />
             <CustomText style={home_styles.quickActionText}>Transfer</CustomText>
           </TouchableOpacity>
           <TouchableOpacity style={home_styles.quickActionButton}>
-            <Ionicons name="arrow-down-outline" size={24} color="#2566a5" />
+            <Ionicons name="arrow-down-outline" size={24} color="#2566A5" />
             <CustomText style={home_styles.quickActionText}>Tarik Tunai</CustomText>
           </TouchableOpacity>
           <TouchableOpacity style={home_styles.quickActionButton}>
-            <FontAwesome name="ellipsis-h" size={24} color="#2566a5" />
+            <FontAwesome name="ellipsis-h" size={24} color="#2566A5" />
             <CustomText style={home_styles.quickActionText}>Lebih</CustomText>
           </TouchableOpacity>
         </View>
@@ -60,21 +64,21 @@ const HomeScreen = ({ navigation }) => {
             style={home_styles.quickActionButton}
             onPress={() => navigation.navigate('Pulsa')}
           >
-            <Ionicons name="phone-portrait-outline" size={24} color="#2566a5" />
+            <Ionicons name="phone-portrait-outline" size={24} color="#2566A5" />
             <CustomText style={home_styles.quickActionText}>Pulsa/Data</CustomText>
           </TouchableOpacity>
           <TouchableOpacity
             style={home_styles.quickActionButton}
             onPress={() => navigation.navigate('PLN')}
           >
-            <Ionicons name="flash-outline" size={24} color="#2566a5" />
+            <Ionicons name="flash-outline" size={24} color="#2566A5" />
             <CustomText style={home_styles.quickActionText}>Listrik</CustomText>
           </TouchableOpacity>
           <TouchableOpacity
             style={home_styles.quickActionButton}
             onPress={() => navigation.navigate('BPJS')}
           >
-            <FontAwesome5 name="shield-alt" size={24} color="#2566a5" />
+            <FontAwesome5 name="shield-alt" size={24} color="#2566A5" />
             <CustomText style={home_styles.quickActionText}>BPJS</CustomText>
           </TouchableOpacity>
         </View>
@@ -83,20 +87,31 @@ const HomeScreen = ({ navigation }) => {
       <View style={home_styles.space}>
         <View style={[home_styles.flexRow, { paddingBottom: 16 }]}>
           <CustomText style={{ fontSize: 24, fontFamily: 'Lato-Black' }}>Transaksi Terbaru</CustomText>
-          <CustomText style={{ fontSize: 14, color: '#2566a5' }}>View All</CustomText>
+          <TouchableOpacity onPress={() => navigation.navigate('History')}>
+            <CustomText style={{ fontSize: 14, color: '#2566A5' }}>View All</CustomText>
+          </TouchableOpacity>
         </View>
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          style={{
-            marginTop: 19,
-            marginLeft: 17,
-          }}
-        >
-          <View>
-            
-          </View>
-        </ScrollView>
+        <View style={{ marginLeft: -8 }}>
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{ paddingBottom: 16, paddingHorizontal: 8 }}
+          >
+            {latestTransactions.map((transaction) => (
+              <View key={transaction.traceNo} style={home_styles.transactionCard}>
+                <CustomText style={home_styles.transactionType}>{transaction.transactionType}</CustomText>
+                <CustomText style={home_styles.transactionPrice}>Rp {transaction.price.toLocaleString('id-ID')}</CustomText>
+                <CustomText style={home_styles.transactionDate}>
+                  {new Date(transaction.date).toLocaleString('id-ID', {
+                    day: 'numeric',
+                    month: 'numeric',
+                    year: 'numeric',
+                  })}
+                </CustomText>
+              </View>
+            ))}
+          </ScrollView>
+        </View>
       </View>
     </View >
   );

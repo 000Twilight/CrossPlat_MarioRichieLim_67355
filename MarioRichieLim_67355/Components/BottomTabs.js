@@ -2,7 +2,7 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Image, View, StyleSheet } from 'react-native';
 import HomeScreen from '../Screens/Home.Screen';
-import History from '../Screens/History.Screen';
+import HistoryScreen from '../Screens/History.Screen';
 import QrisScreen from '../Screens/Qris.Screen';
 import NotificationScreen from '../Screens/Notification.Screen';
 import ProfileScreen from '../Screens/Profile.Screen';
@@ -11,7 +11,6 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import Qris from '../Assets/Qris.png';
-import QrisBlue from '../Assets/Qris-blue.png';
 
 const Tab = createBottomTabNavigator();
 
@@ -20,12 +19,12 @@ function BottomTabs() {
         <Tab.Navigator
             initialRouteName="BottomTabs"
             screenOptions={({ route }) => ({
-                tabBarActiveTintColor: '#808080',
-                tabBarInactiveTintColor: '#b3b3b3',
-                tabBarActiveBackgroundColor: '#F8F9F9',
-                tabBarInactiveBackgroundColor: '#F8F9F9',
+                tabBarActiveTintColor: '#2566A5',
+                tabBarInactiveTintColor: '#8AB8E5',
+                tabBarActiveBackgroundColor: '#F0F0F0',
+                tabBarInactiveBackgroundColor: '#F0F0F0',
                 tabBarStyle: {
-                    backgroundColor: '#F8F9F9',
+                    backgroundColor: '#F0F0F0',
                     paddingRight: 10,
                     paddingLeft: 10,
                     height: 60,
@@ -34,8 +33,8 @@ function BottomTabs() {
                 },
                 tabBarIcon: ({ focused }) => {
                     let icon;
-                    const colorActive = '#2566a5';
-                    const colorInActive = '#e0e0e0';
+                    const colorActive = '#2566A5';
+                    const colorInActive = '#8AB8E5';
 
                     if (route.name === 'Home') {
                         icon = focused ? (
@@ -51,7 +50,7 @@ function BottomTabs() {
                         );
                     } else if (route.name === 'QRIS') {
                         icon = (
-                            <View style={[styles.qrisContainer, focused ? {backgroundColor: {colorActive}} : {backgroundColor: {colorActive}}]}>
+                            <View style={[styles.qrisContainer, { backgroundColor: focused ? colorActive : colorInActive }]}>
                                 <Image source={Qris} style={styles.qrisImage} />
                             </View>
                         );
@@ -80,7 +79,7 @@ function BottomTabs() {
             />
             <Tab.Screen
                 name="History"
-                component={History}
+                component={HistoryScreen}
                 options={{ headerShown: false, tabBarLabel: 'Riwayat' }}
             />
             <Tab.Screen
@@ -109,7 +108,7 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         justifyContent: 'center',
         alignItems: 'center',
-        borderColor: '#F8F9F9',
+        borderColor: '#F0F0F0',
         borderWidth: 4,
         top: -15,
     },

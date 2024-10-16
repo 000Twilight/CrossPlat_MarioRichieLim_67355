@@ -5,7 +5,6 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import CategoryHeader from '../../Components/CategoryHeader';
 import { TransactionContext } from '../../Contexts/Transaction.Context';
 import pulsa_styles from '../../Styles/Transaction/Pulsa.style';
-import BPJS_styles from '../../Styles/Transaction/BPJS.style';
 
 const BPJSScreen = ({ navigation }) => {
   const [errorMessage, setErrorMessage] = useState('');
@@ -36,13 +35,14 @@ const BPJSScreen = ({ navigation }) => {
   const handleTopUpSelection = (item) => {
     dispatch({ type: 'SET_SELECTED_PRICE', payload: item.price });
     dispatch({ type: 'SET_SELECTED_PACKAGE', payload: item.info });
+    dispatch({ type: 'SET_TRANSACTION_TYPE', payload: 'BPJS' }); 
     navigation.navigate('Payment');
   };
 
   const renderTopUpOption = ({ item, index }) => (
     <TouchableOpacity
       key={index}
-      style={pulsa_styles.topUpBox}  // Adjust styling here for single-column layout if needed
+      style={[pulsa_styles.topUpBox, { marginBottom: 10 }]}  // Adjust styling here for single-column layout if needed
       onPress={() => handleTopUpSelection(item)}
     >
       <CustomText style={pulsa_styles.topUpPriceFirst}>
@@ -85,7 +85,7 @@ const BPJSScreen = ({ navigation }) => {
             data={priceOptions}
             renderItem={renderTopUpOption}
             keyExtractor={(item) => item.price.toString()}
-            columnWrapperStyle={null}  
+            columnWrapperStyle={null}
           />
         ) : (
           <View style={pulsa_styles.messageContainer}>
