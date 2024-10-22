@@ -12,7 +12,7 @@ const SuccessScreen = ({ navigation, route }) => {
     const message = isSuccess ? 'Pembelian Berhasil!' : 'Pembelian Berhasil (X)';
 
     const getRandomCardType = () => {
-        const cardTypes = ['Debit', 'Credit', 'Cash', 'E-Wallet']; 
+        const cardTypes = ['Debit', 'Credit', 'Cash', 'E-Wallet'];
         return cardTypes[Math.floor(Math.random() * cardTypes.length)];
     };
 
@@ -32,6 +32,9 @@ const SuccessScreen = ({ navigation, route }) => {
                 customerId: state.phoneNumber,
             },
         });
+
+        dispatch({ type: 'SET_CUSTOMER_ID', payload: '' });
+        dispatch({ type: 'SET_TRANSACTION_TYPE', payload: '' });
 
     }, [isSuccess, dispatch, state.selectedPrice]);
 
@@ -82,7 +85,7 @@ const SuccessScreen = ({ navigation, route }) => {
                     style={[success_styles.button, success_styles.detailButton]}
                     onPress={() => navigation.navigate('History')}
                 >
-                    <Text style={[success_styles.buttonText, { color: '#F0F0F0'}]}>Lihat Detail</Text>
+                    <Text style={[success_styles.buttonText, { color: '#F0F0F0' }]}>Lihat Detail</Text>
                 </TouchableOpacity>
             </View>
         </View>

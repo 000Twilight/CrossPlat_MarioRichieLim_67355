@@ -9,33 +9,24 @@ import { TransactionContext } from '../../Contexts/Transaction.Context';
 const PulsaScreen = ({ navigation }) => {
     const [errorMessage, setErrorMessage] = useState('');
     const [selectedTab, setSelectedTab] = useState('Isi Pulsa');
+    const [isPhoneNumberValid, setIsPhoneNumberValid] = useState(false);
 
     const { state, dispatch } = useContext(TransactionContext);
 
     const priceOptions = [
-        { info: '5.000', price: 6500 },
-        { info: '10.000', price: 11500 },
-        { info: '15.000', price: 16500 },
-        { info: '20.000', price: 21500 },
-        { info: '25.000', price: 26500 },
-        { info: '30.000', price: 31500 },
-        { info: '40.000', price: 41500 },
-        { info: '50.000', price: 51500 },
-        { info: '75.000', price: 76500 },
-        { info: '100.000', price: 101500 },
+        { info: '5.000', price: 6500 }, { info: '10.000', price: 11500 },
+        { info: '15.000', price: 16500 }, { info: '20.000', price: 21500 },
+        { info: '25.000', price: 26500 }, { info: '30.000', price: 31500 },
+        { info: '40.000', price: 41500 }, { info: '50.000', price: 51500 },
+        { info: '75.000', price: 76500 }, { info: '100.000', price: 101500 },
     ];
 
     const dataPackageOptions = [
-        { info: '5GB', price: 31500 },
-        { info: '10GB', price: 51500 },
-        { info: '15GB', price: 76500 },
-        { info: '20GB', price: 101500 },
-        { info: '25GB', price: 126500 },
-        { info: '30GB', price: 151500 },
-        { info: '40GB', price: 176500 },
-        { info: '50GB', price: 201500 },
-        { info: '60GB', price: 251500 },
-        { info: '100GB', price: 401500 },
+        { info: '5GB', price: 31500 }, { info: '10GB', price: 51500 },
+        { info: '15GB', price: 76500 }, { info: '20GB', price: 101500 },
+        { info: '25GB', price: 126500 }, { info: '30GB', price: 151500 },
+        { info: '40GB', price: 176500 }, { info: '50GB', price: 201500 },
+        { info: '60GB', price: 251500 }, { info: '100GB', price: 401500 },
     ];
 
     const validatePhoneNumber = (phoneNumber) => {
@@ -43,19 +34,19 @@ const PulsaScreen = ({ navigation }) => {
 
         if (!phoneNumber.startsWith('08')) {
             setErrorMessage('Nomor harus dimulai dengan 08');
-            dispatch({ type: 'SET_PHONE_NUMBER', payload: phoneNumber });
+            setIsPhoneNumberValid(false);
             return false;
         }
 
         if (phoneNumber.length < 10) {
             setErrorMessage('Nomor telepon tidak boleh kurang dari 10 digit');
-            dispatch({ type: 'SET_PHONE_NUMBER', payload: phoneNumber });
+            setIsPhoneNumberValid(false);
             return false;
         }
 
         if (phoneNumber.length > 13) {
             setErrorMessage('Nomor telepon tidak boleh lebih dari 13 digit');
-            dispatch({ type: 'SET_PHONE_NUMBER', payload: phoneNumber });
+            setIsPhoneNumberValid(false);
             return false;
         }
 
@@ -69,22 +60,36 @@ const PulsaScreen = ({ navigation }) => {
 
         if (!validPrefixes.some(prefix => phoneNumber.startsWith(prefix))) {
             setErrorMessage('Nomor tidak sesuai dengan operator resmi di Indonesia');
-            dispatch({ type: 'SET_PHONE_NUMBER', payload: phoneNumber });
+            setIsPhoneNumberValid(false);
             return false;
         }
 
-        dispatch({ type: 'SET_PHONE_NUMBER', payload: phoneNumber });
+        dispatch({ type: 'SET_TRANSACTION_TYPE', payload: 'Pulsa' });
+        dispatch({ type: 'SET_CUSTOMER_ID', payload: phoneNumber });
+        setIsPhoneNumberValid(true);
         return true;
     };
 
     const handlePhoneNumberChange = (phoneNumber) => {
-        validatePhoneNumber(phoneNumber);
+        dispatch({ type: 'SET_CUSTOMER_ID', payload: phoneNumber });
+
+        const isValid = validatePhoneNumber(phoneNumber);
+
+        if (isValid) {
+            const type = selectedTab === 'Isi Pulsa' ? 'Pulsa' : 'Paket Data';
+            dispatch({ type: 'SET_TRANSACTION_TYPE', payload: type });
+        } else {
+            // Optionally, you can reset the transaction type if input is invalid
+            dispatch({ type: 'SET_TRANSACTION_TYPE', payload: '' });
+        }
     };
 
     const handleTopUpSelection = (item) => {
+        const type = selectedTab === 'Isi Pulsa' ? 'Pulsa' : 'Paket Data';
+
+        dispatch({ type: 'SET_TRANSACTION_TYPE', payload: type });
         dispatch({ type: 'SET_SELECTED_PRICE', payload: item.price });
         dispatch({ type: 'SET_SELECTED_PACKAGE', payload: item.info });
-        dispatch({ type: 'SET_TRANSACTION_TYPE', payload: 'Pulsa' }); 
         navigation.navigate('Payment');
     };
 
@@ -134,10 +139,10 @@ const PulsaScreen = ({ navigation }) => {
                             style={pulsa_styles.textInput}
                             placeholder="Contoh : 082370323318"
                             keyboardType="phone-pad"
-                            value={state.phoneNumber}
+                            value={state.customerId}
                             onChangeText={handlePhoneNumberChange}
                         />
-                        {state.phoneNumber.length > 0 && (
+                        {state.customerId.length > 0 && (
                             <TouchableOpacity onPress={() => handlePhoneNumberChange('')}>
                                 <Icon name="close" size={24} />
                             </TouchableOpacity>
@@ -171,7 +176,7 @@ const PulsaScreen = ({ navigation }) => {
                     </TouchableOpacity>
                 </View>
 
-                {state.isPhoneNumberValid ? (
+                {isPhoneNumberValid ? (
                     selectedTab === 'Isi Pulsa' ? (
                         <FlatList
                             data={priceOptions}

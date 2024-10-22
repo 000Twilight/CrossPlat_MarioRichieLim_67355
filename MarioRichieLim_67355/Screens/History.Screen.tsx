@@ -33,11 +33,13 @@ const HistoryScreen = ({ navigation }) => {
                     data={validHistory}
                     showsVerticalScrollIndicator={false}
                     keyExtractor={(item) => item.traceNo}
-                    contentContainerStyle={{ paddingBottom: 50 }} 
+                    contentContainerStyle={{ paddingBottom: 50, paddingHorizontal: 10 }} 
                     renderItem={({ item }) => (
                         <TouchableOpacity onPress={() => handleHistoryPress(item.traceNo)} style={history_styles.transactionItem}>
                             <CustomText style={history_styles.transactionText}>Tipe Transaksi: {item.transactionType}</CustomText>
-                            <CustomText style={history_styles.transactionText}>Harga: {item.price}</CustomText>
+                            <CustomText style={history_styles.transactionText}>
+                                Harga: Rp {item.price.toLocaleString('id-ID')}
+                            </CustomText>
                             <CustomText style={history_styles.transactionText}>
                                 Status:{' '}
                                 <CustomText

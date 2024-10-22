@@ -9,32 +9,31 @@ import pulsa_styles from '../../Styles/Transaction/Pulsa.style';
 const PLNScreen = ({ navigation }) => {
   const [errorMessage, setErrorMessage] = useState('');
   const { state, dispatch } = useContext(TransactionContext);
+  const [isTokenIdValid, setIsTokenIdValid] = useState(false);
 
   const priceOptions = [
-    { info: '1210,1 kWh', price: 1880000 },
-    { info: '968,4 kWh', price: 1248000 },
-    { info: '659,7 kWh', price: 994000 },
-    { info: '328,9 kWh', price: 494000 },
-    { info: '132,3 kWh', price: 244000 },
-    { info: '66,2 kWh', price: 97000 },
-    { info: '33,1 kWh', price: 47000 },
-    { info: '13,2 kWh', price: 17000 },
-    { info: '6,6 kWh', price: 8500 },
-    { info: '3,3 kWh', price: 4000 },
+    { info: '1210,1 kWh', price: 1880000 }, { info: '968,4 kWh', price: 1248000 },
+    { info: '659,7 kWh', price: 994000 }, { info: '328,9 kWh', price: 494000 },
+    { info: '132,3 kWh', price: 244000 }, { info: '66,2 kWh', price: 97000 },
+    { info: '33,1 kWh', price: 47000 }, { info: '13,2 kWh', price: 17000 },
+    { info: '6,6 kWh', price: 8500 }, { info: '3,3 kWh', price: 4000 },
   ];
 
   const validateTokenId = (tokenId) => {
     if (tokenId.length !== 20) {
       setErrorMessage('PLN ID Token harus terdiri dari 20 digit');
+      setIsTokenIdValid(false);
       return false;
     }
     setErrorMessage('');
+    setIsTokenIdValid(true);
     return true;
   };
 
   const handleTokenIdChange = (tokenId) => {
-    dispatch({ type: 'SET_TOKEN_ID', payload: tokenId });
     validateTokenId(tokenId);
+    dispatch({ type: 'SET_CUSTOMER_ID', payload: tokenId });
+    dispatch({ type: 'SET_TRANSACTION_TYPE', payload: 'Listrik' });
   };
 
   const handleTopUpSelection = (item) => {
@@ -73,10 +72,10 @@ const PLNScreen = ({ navigation }) => {
               style={pulsa_styles.textInput}
               placeholder="Masukkan PLN ID Token (20 digit)"
               keyboardType="number-pad"
-              value={state.tokenId}
+              value={state.customerId}
               onChangeText={handleTokenIdChange}
             />
-            {state.tokenId.length > 0 && (
+            {state.customerId.length > 0 && (
               <TouchableOpacity onPress={() => handleTokenIdChange('')}>
                 <Icon name="close" size={24} />
               </TouchableOpacity>
@@ -85,7 +84,7 @@ const PLNScreen = ({ navigation }) => {
           {errorMessage !== '' && <CustomText style={pulsa_styles.errorText}>{errorMessage}</CustomText>}
         </View>
 
-        {state.tokenId.length === 20 ? (
+        {isTokenIdValid ? (
           <FlatList
             data={priceOptions}
             renderItem={renderTopUpOption}

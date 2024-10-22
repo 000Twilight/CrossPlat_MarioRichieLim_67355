@@ -79,13 +79,15 @@ const NotificationScreen = ({ navigation }) => {
   return (
     <View style={notification_styles.container}>
       <CategoryHeader title="Notifikasi" />
-      <FlatList
-        data={promotionalData}
-        showsVerticalScrollIndicator={false}
-        keyExtractor={(item) => item.id}
-        renderItem={renderNotificationCard}
-        contentContainerStyle={notification_styles.listContainer}
-      />
+      <View style={{ flex: 1, paddingHorizontal: 20 }}>
+        <FlatList
+          data={promotionalData}
+          showsVerticalScrollIndicator={false}
+          keyExtractor={(item) => item.title} 
+          renderItem={renderNotificationCard}
+          contentContainerStyle={notification_styles.listContainer}
+        />
+      </View>
     </View>
   );
 };

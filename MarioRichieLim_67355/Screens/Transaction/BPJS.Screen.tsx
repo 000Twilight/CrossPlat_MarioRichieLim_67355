@@ -9,6 +9,7 @@ import pulsa_styles from '../../Styles/Transaction/Pulsa.style';
 const BPJSScreen = ({ navigation }) => {
   const [errorMessage, setErrorMessage] = useState('');
   const { state, dispatch } = useContext(TransactionContext);
+  const [isBPJSNumberValid, setIsBPJSNumberValid] = useState(false);
 
   const priceOptions = [
     { info: 'BPJS Kelas 1', price: 150000 },
@@ -21,21 +22,24 @@ const BPJSScreen = ({ navigation }) => {
   const validateBPJSNumber = (bpjsNumber) => {
     if (bpjsNumber.length !== 13) {
       setErrorMessage('Nomor BPJS harus terdiri dari 13 digit');
+      setIsBPJSNumberValid(false);
       return false;
     }
     setErrorMessage('');
+    setIsBPJSNumberValid(true);
     return true;
   };
 
   const handleBPJSNumberChange = (bpjsNumber) => {
-    dispatch({ type: 'SET_BPJS_NUMBER', payload: bpjsNumber });
     validateBPJSNumber(bpjsNumber);
+    dispatch({ type: 'SET_TRANSACTION_TYPE', payload: 'BPJS' });
+    dispatch({ type: 'SET_CUSTOMER_ID', payload: bpjsNumber });
   };
 
   const handleTopUpSelection = (item) => {
     dispatch({ type: 'SET_SELECTED_PRICE', payload: item.price });
     dispatch({ type: 'SET_SELECTED_PACKAGE', payload: item.info });
-    dispatch({ type: 'SET_TRANSACTION_TYPE', payload: 'BPJS' }); 
+    dispatch({ type: 'SET_TRANSACTION_TYPE', payload: 'BPJS' });
     navigation.navigate('Payment');
   };
 
@@ -68,10 +72,10 @@ const BPJSScreen = ({ navigation }) => {
               style={pulsa_styles.textInput}
               placeholder="Masukkan Nomor BPJS (13 digit)"
               keyboardType="number-pad"
-              value={state.bpjsNumber}
+              value={state.customerId}
               onChangeText={handleBPJSNumberChange}
             />
-            {state.bpjsNumber.length > 0 && (
+            {state.customerId.length > 0 && (
               <TouchableOpacity onPress={() => handleBPJSNumberChange('')}>
                 <Icon name="close" size={24} />
               </TouchableOpacity>
@@ -80,7 +84,7 @@ const BPJSScreen = ({ navigation }) => {
           {errorMessage !== '' && <CustomText style={pulsa_styles.errorText}>{errorMessage}</CustomText>}
         </View>
 
-        {state.bpjsNumber.length === 13 ? (
+        {isBPJSNumberValid ? (
           <FlatList
             data={priceOptions}
             renderItem={renderTopUpOption}

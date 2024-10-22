@@ -7,9 +7,22 @@ import { Ionicons, FontAwesome, FontAwesome5 } from '@expo/vector-icons';
 import { TransactionContext } from '../Contexts/Transaction.Context';
 
 const HomeScreen = ({ navigation }) => {
-  const { state } = useContext(TransactionContext);
+  const { state, dispatch } = useContext(TransactionContext);
+  
+  const sortedHistory = state.transactionHistory.slice().sort((a, b) =>
+    new Date(b.date).getTime() - new Date(a.date).getTime()
+  );
 
-  const latestTransactions = state.transactionHistory.slice(0, 4);
+  const latestTransactions = sortedHistory.slice(0, 4);
+
+  useEffect(() => {
+    const temp = navigation.addListener('focus', () => {
+      dispatch({ type: 'SET_CUSTOMER_ID', payload: '' });
+      dispatch({ type: 'SET_TRANSACTION_TYPE', payload: '' });
+    });
+
+    return temp;
+  }, [navigation, dispatch]);
 
   return (
     <View style={home_styles.container}>

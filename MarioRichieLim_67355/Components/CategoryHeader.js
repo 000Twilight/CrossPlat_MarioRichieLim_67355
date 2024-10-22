@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     },
     backButton: {
         position: 'absolute',
-        left: 10,
+        left: 20,
         justifyContent: 'center',
         alignItems: 'center',
     },

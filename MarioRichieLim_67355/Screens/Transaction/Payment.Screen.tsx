@@ -9,9 +9,10 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 const PaymentScreen = ({ navigation }) => {
     const { state } = useContext(TransactionContext);
     const {
-        phoneNumber,
-        tokenId,
-        bpjsNumber,
+        // phoneNumber,
+        // tokenId,
+        // bpjsNumber,
+        customerId,
         selectedPrice,
         selectedPackage,
         operator,
@@ -29,10 +30,12 @@ const PaymentScreen = ({ navigation }) => {
                         <AntDesign name="star" size={30} color="black" />
                         <View style={payment_styles.infoContainer}>
                             <CustomText style={payment_styles.operatorText}>
-                                {tokenId ? 'PLN' : bpjsNumber ? 'BPJS' : operator}
+                                {/* {tokenId ? 'PLN' : bpjsNumber ? 'BPJS' : operator} */}
+                                {state.transactionType === 'Listrik' ? 'PLN' : state.transactionType === 'BPJS' ? 'BPJS' : state.operator}
                             </CustomText>
                             <CustomText style={payment_styles.phoneText}>
-                                {phoneNumber || tokenId || bpjsNumber}
+                                {/* {phoneNumber || tokenId || bpjsNumber} */}
+                                {state.customerId}
                             </CustomText>
                         </View>
                     </View>
