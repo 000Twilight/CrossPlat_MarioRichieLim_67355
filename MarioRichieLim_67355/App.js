@@ -1,4 +1,4 @@
-// https://github.com/000Twilight/CrossPlat_MarioRichieLim_67355.git
+// https://github.com/000Twilight/CrossPlat_MarioRichieLim_67355/tree/UTS-LAB
 
 import 'react-native-gesture-handler';
 import React, { useState, useEffect } from 'react';
