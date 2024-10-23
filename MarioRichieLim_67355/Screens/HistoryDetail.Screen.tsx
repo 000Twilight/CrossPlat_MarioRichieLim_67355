@@ -14,7 +14,7 @@ const HistoryDetailScreen = ({ navigation }) => {
       <CategoryHeader title="Transaksi Detail" />
       <View style={styles.contentContainer}>
         <View style={styles.merchantInfo}>
-          <Image source={require('../Assets/Profile.jpeg')} style={styles.logoPlaceholder} />
+          <Image source={require('../Assets/merchant.png')} style={styles.logoPlaceholder} />
           <CustomText style={styles.merchantName}>Union-X</CustomText>
           <CustomText style={styles.merchantAddress}>UMN</CustomText>
         </View>

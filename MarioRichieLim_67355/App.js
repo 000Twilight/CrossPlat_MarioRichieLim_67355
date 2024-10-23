@@ -1,3 +1,5 @@
+// https://github.com/000Twilight/CrossPlat_MarioRichieLim_67355.git
+
 import 'react-native-gesture-handler';
 import React, { useState, useEffect } from 'react';
 import * as Font from 'expo-font';

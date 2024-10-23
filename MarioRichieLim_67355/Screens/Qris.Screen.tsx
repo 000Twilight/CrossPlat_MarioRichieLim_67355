@@ -11,15 +11,15 @@ const QrisScreen = ({ navigation }) => {
   return (
     <View style={{ alignItems: 'center', flex: 1 }}>
       <CategoryHeader title="QRIS" />
-      <View style={{ marginTop: 50 }}>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <QRCode
           value={qrValue}
-          size={200}
+          size={250}
           color="black"
           backgroundColor="white"
         />
+        <CustomText style={{ marginTop: 20, fontFamily: 'Lato-Black', fontSize: 20 }}>QR Code Github</CustomText>
       </View>
-      <CustomText style={{ marginTop: 20, fontFamily: 'Lato-Black', fontSize: 20 }}>QR Code Github</CustomText>
     </View>
   );
 };

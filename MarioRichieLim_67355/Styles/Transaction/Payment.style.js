@@ -25,6 +25,11 @@ const payment_styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
     },
+    image: {
+        width: 40,
+        height: 40,
+        resizeMode: 'contain', 
+    },
     infoContainer: {
         flexDirection: 'column',
         marginLeft: 14,
