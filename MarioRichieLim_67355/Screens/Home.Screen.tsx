@@ -7,13 +7,13 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RouteProp } from '@react-navigation/native';
 
 const HomeScreen = () => {
+    const [posts, setPosts] = useState<Post[]>([]);
+
     interface Post {
         id: number;
         title: string;
         body: string;
     }
-
-    const [posts, setPosts] = useState<Post[]>([]);
 
     type RootStackParamList = {
         Home: undefined;
