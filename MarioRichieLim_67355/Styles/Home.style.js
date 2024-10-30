@@ -4,7 +4,13 @@ const home_styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
-        padding: 10,
+        padding: 20,
+    },
+    titleName: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        marginBottom: 20,
+        alignSelf: 'center',
     },
     card: {
         backgroundColor: '#f8f9fa',

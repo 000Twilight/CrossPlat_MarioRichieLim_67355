@@ -18,6 +18,21 @@ const form_styles = StyleSheet.create({
         marginBottom: 15,
         borderRadius: 8,
     },
+    button: {
+        backgroundColor: '#007BFF',
+        padding: 10,
+        borderRadius: 8,
+        alignItems: 'center',
+        alignSelf: 'center',
+        marginTop: 10,
+        width: '20%',
+    },
+    buttonText: {
+        color: '#fff',
+        fontSize: 16,
+        fontWeight: 'bold',
+        borderRadius: 8,
+    },
 });
 
 export default form_styles;
