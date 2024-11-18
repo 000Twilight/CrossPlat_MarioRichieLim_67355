@@ -1,8 +1,14 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Button, Alert, Platform } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Alert,
+  Platform,
+} from 'react-native';
 import * as Location from 'expo-location';
 import * as FileSystem from 'expo-file-system';
-import { StatusBar } from 'expo-status-bar';
 
 export default function App() {
   const [location, setLocation] = useState(null);
@@ -12,7 +18,10 @@ export default function App() {
       const { status } = await Location.requestForegroundPermissionsAsync();
 
       if (status !== 'granted') {
-        Alert.alert('Permission Denied', 'Location permission is required to get the current location.');
+        Alert.alert(
+          'Permission Denied',
+          'Location permission is required to get the current location.'
+        );
         return;
       }
 
@@ -28,6 +37,7 @@ export default function App() {
         `Latitude: ${currentLocation.coords.latitude}, Longitude: ${currentLocation.coords.longitude}`
       );
 
+      // Save location data to the Downloads folder
       await saveLocationToFile(currentLocation.coords);
     } catch (error) {
       console.error('Error getting location:', error);
@@ -39,24 +49,36 @@ export default function App() {
     try {
       const locationData = `Latitude: ${coords.latitude}, Longitude: ${coords.longitude}, Timestamp: ${new Date().toISOString()}\n`;
 
-      let fileUri;
-
       if (Platform.OS === 'android') {
-        const externalDirectory = FileSystem.externalDirectory || FileSystem.documentDirectory;
-        if (!externalDirectory) {
-          throw new Error('External storage directory is not available.');
+        // Open a folder picker for the user to select a directory
+        const dirUri = await FileSystem.StorageAccessFramework.requestDirectoryPermissionsAsync();
+
+        if (!dirUri.granted) {
+          Alert.alert(
+            'Permission Denied',
+            'You need to select a folder to save the file.'
+          );
+          return;
         }
-        fileUri = `${externalDirectory}location_data.txt`;
+
+        const fileUri = `${dirUri.directoryUri}/location_data_${Date.now()}.txt`;
+
+        // Write the data to the file
+        await FileSystem.StorageAccessFramework.writeAsStringAsync(
+          fileUri,
+          locationData
+        );
+
+        console.log(`Location saved to: ${fileUri}`);
+        Alert.alert('File Saved', `Location data saved to selected folder.`);
       } else {
-        fileUri = `${FileSystem.documentDirectory}location_data.txt`;
+        // For iOS, save to the app's document directory
+        const fileUri = `${FileSystem.documentDirectory}location_data.txt`;
+        await FileSystem.writeAsStringAsync(fileUri, locationData);
+
+        console.log(`Location saved to: ${fileUri}`);
+        Alert.alert('File Saved', `Location data saved to: ${fileUri}`);
       }
-
-      await FileSystem.writeAsStringAsync(fileUri, locationData, {
-        encoding: FileSystem.EncodingType.UTF8,
-      });
-
-      console.log(`Location saved to: ${fileUri}`);
-      Alert.alert('Location Saved', `Location saved to: ${fileUri}`);
     } catch (error) {
       console.error('Error saving location to file:', error);
       Alert.alert('Error', 'Failed to save location data.');
@@ -66,8 +88,9 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Geolocation App</Text>
-      <Button title="Get Location" onPress={getLocation} />
-      <StatusBar style="auto" />
+      <TouchableOpacity style={styles.button} onPress={getLocation}>
+        <Text style={styles.buttonText}>Get Location & Save</Text>
+      </TouchableOpacity>
       {location && (
         <Text style={styles.location}>
           Latitude: {location.latitude}, Longitude: {location.longitude}
@@ -89,6 +112,16 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
+  },
+  button: {
+    backgroundColor: '#007BFF',
+    padding: 10,
+    margin: 10,
+    borderRadius: 5,
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 16,
   },
   location: {
     marginTop: 20,
