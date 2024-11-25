@@ -3,16 +3,17 @@ import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import BottomTabs from './Components/BottomTabs';
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <StatusBar backgroundColor="#000000" barStyle="light-content" />
+      <StatusBar backgroundColor="#FFFFFF" barStyle="dark-content" />
       <Stack.Navigator
         screenOptions={{
-          headerStyle: { backgroundColor: '#F0F0F0' },
+          headerStyle: { backgroundColor: '#FFFFFF' },
           headerTintColor: '#000000',
         }}
       >
