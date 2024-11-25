@@ -12,10 +12,10 @@ export default function App() {
     <NavigationContainer>
       <StatusBar backgroundColor="#FFB001" barStyle="light-content" />
       <Stack.Navigator
-        screenOptions={{
-          headerStyle: { backgroundColor: '#FFB001' },
-          headerTintColor: '#000000',
-        }}
+        // screenOptions={{
+        //   headerStyle: { backgroundColor: '#FFB001' },
+        //   headerTintColor: '#000000',
+        // }}
       >
         <Stack.Screen
           name="Main"

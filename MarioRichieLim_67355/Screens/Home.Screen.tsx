@@ -3,7 +3,7 @@ import { View, Text, ScrollView, TouchableOpacity, Image, Pressable, Animated } 
 
 const HomeScreen = ({ navigation }) => {
   return (
-    <View>
+    <View style={{ backgroundColor: 'white' }}>
       <Text>Home</Text>
     </View>
   );
