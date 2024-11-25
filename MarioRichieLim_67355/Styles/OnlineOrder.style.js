@@ -25,11 +25,12 @@ const online_order_styles = StyleSheet.create({
         flexDirection: 'column',
         borderRadius: 8,
         overflow: 'hidden',
+        alignItems: 'center',
         // elevation: 2,
     },
     imageOrder: {
-        width: 100,
-        height: 100,
+        width: 200,
+        height: 200,
     },
     cardContent: {
         padding: 10,

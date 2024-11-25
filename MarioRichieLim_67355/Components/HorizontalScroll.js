@@ -23,7 +23,7 @@ const HorizontalScroll = () => {
         >
             {categories.map((category) => (
                 <View key={category.id} style={styles.itemContainer}>
-                    <Image source={{ uri: category.image }} style={styles.image} />
+                    <Image source={require('../Assets/icon.png')} style={styles.image} />
                     <Text style={styles.text}>{category.title}</Text>
                 </View>
             ))}
@@ -45,13 +45,12 @@ const styles = StyleSheet.create({
         height: 100,
         borderRadius: 12,
         borderWidth: 1,
-        borderColor: '#E0E0E0',
+        borderColor: '#333',
     },
     text: {
         marginTop: 8,
         fontSize: 14,
         fontWeight: '600',
-        color: '#333',
     },
 });
 

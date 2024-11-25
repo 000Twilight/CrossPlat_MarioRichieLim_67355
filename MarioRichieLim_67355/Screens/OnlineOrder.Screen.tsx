@@ -17,7 +17,7 @@ const OnlineOrderScreen = () => {
                 <Text style={online_order_styles.orderNowTitle}>Order Now</Text>
                 <TouchableOpacity style={online_order_styles.cardOrder}>
                     <Image
-                        source={{ uri: 'https://via.placeholder.com/600x400' }}
+                        source={require('../Assets/icon.png')}
                         style={online_order_styles.imageOrder}
                     />
                     <View style={online_order_styles.cardContent}>
