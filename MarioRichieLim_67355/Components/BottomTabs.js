@@ -1,11 +1,12 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { MaterialIcons, FontAwesome } from '@expo/vector-icons';
+
 import HomeScreen from '../Screens/Home.Screen';
 import PromoScreen from '../Screens/Promo.Screen';
 import PaymentScreen from '../Screens/Payment.Screen';
 import ProfileScreen from '../Screens/Profile.Screen';
-
-import { MaterialIcons, FontAwesome } from '@expo/vector-icons';
+import OnlineOrderScreen from '../Screens/OnlineOrder.Screen';
 
 const Tab = createBottomTabNavigator();
 
@@ -19,12 +20,12 @@ function BottomTabs() {
                 tabBarStyle: {
                     backgroundColor: '#FFB001',
                     height: 70,
-                    borderTopLeftRadius: 20,
-                    borderTopRightRadius: 20,
-                    position: 'absolute', // Makes it float above the content
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
+                    width: '90%',
+                    borderRadius: 20,
+                    position: 'absolute', 
+                    left: '5%', // Center horizontally
+                    right: '5%', // Center horizontally
+                    bottom: '3%',
                     elevation: 10, // Adds shadow on Android
                     shadowColor: '#000', // Adds shadow on iOS
                     shadowOffset: { width: 0, height: -2 },
@@ -33,7 +34,7 @@ function BottomTabs() {
                 },
                 tabBarLabelStyle: {
                     fontSize: 12,
-                    fontWeight: '600',
+                    fontWeight: '400',
                     marginBottom: 10, // Moves label up for spacing
                 },
                 tabBarItemStyle: {
@@ -81,8 +82,8 @@ function BottomTabs() {
             />
             <Tab.Screen
                 name="Profile"
-                component={ProfileScreen}
-                options={{ headerShown: false, tabBarLabel: 'Profile' }}
+                component={OnlineOrderScreen}
+                options={{ headerShown: false, tabBarLabel: 'Online' }}
             />
         </Tab.Navigator>
     );
