@@ -1,12 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, Image, Pressable, Animated } from 'react-native';
 
-const PromoScreen = ({ navigation }) => {
+const OnlineOrderScreen = ({ navigation }) => {
   return (
     <View>
-      <Text>Promo</Text>
+      <Text>Online Order</Text>
     </View>
   );
 };
 
-export default PromoScreen;
+export default OnlineOrderScreen;
