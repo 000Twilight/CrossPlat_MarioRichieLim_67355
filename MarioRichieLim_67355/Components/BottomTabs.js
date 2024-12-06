@@ -23,11 +23,11 @@ function BottomTabs() {
                     width: '90%',
                     borderRadius: 20,
                     position: 'absolute', 
-                    left: '5%', // Center horizontally
-                    right: '5%', // Center horizontally
+                    left: '5%',
+                    right: '5%', 
                     bottom: '3%',
-                    elevation: 10, // Adds shadow on Android
-                    shadowColor: '#000', // Adds shadow on iOS
+                    elevation: 10, 
+                    shadowColor: '#000', 
                     shadowOffset: { width: 0, height: -2 },
                     shadowOpacity: 0.1,
                     shadowRadius: 5,
