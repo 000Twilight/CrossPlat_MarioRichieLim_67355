@@ -1,20 +1,34 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StatusBar } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import FrontEndScreen from './screens/FrontEnd.screen';
+import BackEndScreen from './screens/BackEnd.screen';
+import NumberScreen from './screens/Number.screen';
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <StatusBar backgroundColor="#FFFFFF" barStyle="light-content" />
+      <Stack.Navigator>
+      <Stack.Screen
+          name="Main"
+          component={NumberScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="FrontEnd"
+          component={FrontEndScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="BackEnd"
+          component={BackEndScreen}
+          options={{ headerShown: false }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
