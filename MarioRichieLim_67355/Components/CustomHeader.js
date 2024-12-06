@@ -4,7 +4,7 @@ import Octicons from '@expo/vector-icons/Octicons';
 import SearchBar from './SearchBar';
 import { useNavigation } from '@react-navigation/native';
 
-const CustomHeader = ({ title }) => {
+const CustomHeader = ({ title, placeholder, haveSearchBar }) => {
     const navigation = useNavigation();
 
     return (
@@ -16,7 +16,7 @@ const CustomHeader = ({ title }) => {
                 <Text style={styles.headerTitle}>{title}</Text>
                 <View style={{ width: 26, height: 28 }}></View>
             </View>
-            <SearchBar placeholder="Let’s order something!" />
+            {haveSearchBar && <SearchBar placeholder={placeholder} />}
         </View>
     );
 };
@@ -24,11 +24,11 @@ const CustomHeader = ({ title }) => {
 const styles = StyleSheet.create({
     headerContainer: {
         backgroundColor: '#FFB001',
-        height: 160,
         borderBottomLeftRadius: 30,
         borderBottomRightRadius: 30,
         paddingHorizontal: 20,
         paddingTop: 30,
+        paddingBottom: 20,
     },
     flexRow: {
         flexDirection: 'row',

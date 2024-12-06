@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollView } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native';
 import CustomHeader from '../Components/CustomHeader';
 import FeaturesCards from '../Components/FeaturesCard';
 import online_order_styles from '../Styles/OnlineOrder.style';
@@ -22,7 +22,11 @@ const OnlineOrderScreen = () => {
 
     return (
         <ScrollView style={{ flex: 1, backgroundColor: 'white' }}>
-            <CustomHeader title="Online Order" />
+            <CustomHeader
+                title="Online Order"
+                placeholder="Let's Order Something"
+                haveSearchBar={true}
+            />
             <View style={online_order_styles.paddingApp}>
                 <ScrollView
                     horizontal
