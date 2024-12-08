@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 
 const frontend_styles = StyleSheet.create({
     container: {
-        flex: 1,
+        display: 'flex',
         backgroundColor: 'white',
         paddingHorizontal: 220,
     },
@@ -85,7 +85,7 @@ const frontend_styles = StyleSheet.create({
     },
 
     bannerContainer: {
-        // position: 'relative',
+        position: 'relative',
         paddingTop: 30,
     },
     banner: {
@@ -93,14 +93,78 @@ const frontend_styles = StyleSheet.create({
         height: 350,
     },
     textBanner: {
-        // position: 'absolute',
-        // top: 50,
-        // left: '18%',
+        position: 'absolute',
+        top: 60,
+        left: '17%',
         color: 'white',
         fontSize: 32,
         letterSpacing: 2,
+        fontWeight: 'bold',
+    },
+    boxBannerContainer: {
+        position: 'absolute',
+        top: 120,
+        left: '17%',
+        flexDirection: 'row',
+    },
+    dropdownBannerContainer: {
+        position: 'absolute',
+        top: 180,
+        left: '17%',
+        width: 842,
+        height: 100,
+        backgroundColor: 'white',
+        flexDirection: 'row',
+        backgroundColor: 'white',
     },
 
+    featuredProducts: {
+        paddingVertical: 20,
+        alignItems: 'center'
+    },
+    
+    productCard: {
+        borderWidth: 1,
+        borderColor: '#ccc',
+        padding: 20,
+        marginHorizontal: 10,
+        backgroundColor: 'white',
+        width: 250,
+    },
+    productImage: {
+        width: '100%',
+        height: 200,
+        resizeMode: 'contain',
+        backgroundColor: '#d0d8db',
+    },
+    productName: {
+        fontSize: 16,
+        marginVertical: 7,
+    },
+    subProductName: {
+        fontSize: 12,
+        marginVertical: 5,
+        color: '#777',
+    },
+    productPrice: {
+        fontSize: 16,
+        fontWeight: 'bold',
+    },
+    subProductPrice: {
+        fontSize: 12,
+        fontWeight: 'bold',
+        paddingTop: 9,
+        marginBottom: -3,
+    },
+    addButtonFeatured: {
+        backgroundColor: '#ff9917',
+        padding: 10,
+    },
+    addButtonTextFeatured: {
+        color: 'white',
+        fontWeight: 500,
+        textAlign: 'center',
+    }
 });
 
 export default frontend_styles;

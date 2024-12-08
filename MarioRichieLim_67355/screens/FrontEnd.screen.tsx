@@ -3,10 +3,11 @@ import React from 'react';
 import frontend_styles from '../styles/FrontEnd.style';
 import Navbar from '../components/Navbar';
 import { MaterialIcons } from '@expo/vector-icons';
+import Feather from '@expo/vector-icons/Feather';
 
 const FrontEndScreen = () => {
   return (
-    <ScrollView style={{ backgroundColor: 'white' }}>
+    <ScrollView style={{ backgroundColor: '#fafafa', paddingBottom: 100 }}>
       <Navbar />
       <View style={frontend_styles.container}>
 
@@ -48,15 +49,97 @@ const FrontEndScreen = () => {
         </View>
 
       </View>
+
       <View style={frontend_styles.bannerContainer}>
         <Image source={require('../assets/banner.jpg')} style={frontend_styles.banner} />
         <Text style={frontend_styles.textBanner}>
           FIND THE RIGHT CARDRIDGES FOR YOUR PRINTER
         </Text>
+        <View style={frontend_styles.boxBannerContainer}>
+          <View style={{ paddingVertical: 20, paddingHorizontal: 112, backgroundColor: '#1f88e6' }}>
+            <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'white' }}>
+              3-Step Easy Search®
+            </Text>
+          </View>
+          <View style={{ paddingVertical: 20, paddingHorizontal: 112, backgroundColor: '#f0f0f0' }}>
+            <Text style={{ fontSize: 18, fontWeight: 'bold' }}>
+              Search by Serial Number
+            </Text>
+          </View>
+        </View>
+        <View style={frontend_styles.dropdownBannerContainer}>
+          <View style={{ paddingVertical: 10, paddingHorizontal: 20, backgroundColor: '#f0f0f0', position: 'absolute', left: 30, top: '30%' }}>
+            <Text>
+              1. Printer Brand
+            </Text>
+          </View>
+          <View style={{ paddingVertical: 10, paddingHorizontal: 20, backgroundColor: '#f0f0f0', position: 'absolute', left: 210, top: '30%' }}>
+            <Text>
+              2. Printer Series
+            </Text>
+          </View>
+          <View style={{ paddingVertical: 10, paddingHorizontal: 20, backgroundColor: '#f0f0f0', position: 'absolute', left: 400, top: '30%' }}>
+            <Text>
+              3. Printer Model
+            </Text>
+          </View>
+          <View style={{ paddingVertical: 10, paddingHorizontal: 20, backgroundColor: '#ff9917', position: 'absolute', left: 600, top: '30%' }}>
+            <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'white' }}>
+              FIND CARTRIDGES
+            </Text>
+          </View>
+        </View>
       </View>
 
-      <View style={frontend_styles.container}>
-        <Text style={{ fontSize: 16 }}>FEATURED PRODUCTS</Text>
+      <View style={frontend_styles.featuredProducts}>
+        <Text style={{ fontSize: 24, fontWeight: 500 }}>FEATURED PRODUCTS</Text>
+      </View>
+
+      <View style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'row', alignItems: 'center' }}>
+        <TouchableOpacity>
+          <Feather name="arrow-left-circle" size={50} color="#b8b8b8" style={{ paddingLeft: 120 }} />
+        </TouchableOpacity>
+        <View style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'row' }}>
+          <View style={frontend_styles.productCard}>
+            <Image source={require('../assets/product_1.png')} style={frontend_styles.productImage} />
+            <Text style={frontend_styles.productName}>HP 62 Black Ink Cartridge</Text>
+            <Text style={frontend_styles.subProductName}>(HP2C2P04AE)</Text>
+            <Text style={{ paddingVertical: 9 }}></Text>
+            <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+              <Text style={frontend_styles.productPrice}>$9.49</Text>
+              <TouchableOpacity style={frontend_styles.addButtonFeatured}>
+                <Text style={frontend_styles.addButtonTextFeatured}>ADD TO CART</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+          <View style={frontend_styles.productCard}>
+            <Image source={require('../assets/product_2.png')} style={frontend_styles.productImage} />
+            <Text style={frontend_styles.productName}>Canon MF-3110 Toner</Text>
+            <Text style={frontend_styles.subProductName}>(C2P04AE)</Text>
+            <Text style={{ paddingVertical: 9 }}></Text>
+            <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+              <Text style={frontend_styles.productPrice}>$36.45</Text>
+              <TouchableOpacity style={frontend_styles.addButtonFeatured}>
+                <Text style={frontend_styles.addButtonTextFeatured}>ADD TO CART</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+          <View style={frontend_styles.productCard}>
+            <Image source={require('../assets/product_1.png')} style={frontend_styles.productImage} />
+            <Text style={frontend_styles.productName}>HP 62 Black Ink Cartridge</Text>
+            <Text style={frontend_styles.subProductName}>(HP2C2P04AE)</Text>
+            <Text style={frontend_styles.subProductPrice}>$9.49</Text>
+            <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+              <Text style={[frontend_styles.productPrice, { color: 'red', textDecorationLine: 'line-through' }]}>$5.99</Text>
+              <TouchableOpacity style={frontend_styles.addButtonFeatured}>
+                <Text style={frontend_styles.addButtonTextFeatured}>ADD TO CART</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+        <TouchableOpacity>
+          <Feather name="arrow-right-circle" size={50} color="#ff9917" style={{ paddingRight: 120 }} />
+        </TouchableOpacity>
       </View>
     </ScrollView>
   );
