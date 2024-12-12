@@ -12,9 +12,12 @@ import * as ImagePicker from 'expo-image-picker';
 import * as MediaLibrary from 'expo-media-library';
 import * as Location from 'expo-location';
 import * as FileSystem from 'expo-file-system';
+import { storage, firestore } from './Firebase';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { collection, addDoc } from 'firebase/firestore';
 
 export default function App() {
-  const [uri, setUri] = useState("");
+  const [uri, setUri] = useState('');
   const [location, setLocation] = useState(null);
 
   // Function to open image picker
@@ -22,7 +25,7 @@ export default function App() {
     const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
 
     if (permissionResult.granted === false) {
-      alert("Permission to access gallery is required!");
+      alert('Permission to access gallery is required!');
       return;
     }
 
@@ -34,9 +37,9 @@ export default function App() {
 
     if (pickerResult.assets && pickerResult.assets.length > 0) {
       setUri(pickerResult.assets[0].uri);
-      console.log("Image URI from gallery:", pickerResult.assets[0].uri);
+      console.log('Image URI from gallery:', pickerResult.assets[0].uri);
     } else {
-      console.log("User cancelled image picker or URI is undefined");
+      console.log('User cancelled image picker or URI is undefined');
     }
   };
 
@@ -45,7 +48,7 @@ export default function App() {
     const permissionResult = await ImagePicker.requestCameraPermissionsAsync();
 
     if (permissionResult.granted === false) {
-      alert("Permission to access camera is required!");
+      alert('Permission to access camera is required!');
       return;
     }
 
@@ -57,31 +60,9 @@ export default function App() {
 
     if (cameraResult.assets && cameraResult.assets.length > 0) {
       setUri(cameraResult.assets[0].uri);
-      console.log("Image URI from camera:", cameraResult.assets[0].uri);
+      console.log('Image URI from camera:', cameraResult.assets[0].uri);
     } else {
-      console.log("User cancelled camera or URI is undefined");
-    }
-  };
-
-  // Function to save the image to gallery
-  const SaveFile = async () => {
-    if (!uri) {
-      alert("No image selected or captured");
-      return;
-    }
-
-    try {
-      const { status } = await MediaLibrary.requestPermissionsAsync();
-      if (status !== "granted") {
-        alert("Permission to save images to gallery is required!");
-        return;
-      }
-
-      const asset = await MediaLibrary.createAssetAsync(uri);
-      alert("Image saved to gallery!");
-      console.log("Saved image asset:", asset);
-    } catch (error) {
-      console.error("Failed to save image:", error);
+      console.log('User cancelled camera or URI is undefined');
     }
   };
 
@@ -106,44 +87,64 @@ export default function App() {
         'Location Captured',
         `Latitude: ${currentLocation.coords.latitude}, Longitude: ${currentLocation.coords.longitude}`
       );
-
-      // Save location to file
-      await saveLocationToFile(currentLocation.coords);
     } catch (error) {
       console.error('Error getting location:', error);
       Alert.alert('Error', 'An error occurred while fetching location.');
     }
   };
 
-  // Function to save location to file
-  const saveLocationToFile = async (coords) => {
+  // Function to upload image to Firebase Storage
+  const uploadImageToFirebase = async () => {
+    if (!uri) {
+      alert('No image selected');
+      return;
+    }
+
+    const imageUri = uri;
+    const imageName = `image_${Date.now()}.jpg`;
+    const storageRef = ref(storage, `images/${imageName}`);
+
     try {
-      const locationData = `Latitude: ${coords.latitude}, Longitude: ${coords.longitude}, Timestamp: ${new Date().toISOString()}\n`;
-
-      if (Platform.OS === 'android') {
-        const dirUri = await FileSystem.StorageAccessFramework.requestDirectoryPermissionsAsync();
-
-        if (!dirUri.granted) {
-          Alert.alert('Permission Denied', 'You need to select a folder to save the file.');
-          return;
-        }
-
-        const fileUri = `${dirUri.directoryUri}/location_data_${Date.now()}.txt`;
-
-        await FileSystem.StorageAccessFramework.writeAsStringAsync(fileUri, locationData);
-
-        console.log(`Location saved to: ${fileUri}`);
-        Alert.alert('File Saved', `Location data saved to selected folder.`);
-      } else {
-        const fileUri = `${FileSystem.documentDirectory}location_data.txt`;
-        await FileSystem.writeAsStringAsync(fileUri, locationData);
-
-        console.log(`Location saved to: ${fileUri}`);
-        Alert.alert('File Saved', `Location data saved to: ${fileUri}`);
-      }
+      const response = await fetch(imageUri);
+      const blob = await response.blob();
+      await uploadBytes(storageRef, blob);
+      const downloadUrl = await getDownloadURL(storageRef);
+      console.log('Image uploaded successfully:', downloadUrl);
+      return downloadUrl;
     } catch (error) {
-      console.error('Error saving location to file:', error);
-      Alert.alert('Error', 'Failed to save location data.');
+      console.error('Error uploading image:', error);
+      Alert.alert('Error', 'Failed to upload image.');
+    }
+  };
+
+  // Function to save data to Firestore
+  const saveDataToFirestore = async () => {
+    if (!uri || !location) {
+      Alert.alert('Missing Data', 'Please select an image and capture your location first.');
+      return;
+    }
+
+    const downloadUrl = await uploadImageToFirebase();
+
+    if (downloadUrl) {
+      const data = {
+        imageUri: downloadUrl,
+        location: {
+          latitude: location.latitude,
+          longitude: location.longitude,
+        },
+        timestamp: new Date().toISOString(),
+      };
+
+      try {
+        // Save data to Firestore
+        await addDoc(collection(firestore, 'image_location_data'), data);
+        Alert.alert('Data Saved', 'Image and location data saved to Firestore');
+        console.log('Data saved:', data);
+      } catch (error) {
+        console.error('Error saving data to Firestore:', error);
+        Alert.alert('Error', 'Failed to save data.');
+      }
     }
   };
 
@@ -159,12 +160,12 @@ export default function App() {
         <Text style={styles.buttonText}>Open Camera</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.button} onPress={SaveFile}>
-        <Text style={styles.buttonText}>Save File</Text>
+      <TouchableOpacity style={styles.button} onPress={getLocation}>
+        <Text style={styles.buttonText}>Get Location</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.button} onPress={getLocation}>
-        <Text style={styles.buttonText}>Get Location & Save</Text>
+      <TouchableOpacity style={styles.button} onPress={saveDataToFirestore}>
+        <Text style={styles.buttonText}>Save Image & Location</Text>
       </TouchableOpacity>
 
       {uri && <Image source={{ uri }} style={styles.image} />}
